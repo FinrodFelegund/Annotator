@@ -8,6 +8,7 @@
 #include <QToolBar>
 #include <QMenuBar>
 #include <QFileDialog>
+#include <QStatusBar>
 
 AnnotatorMainWindow::AnnotatorMainWindow(QObject *parent)
 {
@@ -15,7 +16,7 @@ AnnotatorMainWindow::AnnotatorMainWindow(QObject *parent)
     this->setTabPosition(Qt::DockWidgetArea::LeftDockWidgetArea, QTabWidget::East);
     this->setTabPosition(Qt::DockWidgetArea::RightDockWidgetArea, QTabWidget::West);
 
-    _img = std::make_shared<WholeSlideImageReader>();
+    _currentFileName = "";
 
     setUpUi();
     setUpGraphics();
@@ -48,7 +49,6 @@ void AnnotatorMainWindow::setUpGraphics()
     _view = std::make_shared<AnnotatorViewer>(_centralWidget);
     _horizontalLayout->addWidget(_view.get());
 
-    this->setCentralWidget(_centralWidget);
 }
 
 void AnnotatorMainWindow::setUpUi()
@@ -64,21 +64,29 @@ void AnnotatorMainWindow::setUpUi()
 
 void AnnotatorMainWindow::openImage()
 {
+    _currentFileName = QFileDialog::getOpenFileName(this, "Open File", "/Users/danielpietsch/Documents/Bilder/WholeSlideImages", "");
 
-    if(!_img) //do some internal stuff of img and check if error pop up
-        return;
-
-
-    QString fileName = QFileDialog::getOpenFileName(this, "Open File", "/Users/danielpietsch/Documents/Bilder/WholeSlideImages", "");
-
-    if(fileName.isEmpty())
+    if(_currentFileName.isEmpty())
     {
-        //do some outputs to status bar
+        this->statusBar()->showMessage("No suitable Image found");
         return;
+    } else
+    {
+        this->statusBar()->showMessage("Opening: " + _currentFileName);
     }
 
-    //qDebug() << "Test: " << fileName;
-    _img->initializeImage(fileName.toStdString());
-    _view->initialize(_img);
+    emit initializeImage(_currentFileName.toStdString());
+
+
+}
+
+std::shared_ptr<AnnotatorViewer> AnnotatorMainWindow::getView()
+{
+    if(_view)
+    {
+        return _view;
+    }
+
+    return nullptr;
 }
 

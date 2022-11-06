@@ -35,12 +35,15 @@ void WholeSlideImageReader::initializeImage(const std::string imagePath)
 
     if(!_obj)
     {
+        _valid = false;
+        qDebug() << "Unable to open Image";
         return;
     }
 
     if(const char *error = openslide_get_error(_obj))
     {
         _errorState = error;
+        std::cout << _errorState << std::endl;
     }
 
     if(_errorState.empty()) {
@@ -53,7 +56,7 @@ void WholeSlideImageReader::initializeImage(const std::string imagePath)
             _scaleFactors.push_back(openslide_get_level_downsample(_obj, i));
         }
 
-        //printLevelDownsample();
+
 
         if(const char *const *value = openslide_get_property_names(_obj))
         {
@@ -86,6 +89,9 @@ void WholeSlideImageReader::initializeImage(const std::string imagePath)
     {
         _valid = false;
     }
+
+    //printLevelDownsample();
+    printDimensions();
 }
 
 void WholeSlideImageReader::cleanUp()

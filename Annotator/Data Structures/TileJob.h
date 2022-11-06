@@ -11,7 +11,7 @@ class QMutex;
 
 struct TileJob
 {
-    TileJob(int x, int y, int width, int height, int lvl, std::shared_ptr<WholeSlideImageReader> reader = nullptr);
+    TileJob(int x, int y, int width, int height, int lvl, std::shared_ptr<WholeSlideImageReader> reader = nullptr, unsigned int *buf = nullptr);
     ~TileJob();
     int xPos;
     int yPos;

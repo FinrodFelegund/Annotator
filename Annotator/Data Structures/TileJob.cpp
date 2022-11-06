@@ -5,14 +5,14 @@
 #include "TileJob.h"
 #include <QMutex>
 
-TileJob::TileJob(int x, int y, int width, int height, int lvl, std::shared_ptr<WholeSlideImageReader> reader)
+TileJob::TileJob(int x, int y, int width, int height, int lvl, std::shared_ptr<WholeSlideImageReader> reader, unsigned int *buf)
 {
     xPos = x;
     yPos = y;
     this->width = width;
     this->height = height;
     level = lvl;
-    buf = nullptr;
+    this->buf = buf;
 
     _reader = reader;
 }

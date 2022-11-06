@@ -5,6 +5,7 @@
 #ifndef ANNOTATOR_ANNOTATORVIEWER_H
 #define ANNOTATOR_ANNOTATORVIEWER_H
 #include <QGraphicsView>
+#include <QScrollBar>
 #include "../Threads/Manager.h"
 #include "../Reader/WholeSlideImageReader.h"
 
@@ -16,8 +17,10 @@ public:
     ~AnnotatorViewer() noexcept;
     void initialize(std::shared_ptr<WholeSlideImageReader> reader);
     void close();
-    void loadAllTilesForLevel(int level);
-    void loadTilesForFieldOfView(QRect view, int level);
+    QRectF getSceneRect();
+    int getCurrentLevel();
+    int getCurrentSceneScale();
+    int getTileSize();
 
 private:
     virtual void wheelEvent(QWheelEvent *event);
@@ -25,17 +28,19 @@ private:
     virtual void mousePressEvent(QMouseEvent *event);
     virtual void mouseReleaseEvent(QMouseEvent *event);
 
-
-
-private:
-    std::shared_ptr<Manager> _manager;
     std::shared_ptr<WholeSlideImageReader> _reader;
-    int _sceneScale;
+    int _currentSceneScale;
     int _tileSize;
-    int _lastLevel;
-    int _currentScaleFactor;
+    int _currentLevel;
+    std::pair<int, int> _levelZeroDimensions;
+    std::pair<int, int> _levelTopDimensions;
+    bool _clicked;
+    QPointF _currentPos;
 
-private slots:
+signals:
+    void fieldOfViewChanged(QRect rect);
+
+public slots:
     void loadTileInScene(unsigned int *buf, int x, int y, int width, int height, int level);
 };
 

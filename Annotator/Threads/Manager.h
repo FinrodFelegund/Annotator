@@ -18,7 +18,7 @@ class Manager : public QObject
 {
     Q_OBJECT
 public:
-    explicit Manager(QObject *parent = nullptr, std::shared_ptr<WholeSlideImageReader> img = nullptr, int tileSize = 1024);
+    explicit Manager(QObject *parent = nullptr);
     ~Manager() noexcept;
 
 private:
@@ -30,6 +30,8 @@ private:
     QWaitCondition _condition;
     std::shared_ptr<WholeSlideImageReader> _imageToRead;
     int _tileSize;
+    int _numberOfThreads;
+    int _jobsToDo;
 
 public:
     void addJob(int x, int y, int level, int width, int height);
@@ -39,12 +41,9 @@ public:
     void clearJobs();
     TileJob *getJob();
     int getWaitingThreads();
-    //this is old stuff
     void print();
-
-signals:
-    void finished(std::vector<TileJob> finishedTiles);
-
+    void setImage(std::shared_ptr<WholeSlideImageReader> img);
+    int getNumberOfJobs();
 
 };
 

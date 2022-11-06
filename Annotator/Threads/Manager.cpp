@@ -5,16 +5,16 @@
 #include "Manager.h"
 #include "Worker.h"
 
-Manager::Manager(QObject *parent, std::shared_ptr<WholeSlideImageReader> img, int tileSize) : QObject(parent)
+Manager::Manager(QObject *parent) : QObject(parent)
 {
     _stop = false;
     _waitingThreads = 0;
-    _imageToRead = img;
-    _tileSize = tileSize;
+    _imageToRead = nullptr;
+    _tileSize = 0;
 
-    int numberOfThreads = std::thread::hardware_concurrency();
+    _numberOfThreads = std::thread::hardware_concurrency();
 
-    for(int i = 0; i < numberOfThreads; i++)
+    for(int i = 0; i < _numberOfThreads; i++)
     {
         Worker *worker = new Worker(this);
         worker->start(QThread::HighPriority);
@@ -61,10 +61,19 @@ void Manager::clearJobs()
 void Manager::addJob(int x, int y, int level, int width, int height)
 {
     QMutexLocker locker(&_mutex);
+    if(!_imageToRead)
+    {
+        return;
+    }
     TileJob *tile = new TileJob(x, y, width, height, level);
     tile->setImage(_imageToRead);
     _workList.push_front(tile);
     _condition.wakeOne();
+}
+
+void Manager::setImage(std::shared_ptr<WholeSlideImageReader> img)
+{
+    _imageToRead = img;
 }
 
 std::vector<Worker*> Manager::getThreads()
@@ -99,10 +108,16 @@ TileJob* Manager::getJob()
     return tile;
 }
 
+
 int Manager::getWaitingThreads()
 {
     return _waitingThreads;
 }
+
+
+
+
+
 
 //old
 void Manager::print()

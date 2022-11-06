@@ -16,9 +16,12 @@ AnnotatorViewer::AnnotatorViewer(QObject *parent)
     setBackgroundBrush(QBrush(QColor(252, 252, 252)));
     scene()->setBackgroundBrush(QBrush(QColor(252, 252, 252)));
     _tileSize = 1024;
-    _lastLevel = 0;
-    _currentScaleFactor = 0;
-    _sceneScale = 0;
+    _currentLevel = 0;
+    _currentSceneScale = 0;
+    _levelZeroDimensions.first = _levelZeroDimensions.second = 0;
+    _clicked = false;
+    _currentPos.setX(0);
+    _currentPos.setY(0);
 
 
     setResizeAnchor(QGraphicsView::ViewportAnchor::AnchorViewCenter);
@@ -27,6 +30,10 @@ AnnotatorViewer::AnnotatorViewer(QObject *parent)
     setAutoFillBackground(true);
     setViewportUpdateMode(ViewportUpdateMode::FullViewportUpdate);
     setInteractive(false);
+    horizontalScrollBar()->hide();
+    verticalScrollBar()->hide();
+    setEnabled(false);
+
 }
 
 AnnotatorViewer::~AnnotatorViewer() noexcept
@@ -36,130 +43,52 @@ AnnotatorViewer::~AnnotatorViewer() noexcept
 
 void AnnotatorViewer::initialize(std::shared_ptr<WholeSlideImageReader> reader)
 {
+
     close();
     setEnabled(true);
     _reader = reader;
-    _manager = std::make_shared<Manager>(this, _reader, _tileSize);
-    _lastLevel = reader->getNumberOfLevels() - 1;
-    _sceneScale = _reader->getLevelDownSample(_lastLevel);
+    //_manager = std::make_shared<Manager>(this, _reader, _tileSize);
+    _currentLevel = reader->getNumberOfLevels() - 1;
+    _currentSceneScale = _reader->getLevelDownSample(_currentLevel);
+    _levelZeroDimensions = _reader->getLevel0Dimensions();
+    _levelTopDimensions = _reader->getLevelDimensions(_currentLevel);
 
-
-    std::pair<int, int> dimensions0 = _reader->getLevel0Dimensions();
-    std::pair<int, int> topDimension = _reader->getLevelDimensions(_reader->getNumberOfLevels() - 1);
-    qDebug() << "Dimension 0: " << dimensions0.first << " " << dimensions0.second;
-    qDebug() << "Top Dimension: " << topDimension.first << " " << topDimension.second;
-    setSceneRect(0, 0, dimensions0.first, dimensions0.second);
-    fitInView(QRectF(0, 0, dimensions0.first, dimensions0.second), Qt::KeepAspectRatio);
-
-    std::vector<Worker*> worker = _manager->getThreads();
-    for(int i = 0; i < worker.size(); i++)
-    {
-        connect(worker[i], &Worker::finished, this, &AnnotatorViewer::loadTileInScene);
-    }
-
-    _reader->printLevelDownsample();
-
-    loadAllTilesForLevel(_reader->getNumberOfLevels() - 1);
+    setSceneRect(0, 0, _levelZeroDimensions.first, _levelZeroDimensions.second);
+    fitInView(QRectF(0, 0, _levelZeroDimensions.first, _levelZeroDimensions.second), Qt::KeepAspectRatio);
 
 }
 
-void AnnotatorViewer::loadAllTilesForLevel(int level)
+QRectF AnnotatorViewer::getSceneRect()
 {
-    unsigned int numberOfLevels = _reader->getNumberOfLevels();
-
-
-    std::pair<int, int> dimensionsTop = _reader->getLevelDimensions(numberOfLevels - 1);
-    std::pair<int, int> dimensions0 = _reader->getLevel0Dimensions();
-    int tilesX = qCeil((qreal)dimensionsTop.first / (qreal)_tileSize);
-    int tilesY = qCeil((qreal)dimensionsTop.second / (qreal)_tileSize);
-
-    //qDebug() << "Number of Tiles: " << tilesX << " " << tilesY;
-
-    int scale = qCeil((qreal)dimensions0.first / (qreal)dimensionsTop.first);
-
-    int width, height = 0;
-    for(int i = 0; i < tilesX; i++)
-    {
-        for(int j = 0; j < tilesY; j++)
-        {
-            if(i == tilesX - 1)
-            {
-                width = (dimensionsTop.first - i * _tileSize) - 1;
-            } else
-            {
-                width = _tileSize;
-            }
-
-            if(j == tilesY - 1)
-            {
-                height = (dimensionsTop.second - j * _tileSize) - 1;
-            } else
-            {
-                height = _tileSize;
-            }
-
-            int tmpX = i * _tileSize * scale;
-            int tmpY = j *_tileSize * scale;
-            //qDebug() << "Tile Coordinate in set tiles: " << tmpX << " " << tmpY << " " << width << " " << height;
-            _manager->addJob(i * _tileSize * scale, j * _tileSize * scale, numberOfLevels - 1, width, height);
-        }
-    }
-    //qDebug() << "Number of tiles: " << tilesX << " " << tilesY;
+    return this->sceneRect();
 }
 
-void AnnotatorViewer::loadTilesForFieldOfView(QRect view, int level)
+int AnnotatorViewer::getCurrentLevel()
 {
+    return _currentLevel;
+}
 
-    int tilesX = qCeil(((qreal)view.width()) / ((qreal)_tileSize));
-    int tilesY = qCeil(((qreal)view.height()) / ((qreal)_tileSize));
+int AnnotatorViewer::getCurrentSceneScale()
+{
+    return _currentSceneScale;
+}
 
-    //qDebug() << "Number of Tiles: " << tilesX << " " << tilesY;
-
-    int width, height = 0;
-
-    std::pair<int, int> dims0 = _reader->getLevel0Dimensions();
-    std::pair<int, int> dimsLevel = _reader->getLevelDimensions(level);
-    int scale = qCeil(qreal(dims0.first) / qreal(dimsLevel.first));
-
-    for(int i = 0; i < tilesX; i++)
-    {
-        for(int j = 0; j < tilesY; j++)
-        {
-            if(i == tilesX - 1)
-            {
-                width = (view.width() - i * _tileSize) - 1;
-            } else
-            {
-                width = _tileSize;
-            }
-
-            if(j == tilesY - 1)
-            {
-                height = (view.height() - j * _tileSize) - 1;
-            } else
-            {
-                height = _tileSize;
-            }
-
-            _manager->addJob((view.x() + i * _tileSize) * scale, (view.y() + j * _tileSize) * scale, level, width, height);
-        }
-
-    }
-
+int AnnotatorViewer::getTileSize()
+{
+    return _tileSize;
 }
 
 void AnnotatorViewer::loadTileInScene(unsigned int *buf, int x, int y, int width, int height, int level)
 {
 
-
-    std::pair<int, int> level0 = _reader->getLevel0Dimensions();
     std::pair<int, int> currentLevel = _reader->getLevelDimensions(level);
-    qreal scaleFactor = (qreal)level0.first / (qreal)currentLevel.first;
+    qreal scaleFactor = (qreal)_levelZeroDimensions.first / (qreal)currentLevel.first;
+
+    //qDebug() << "X: " << x << " Y: " << y << " Buf: " << buf << " Scalefactor: " << scaleFactor << " Width: " << width << " Height: " << height;
 
     QImage *img = nullptr;
     QGraphicsPixmapItem *item = nullptr;
     img = new QImage((unsigned char*)buf, width, height,  QImage::Format_ARGB32);
-    //qDebug() << "x: " << x << " y: " << y << " width: " << width << " height: " << height;
     item = scene()->addPixmap(QPixmap::fromImage(*img));
     delete img;
     item->setScale(scaleFactor);
@@ -169,81 +98,92 @@ void AnnotatorViewer::loadTileInScene(unsigned int *buf, int x, int y, int width
 
 void AnnotatorViewer::close()
 {
+    //_reader belongs to the Controller Object
     _reader = nullptr;
-    if(_manager)
-    {
-        _manager->shutdown();
-        _manager->clearJobs();
-        _manager->deleteLater();
-        _manager = nullptr;
-    }
     setEnabled(false);
     scene()->clear();
-    _currentScaleFactor = 0;
-    _lastLevel = 0;
-    _sceneScale = 0;
+    _currentLevel = 0;
+    _currentSceneScale = 0;
+    _levelZeroDimensions.first = _levelZeroDimensions.second = 0;
+    _levelTopDimensions.first = _levelTopDimensions.second = 0;
+    _clicked = false;
+    _currentPos.setX(0);
+    _currentPos.setY(0);
 }
 
 void AnnotatorViewer::wheelEvent(QWheelEvent *event)
 {
-    std::pair<int, int> dims0 = _reader->getLevel0Dimensions();
-    QRectF FOV = this->mapToScene(this->rect()).boundingRect();
-    //qDebug() << "x: " << FOV.x() << " y: " << FOV.y() << " width: " << FOV.width() << " height: " << FOV.height();
-
-    std::pair<int, int> topLevelDimension = _reader->getLevelDimensions(_reader->getNumberOfLevels() - 1);
-    std::pair<int, int> level0Dimension = _reader->getLevel0Dimensions();
-    qreal scaleX = qreal(dims0.first) / qreal(FOV.width());
-
-    float angle = event->angleDelta().y();
-    qreal numDegrees = qPow(1.2, angle / 240.0);
-
-    int topLevelDownsample = _reader->getLevelDownSample(_reader->getNumberOfLevels() - 1);
-
     setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
 
-    if(angle > 1 && topLevelDownsample >= scaleX)
+    //declarations
+    QRect rect = this->mapToScene(this->rect()).boundingRect().toRect(); //currently visible rect of scene in view
+    qreal currentlyScaledValue = qreal(_levelZeroDimensions.first) / qreal(rect.width());
+    int levelTopDownsample = _reader->getLevelDownSample(_reader->getNumberOfLevels() - 1);
+
+    auto point = event->position().toPoint();
+    auto scenePos = this->mapToScene(point);
+
+    //compute scaled angle
+    float angle = event->angleDelta().y();
+    qreal numDegrees = std::pow(1.2, angle / 240.);
+
+    //scale
+    if(angle > 1 && levelTopDownsample >= currentlyScaledValue) //angle > 1 means scaling down; lTD >= cSV means scaling down till view is as wide as top Level width
     {
-        if(qreal(FOV.width() / numDegrees < topLevelDimension.first)) // scale only till width of toplevel image is reached
+        if(qreal(rect.width()) / numDegrees < _levelTopDimensions.first)
         {
-            numDegrees = qreal(FOV.width()) / qreal(topLevelDimension.first);
+            numDegrees = qreal(rect.width()) / qreal(_levelTopDimensions.first); //scale only till width of top level is reached
         }
-
         scale(numDegrees, numDegrees);
+        const QPointF p1mouse = mapFromScene(scenePos);
+        const QPointF move = p1mouse - event->position(); // The move
+        horizontalScrollBar()->setValue(move.x() + horizontalScrollBar()->value());
+        verticalScrollBar()->setValue(move.y() + verticalScrollBar()->value());
 
-    } else if((angle < 1) && (1 <= scaleX))
+    } else if(angle < 1 && 1. <= _levelZeroDimensions.first)
     {
-        if(qreal(FOV.width()) / numDegrees > level0Dimension.first)
+        if(qreal(rect.width()) / numDegrees > _levelZeroDimensions.first)
         {
-            numDegrees = qreal(FOV.width()) / qreal(level0Dimension.first); // scale only till width of bottomlevel is reached
+            numDegrees = qreal(rect.width()) / qreal(_levelZeroDimensions.first);
         }
-
         scale(numDegrees, numDegrees);
+        const QPointF p1mouse = mapFromScene(scenePos);
+        const QPointF move = p1mouse - event->position(); // The move
+        horizontalScrollBar()->setValue(move.x() + horizontalScrollBar()->value());
+        verticalScrollBar()->setValue(move.y() + verticalScrollBar()->value());
     }
 
-    int projectedLevel = _reader->getLevelForGivenDownSample(scaleX);
-    if(projectedLevel != _lastLevel )
+    //find out on which level we are after scaling
+    int projectedLevel = _reader->getLevelForGivenDownSample(currentlyScaledValue);
+    if(projectedLevel != _currentLevel)
     {
-        _lastLevel = projectedLevel;
-        float sceneScale =   _reader->getLevelDownSample(projectedLevel);
-        QRect intFOV = QRect(FOV.left() / sceneScale, FOV.top() / sceneScale, FOV.width() / sceneScale, FOV.height() / sceneScale);
-        //this->scene()->clear();
-        //qDebug() << "FOV: " << intFOV.top() << " " << intFOV.left() << " " << intFOV.width() << " " << intFOV.height();
-        //qDebug() << " ";
-        loadTilesForFieldOfView(intFOV, _lastLevel);
+        _currentLevel = projectedLevel;
+        _currentSceneScale = _reader->getLevelDownSample(_currentLevel);
+        //emit fieldOfViewChanged(rect);
     }
+
+}
+
+
+
+void AnnotatorViewer::mousePressEvent(QMouseEvent *event)
+{
+    _clicked = true;
+    _currentPos = event->pos();
 }
 
 void AnnotatorViewer::mouseMoveEvent(QMouseEvent *event)
 {
-    //qDebug() << "Mouse moving";
-}
-
-void AnnotatorViewer::mousePressEvent(QMouseEvent *event)
-{
-    //qDebug() << "Mouse pressed";
+    if(_clicked)
+    {
+        QPoint delta = _currentPos.toPoint() - event->pos();
+        _currentPos = event->pos();
+        horizontalScrollBar()->setValue(delta.x() + horizontalScrollBar()->value());
+        verticalScrollBar()->setValue(delta.y() + verticalScrollBar()->value());
+    }
 }
 
 void AnnotatorViewer::mouseReleaseEvent(QMouseEvent *event)
 {
-   //qDebug() << "Mouse released";
+   _clicked = false;
 }

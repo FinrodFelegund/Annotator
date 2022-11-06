@@ -6,27 +6,32 @@
 #define ANNOTATOR_ANNOTATORMAINWINDOW_H
 #include <QMainWindow>
 #include <QHBoxLayout>
-#include "AnnotatorView/AnnotatorViewer.h"
-#include "Reader/WholeSlideImageReader.h"
+#include "../AnnotatorView/AnnotatorViewer.h"
+#include "Toolbar.h"
 
 class AnnotatorMainWindow : public QMainWindow
 {
+    Q_OBJECT
 public:
     AnnotatorMainWindow(QObject *parent = nullptr);
     ~AnnotatorMainWindow() noexcept;
     void setUpUi();
     void setUpGraphics();
+    std::shared_ptr<AnnotatorViewer> getView();
 
 public slots:
     void openImage();
 
+signals:
+    void initializeImage(std::string fileName);
+
 private:
     std::shared_ptr<AnnotatorViewer> _view;
-    std::shared_ptr<WholeSlideImageReader> _img;
     QWidget *_centralWidget;
     QHBoxLayout *_horizontalLayout;
-
+    Toolbar *bar;
     QAction *_openImage;
+    QString _currentFileName;
 
 
 };
