@@ -1,0 +1,7 @@
+<RCC>
+    <qresource>
+        <file>Icons/clicker.png</file>
+        <file>Icons/pencil-cursor.png</file>
+        <file>Icons/exit.png</file>
+    </qresource>
+</RCC>

@@ -11,14 +11,14 @@
 
 class Tiler {
 public:
-    Tiler(QRect rect, int tileSize);
+    Tiler(QRectF rect, int tileSize);
     ~Tiler();
     void exec();
     std::vector<Tile> getTilingResult();
     void cleanUp();
     void print();
 private:
-    QRect _rectangle;
+    QRectF _rectangle;
     int _tileSize;
     std::vector<Tile> _tiles;
 };

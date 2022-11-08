@@ -23,7 +23,7 @@ private:
     std::vector<int> _scaleFactors;
     int _numberOfLevels;
     const int _tileSize = 1024;
-    std::unique_ptr<std::shared_mutex> _mutex;
+    std::shared_ptr<std::shared_mutex> _mutex;
     std::string _filetype;
     std::map<std::string, std::string> _propertiesMap;
     std::string _errorState;
@@ -45,7 +45,7 @@ public:
     bool isValid();
     std::string getErrorState();
 
-    void *readDataFromImage(int64_t x, int64_t y, int64_t width, int64_t height, int32_t level);
+    unsigned char *readDataFromImage(int64_t x, int64_t y, int64_t width, int64_t height, int32_t level);
     void printDimensions();
     void printLevelDownsample();
 

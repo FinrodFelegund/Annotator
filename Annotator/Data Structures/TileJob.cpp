@@ -5,7 +5,7 @@
 #include "TileJob.h"
 #include <QMutex>
 
-TileJob::TileJob(int x, int y, int width, int height, int lvl, std::shared_ptr<WholeSlideImageReader> reader, unsigned int *buf)
+TileJob::TileJob(int x, int y, int width, int height, int lvl, std::shared_ptr<WholeSlideImageReader> reader, unsigned char *buf)
 {
     xPos = x;
     yPos = y;
@@ -35,7 +35,7 @@ void TileJob::setImage(std::shared_ptr<WholeSlideImageReader> reader)
 
 void TileJob::doJob()
 {
-    buf = (unsigned int*)_reader->readDataFromImage(xPos, yPos, width, height, level);
+    buf = _reader->readDataFromImage(xPos, yPos, width, height, level);
 }
 
 int TileJob::getXPos()
@@ -58,7 +58,7 @@ int TileJob::getHeight()
     return height;
 }
 
-unsigned int *TileJob::getBuf()
+unsigned char *TileJob::getBuf()
 {
     if(buf)
     {

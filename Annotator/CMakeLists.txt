@@ -30,7 +30,8 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 
-add_executable(Annotator main.cpp Reader/WholeSlideImageReader.cpp Reader/WholeSlideImageReader.h Threads/Worker.cpp Threads/Worker.h Threads/Manager.cpp Threads/Manager.h "Data Structures/TileJob.cpp" "Data Structures/TileJob.h" AnnotatorUI/AnnotatorMainWindow.cpp AnnotatorUI/AnnotatorMainWindow.h AnnotatorView/AnnotatorViewer.cpp AnnotatorView/AnnotatorViewer.h "Data Structures/GraphicsItem.cpp" "Data Structures/GraphicsItem.h" AnnotatorApplication/AnnotatorController.cpp AnnotatorApplication/AnnotatorController.h "Data Structures/Tile.cpp" "Data Structures/Tile.h" "Data Structures/Tiler.cpp" "Data Structures/Tiler.h" AnnotatorUI/Toolbar.cpp AnnotatorUI/Toolbar.h)
+
+add_executable(Annotator Resources.qrc main.cpp Reader/WholeSlideImageReader.cpp Reader/WholeSlideImageReader.h Threads/Worker.cpp Threads/Worker.h Threads/Manager.cpp Threads/Manager.h "Data Structures/TileJob.cpp" "Data Structures/TileJob.h" AnnotatorUI/AnnotatorMainWindow.cpp AnnotatorUI/AnnotatorMainWindow.h AnnotatorView/AnnotatorViewer.cpp AnnotatorView/AnnotatorViewer.h "Data Structures/GraphicsItem.cpp" "Data Structures/GraphicsItem.h" AnnotatorApplication/AnnotatorController.cpp AnnotatorApplication/AnnotatorController.h "Data Structures/Tile.cpp" "Data Structures/Tile.h" "Data Structures/Tiler.cpp" "Data Structures/Tiler.h" AnnotatorUI/Toolbar.cpp AnnotatorUI/Toolbar.h AnnotatorUI/Dockwidget.cpp AnnotatorUI/Dockwidget.h)
 target_link_libraries(Annotator
         Qt::Core
         Qt::Gui

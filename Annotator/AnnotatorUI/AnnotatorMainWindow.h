@@ -6,8 +6,10 @@
 #define ANNOTATOR_ANNOTATORMAINWINDOW_H
 #include <QMainWindow>
 #include <QHBoxLayout>
+#include <QVBoxLayout>
 #include "../AnnotatorView/AnnotatorViewer.h"
 #include "Toolbar.h"
+#include "Dockwidget.h"
 
 class AnnotatorMainWindow : public QMainWindow
 {
@@ -18,6 +20,7 @@ public:
     void setUpUi();
     void setUpGraphics();
     std::shared_ptr<AnnotatorViewer> getView();
+    Toolbar* getToolBar();
 
 public slots:
     void openImage();
@@ -25,11 +28,19 @@ public slots:
 signals:
     void initializeImage(std::string fileName);
 
+protected:
+    virtual void resizeEvent(QResizeEvent *event);
+
 private:
     std::shared_ptr<AnnotatorViewer> _view;
     QWidget *_centralWidget;
     QHBoxLayout *_horizontalLayout;
-    Toolbar *bar;
+    Toolbar *_bar;
+
+
+    DockWidget *_leftDockwidget;
+    QVBoxLayout *_leftLayout;
+    DockWidget *_rightDockwidget;
     QAction *_openImage;
     QString _currentFileName;
 

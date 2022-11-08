@@ -91,7 +91,7 @@ void WholeSlideImageReader::initializeImage(const std::string imagePath)
     }
 
     //printLevelDownsample();
-    printDimensions();
+    //printDimensions();
 }
 
 void WholeSlideImageReader::cleanUp()
@@ -220,12 +220,12 @@ std::pair<int, int> WholeSlideImageReader::getLevelDimensions(const int level)
     return std::make_pair(-1, -1);
 }
 
-void *WholeSlideImageReader::readDataFromImage(int64_t x, int64_t y, int64_t width, int64_t height, int32_t level)
+unsigned char *WholeSlideImageReader::readDataFromImage(int64_t x, int64_t y, int64_t width, int64_t height, int32_t level)
 {
     if(_valid)
     {
         std::shared_lock<std::shared_mutex> l(*_mutex);
-        uint32_t *buf = new uint32_t[width * height];
+        unsigned int *buf = new uint32_t[width * height * 3];
 
         //qDebug() << "Reading image:";
         //qDebug() << "x: " <<  x << " y: " << y << " " << width << " " << height;
@@ -239,7 +239,27 @@ void *WholeSlideImageReader::readDataFromImage(int64_t x, int64_t y, int64_t wid
             qDebug() << err;
         }
 
-        return buf;
+        unsigned char *rgb = new unsigned char[width * height * 3];
+        unsigned char* bgra = (unsigned char*)buf;
+        for (unsigned long long i = 0, j = 0; i < width*height*4; i+=4, j+=3) {
+            if (bgra[i + 3] == 255) {
+                rgb[j] = bgra[i + 2];
+                rgb[j + 1] = bgra[i + 1];
+                rgb[j + 2] = bgra[i];
+            }
+            else if (bgra[i + 3] == 0) {
+                rgb[j] = _bg_r;
+                rgb[j + 1] = _bg_g;
+                rgb[j + 2] = _bg_b;
+            }
+            else {
+                rgb[j] = (255. * bgra[i + 2]) / bgra[i + 3];
+                rgb[j + 1] = (255. * bgra[i + 1]) / bgra[i + 3];
+                rgb[j + 2] = (255. * bgra[i]) / bgra[i + 3];
+            }
+        }
+        delete[] buf;
+        return rgb;
     }
 
     return nullptr;

@@ -22,7 +22,7 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_AnnotatorController_t {
-    uint offsetsAndSizes[14];
+    uint offsetsAndSizes[22];
     char stringdata0[20];
     char stringdata1[16];
     char stringdata2[1];
@@ -30,6 +30,10 @@ struct qt_meta_stringdata_AnnotatorController_t {
     char stringdata4[9];
     char stringdata5[19];
     char stringdata6[5];
+    char stringdata7[15];
+    char stringdata8[8];
+    char stringdata9[14];
+    char stringdata10[14];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_AnnotatorController_t::offsetsAndSizes) + ofs), len 
@@ -41,7 +45,11 @@ static const qt_meta_stringdata_AnnotatorController_t qt_meta_stringdata_Annotat
         QT_MOC_LITERAL(37, 11),  // "std::string"
         QT_MOC_LITERAL(49, 8),  // "fileName"
         QT_MOC_LITERAL(58, 18),  // "fieldOfViewChanged"
-        QT_MOC_LITERAL(77, 4)   // "rect"
+        QT_MOC_LITERAL(77, 4),  // "rect"
+        QT_MOC_LITERAL(82, 14),  // "clickTriggered"
+        QT_MOC_LITERAL(97, 7),  // "checked"
+        QT_MOC_LITERAL(105, 13),  // "drawTriggered"
+        QT_MOC_LITERAL(119, 13)   // "exitTriggered"
     },
     "AnnotatorController",
     "initializeImage",
@@ -49,7 +57,11 @@ static const qt_meta_stringdata_AnnotatorController_t qt_meta_stringdata_Annotat
     "std::string",
     "fileName",
     "fieldOfViewChanged",
-    "rect"
+    "rect",
+    "clickTriggered",
+    "checked",
+    "drawTriggered",
+    "exitTriggered"
 };
 #undef QT_MOC_LITERAL
 
@@ -59,7 +71,7 @@ static const uint qt_meta_data_AnnotatorController[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -67,12 +79,18 @@ static const uint qt_meta_data_AnnotatorController[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   26,    2, 0x0a,    1 /* Public */,
-       5,    1,   29,    2, 0x0a,    3 /* Public */,
+       1,    1,   44,    2, 0x0a,    1 /* Public */,
+       5,    1,   47,    2, 0x0a,    3 /* Public */,
+       7,    1,   50,    2, 0x0a,    5 /* Public */,
+       9,    1,   53,    2, 0x0a,    7 /* Public */,
+      10,    1,   56,    2, 0x0a,    9 /* Public */,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
     QMetaType::Void, QMetaType::QRect,    6,
+    QMetaType::Void, QMetaType::Bool,    8,
+    QMetaType::Void, QMetaType::Bool,    8,
+    QMetaType::Void, QMetaType::Bool,    8,
 
        0        // eod
 };
@@ -85,6 +103,9 @@ void AnnotatorController::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
         switch (_id) {
         case 0: _t->initializeImage((*reinterpret_cast< std::add_pointer_t<std::string>>(_a[1]))); break;
         case 1: _t->fieldOfViewChanged((*reinterpret_cast< std::add_pointer_t<QRect>>(_a[1]))); break;
+        case 2: _t->clickTriggered((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
+        case 3: _t->drawTriggered((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
+        case 4: _t->exitTriggered((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
         default: ;
         }
     }
@@ -98,7 +119,7 @@ const QMetaObject AnnotatorController::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_AnnotatorController_t
 , QtPrivate::TypeAndForceComplete<AnnotatorController, std::true_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<std::string, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QRect, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<std::string, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QRect, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>
 
 
 >,
@@ -125,13 +146,13 @@ int AnnotatorController::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 5)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 2;
+        _id -= 5;
     }
     return _id;
 }

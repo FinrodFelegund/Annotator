@@ -190,6 +190,30 @@ AnnotatorUI/AnnotatorMainWindow.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Annotator.dir/build.make CMakeFiles/Annotator.dir/AnnotatorUI/AnnotatorMainWindow.cpp.s
 .PHONY : AnnotatorUI/AnnotatorMainWindow.cpp.s
 
+AnnotatorUI/Dockwidget.o: AnnotatorUI/Dockwidget.cpp.o
+.PHONY : AnnotatorUI/Dockwidget.o
+
+# target to build an object file
+AnnotatorUI/Dockwidget.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Annotator.dir/build.make CMakeFiles/Annotator.dir/AnnotatorUI/Dockwidget.cpp.o
+.PHONY : AnnotatorUI/Dockwidget.cpp.o
+
+AnnotatorUI/Dockwidget.i: AnnotatorUI/Dockwidget.cpp.i
+.PHONY : AnnotatorUI/Dockwidget.i
+
+# target to preprocess a source file
+AnnotatorUI/Dockwidget.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Annotator.dir/build.make CMakeFiles/Annotator.dir/AnnotatorUI/Dockwidget.cpp.i
+.PHONY : AnnotatorUI/Dockwidget.cpp.i
+
+AnnotatorUI/Dockwidget.s: AnnotatorUI/Dockwidget.cpp.s
+.PHONY : AnnotatorUI/Dockwidget.s
+
+# target to generate assembly for a file
+AnnotatorUI/Dockwidget.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Annotator.dir/build.make CMakeFiles/Annotator.dir/AnnotatorUI/Dockwidget.cpp.s
+.PHONY : AnnotatorUI/Dockwidget.cpp.s
+
 AnnotatorUI/Toolbar.o: AnnotatorUI/Toolbar.cpp.o
 .PHONY : AnnotatorUI/Toolbar.o
 
@@ -237,6 +261,30 @@ AnnotatorView/AnnotatorViewer.s: AnnotatorView/AnnotatorViewer.cpp.s
 AnnotatorView/AnnotatorViewer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Annotator.dir/build.make CMakeFiles/Annotator.dir/AnnotatorView/AnnotatorViewer.cpp.s
 .PHONY : AnnotatorView/AnnotatorViewer.cpp.s
+
+Annotator_autogen/EWIEGA46WW/qrc_Resources.o: Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.o
+.PHONY : Annotator_autogen/EWIEGA46WW/qrc_Resources.o
+
+# target to build an object file
+Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Annotator.dir/build.make CMakeFiles/Annotator.dir/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.o
+.PHONY : Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.o
+
+Annotator_autogen/EWIEGA46WW/qrc_Resources.i: Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.i
+.PHONY : Annotator_autogen/EWIEGA46WW/qrc_Resources.i
+
+# target to preprocess a source file
+Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Annotator.dir/build.make CMakeFiles/Annotator.dir/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.i
+.PHONY : Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.i
+
+Annotator_autogen/EWIEGA46WW/qrc_Resources.s: Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.s
+.PHONY : Annotator_autogen/EWIEGA46WW/qrc_Resources.s
+
+# target to generate assembly for a file
+Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Annotator.dir/build.make CMakeFiles/Annotator.dir/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.s
+.PHONY : Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.s
 
 Annotator_autogen/mocs_compilation.o: Annotator_autogen/mocs_compilation.cpp.o
 .PHONY : Annotator_autogen/mocs_compilation.o
@@ -470,12 +518,18 @@ help:
 	@echo "... AnnotatorUI/AnnotatorMainWindow.o"
 	@echo "... AnnotatorUI/AnnotatorMainWindow.i"
 	@echo "... AnnotatorUI/AnnotatorMainWindow.s"
+	@echo "... AnnotatorUI/Dockwidget.o"
+	@echo "... AnnotatorUI/Dockwidget.i"
+	@echo "... AnnotatorUI/Dockwidget.s"
 	@echo "... AnnotatorUI/Toolbar.o"
 	@echo "... AnnotatorUI/Toolbar.i"
 	@echo "... AnnotatorUI/Toolbar.s"
 	@echo "... AnnotatorView/AnnotatorViewer.o"
 	@echo "... AnnotatorView/AnnotatorViewer.i"
 	@echo "... AnnotatorView/AnnotatorViewer.s"
+	@echo "... Annotator_autogen/EWIEGA46WW/qrc_Resources.o"
+	@echo "... Annotator_autogen/EWIEGA46WW/qrc_Resources.i"
+	@echo "... Annotator_autogen/EWIEGA46WW/qrc_Resources.s"
 	@echo "... Annotator_autogen/mocs_compilation.o"
 	@echo "... Annotator_autogen/mocs_compilation.i"
 	@echo "... Annotator_autogen/mocs_compilation.s"

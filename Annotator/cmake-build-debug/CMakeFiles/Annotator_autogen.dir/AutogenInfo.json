@@ -262,7 +262,8 @@
 		"/usr/local/lib/cmake/Qt6Widgets/Qt6WidgetsAdditionalTargetInfo.cmake",
 		"/usr/local/lib/cmake/Qt6Widgets/Qt6WidgetsVersionlessTargets.cmake",
 		"/usr/local/lib/cmake/Qt6Widgets/Qt6WidgetsMacros.cmake",
-		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeParseArguments.cmake"
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeParseArguments.cmake",
+		"/Users/danielpietsch/CLionProjects/Annotator/Resources.qrc"
 	],
 	"CMAKE_SOURCE_DIR" : "/Users/danielpietsch/CLionProjects/Annotator",
 	"DEP_FILE" : "",
@@ -279,6 +280,12 @@
 			"/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/AnnotatorMainWindow.h",
 			"MU",
 			"BDUJ6RQD4O/moc_AnnotatorMainWindow.cpp",
+			null
+		],
+		[
+			"/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/Dockwidget.h",
+			"MU",
+			"BDUJ6RQD4O/moc_Dockwidget.cpp",
 			null
 		],
 		[
@@ -401,6 +408,11 @@
 		],
 		[
 			"/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/AnnotatorMainWindow.cpp",
+			"MU",
+			null
+		],
+		[
+			"/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/Dockwidget.cpp",
 			"MU",
 			null
 		],

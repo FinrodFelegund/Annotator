@@ -126,6 +126,12 @@
 		<Unit filename="/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/AnnotatorMainWindow.h">
 			<Option target="Annotator"/>
 		</Unit>
+		<Unit filename="/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/Dockwidget.cpp">
+			<Option target="Annotator"/>
+		</Unit>
+		<Unit filename="/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/Dockwidget.h">
+			<Option target="Annotator"/>
+		</Unit>
 		<Unit filename="/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/Toolbar.cpp">
 			<Option target="Annotator"/>
 		</Unit>
@@ -168,6 +174,9 @@
 		<Unit filename="/Users/danielpietsch/CLionProjects/Annotator/Reader/WholeSlideImageReader.h">
 			<Option target="Annotator"/>
 		</Unit>
+		<Unit filename="/Users/danielpietsch/CLionProjects/Annotator/Resources.qrc">
+			<Option target="Annotator"/>
+		</Unit>
 		<Unit filename="/Users/danielpietsch/CLionProjects/Annotator/Threads/Manager.cpp">
 			<Option target="Annotator"/>
 		</Unit>
@@ -180,6 +189,12 @@
 		<Unit filename="/Users/danielpietsch/CLionProjects/Annotator/Threads/Worker.h">
 			<Option target="Annotator"/>
 		</Unit>
+		<Unit filename="/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp">
+			<Option target="Annotator"/>
+		</Unit>
+		<Unit filename="/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.rule">
+			<Option target="Annotator"/>
+		</Unit>
 		<Unit filename="/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/Annotator_autogen/mocs_compilation.cpp">
 			<Option target="Annotator"/>
 		</Unit>
@@ -187,6 +202,9 @@
 			<Option target="Annotator"/>
 		</Unit>
 		<Unit filename="/Users/danielpietsch/CLionProjects/Annotator/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/Users/danielpietsch/CLionProjects/Annotator/Resources.qrc">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 		<Unit filename="/Users/danielpietsch/CLionProjects/Annotator/../../../../usr/local/lib/cmake/Qt6/Qt6Config.cmake">

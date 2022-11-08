@@ -5,7 +5,7 @@
 #include "Tiler.h"
 #include <QDebug>
 
-Tiler::Tiler(QRect rect, int tileSize)
+Tiler::Tiler(QRectF rect, int tileSize)
 {
     _rectangle = rect;
     _tileSize = tileSize;

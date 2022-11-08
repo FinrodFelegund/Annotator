@@ -22,10 +22,14 @@ public:
     void setWindow(std::shared_ptr<AnnotatorMainWindow> window);
     std::shared_ptr<AnnotatorMainWindow> getMainWindow();
     void showUI();
+    void connectActions();
 
 public slots:
     void initializeImage(std::string fileName);
     void fieldOfViewChanged(QRect rect);
+    void clickTriggered(bool checked);
+    void drawTriggered(bool checked);
+    void exitTriggered(bool checked);
 
 
 private:

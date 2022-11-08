@@ -27,7 +27,7 @@ public:
 
 signals:
 
-    void finished(unsigned int* buffer, int x, int y, int width, int height, int level);
+    void finished(unsigned char* buffer, int x, int y, int width, int height, int level);
 
 private:
 

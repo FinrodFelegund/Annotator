@@ -66,9 +66,18 @@ include CMakeFiles/Annotator.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Annotator.dir/flags.make
 
+Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp: ../Resources.qrc
+Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp: CMakeFiles/Annotator_autogen.dir/AutoRcc_Resources_EWIEGA46WW_Info.json
+Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp: ../Icons/pencil-cursor.png
+Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp: ../Icons/exit.png
+Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp: ../Icons/clicker.png
+Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp: /usr/local/share/qt/libexec/rcc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic RCC for Resources.qrc"
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E cmake_autorcc /Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles/Annotator_autogen.dir/AutoRcc_Resources_EWIEGA46WW_Info.json Debug
+
 CMakeFiles/Annotator.dir/Annotator_autogen/mocs_compilation.cpp.o: CMakeFiles/Annotator.dir/flags.make
 CMakeFiles/Annotator.dir/Annotator_autogen/mocs_compilation.cpp.o: Annotator_autogen/mocs_compilation.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Annotator.dir/Annotator_autogen/mocs_compilation.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Annotator.dir/Annotator_autogen/mocs_compilation.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Annotator.dir/Annotator_autogen/mocs_compilation.cpp.o -c /Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/Annotator_autogen/mocs_compilation.cpp
 
 CMakeFiles/Annotator.dir/Annotator_autogen/mocs_compilation.cpp.i: cmake_force
@@ -81,7 +90,7 @@ CMakeFiles/Annotator.dir/Annotator_autogen/mocs_compilation.cpp.s: cmake_force
 
 CMakeFiles/Annotator.dir/main.cpp.o: CMakeFiles/Annotator.dir/flags.make
 CMakeFiles/Annotator.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Annotator.dir/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Annotator.dir/main.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Annotator.dir/main.cpp.o -c /Users/danielpietsch/CLionProjects/Annotator/main.cpp
 
 CMakeFiles/Annotator.dir/main.cpp.i: cmake_force
@@ -94,7 +103,7 @@ CMakeFiles/Annotator.dir/main.cpp.s: cmake_force
 
 CMakeFiles/Annotator.dir/Reader/WholeSlideImageReader.cpp.o: CMakeFiles/Annotator.dir/flags.make
 CMakeFiles/Annotator.dir/Reader/WholeSlideImageReader.cpp.o: ../Reader/WholeSlideImageReader.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Annotator.dir/Reader/WholeSlideImageReader.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Annotator.dir/Reader/WholeSlideImageReader.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Annotator.dir/Reader/WholeSlideImageReader.cpp.o -c /Users/danielpietsch/CLionProjects/Annotator/Reader/WholeSlideImageReader.cpp
 
 CMakeFiles/Annotator.dir/Reader/WholeSlideImageReader.cpp.i: cmake_force
@@ -107,7 +116,7 @@ CMakeFiles/Annotator.dir/Reader/WholeSlideImageReader.cpp.s: cmake_force
 
 CMakeFiles/Annotator.dir/Threads/Worker.cpp.o: CMakeFiles/Annotator.dir/flags.make
 CMakeFiles/Annotator.dir/Threads/Worker.cpp.o: ../Threads/Worker.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Annotator.dir/Threads/Worker.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Annotator.dir/Threads/Worker.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Annotator.dir/Threads/Worker.cpp.o -c /Users/danielpietsch/CLionProjects/Annotator/Threads/Worker.cpp
 
 CMakeFiles/Annotator.dir/Threads/Worker.cpp.i: cmake_force
@@ -120,7 +129,7 @@ CMakeFiles/Annotator.dir/Threads/Worker.cpp.s: cmake_force
 
 CMakeFiles/Annotator.dir/Threads/Manager.cpp.o: CMakeFiles/Annotator.dir/flags.make
 CMakeFiles/Annotator.dir/Threads/Manager.cpp.o: ../Threads/Manager.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Annotator.dir/Threads/Manager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Annotator.dir/Threads/Manager.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Annotator.dir/Threads/Manager.cpp.o -c /Users/danielpietsch/CLionProjects/Annotator/Threads/Manager.cpp
 
 CMakeFiles/Annotator.dir/Threads/Manager.cpp.i: cmake_force
@@ -133,7 +142,7 @@ CMakeFiles/Annotator.dir/Threads/Manager.cpp.s: cmake_force
 
 CMakeFiles/Annotator.dir/Data_Structures/TileJob.cpp.o: CMakeFiles/Annotator.dir/flags.make
 CMakeFiles/Annotator.dir/Data_Structures/TileJob.cpp.o: ../Data\ Structures/TileJob.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Annotator.dir/Data_Structures/TileJob.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Annotator.dir/Data_Structures/TileJob.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Annotator.dir/Data_Structures/TileJob.cpp.o -c "/Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileJob.cpp"
 
 CMakeFiles/Annotator.dir/Data_Structures/TileJob.cpp.i: cmake_force
@@ -146,7 +155,7 @@ CMakeFiles/Annotator.dir/Data_Structures/TileJob.cpp.s: cmake_force
 
 CMakeFiles/Annotator.dir/AnnotatorUI/AnnotatorMainWindow.cpp.o: CMakeFiles/Annotator.dir/flags.make
 CMakeFiles/Annotator.dir/AnnotatorUI/AnnotatorMainWindow.cpp.o: ../AnnotatorUI/AnnotatorMainWindow.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Annotator.dir/AnnotatorUI/AnnotatorMainWindow.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Annotator.dir/AnnotatorUI/AnnotatorMainWindow.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Annotator.dir/AnnotatorUI/AnnotatorMainWindow.cpp.o -c /Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/AnnotatorMainWindow.cpp
 
 CMakeFiles/Annotator.dir/AnnotatorUI/AnnotatorMainWindow.cpp.i: cmake_force
@@ -159,7 +168,7 @@ CMakeFiles/Annotator.dir/AnnotatorUI/AnnotatorMainWindow.cpp.s: cmake_force
 
 CMakeFiles/Annotator.dir/AnnotatorView/AnnotatorViewer.cpp.o: CMakeFiles/Annotator.dir/flags.make
 CMakeFiles/Annotator.dir/AnnotatorView/AnnotatorViewer.cpp.o: ../AnnotatorView/AnnotatorViewer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Annotator.dir/AnnotatorView/AnnotatorViewer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/Annotator.dir/AnnotatorView/AnnotatorViewer.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Annotator.dir/AnnotatorView/AnnotatorViewer.cpp.o -c /Users/danielpietsch/CLionProjects/Annotator/AnnotatorView/AnnotatorViewer.cpp
 
 CMakeFiles/Annotator.dir/AnnotatorView/AnnotatorViewer.cpp.i: cmake_force
@@ -172,7 +181,7 @@ CMakeFiles/Annotator.dir/AnnotatorView/AnnotatorViewer.cpp.s: cmake_force
 
 CMakeFiles/Annotator.dir/Data_Structures/GraphicsItem.cpp.o: CMakeFiles/Annotator.dir/flags.make
 CMakeFiles/Annotator.dir/Data_Structures/GraphicsItem.cpp.o: ../Data\ Structures/GraphicsItem.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/Annotator.dir/Data_Structures/GraphicsItem.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/Annotator.dir/Data_Structures/GraphicsItem.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Annotator.dir/Data_Structures/GraphicsItem.cpp.o -c "/Users/danielpietsch/CLionProjects/Annotator/Data Structures/GraphicsItem.cpp"
 
 CMakeFiles/Annotator.dir/Data_Structures/GraphicsItem.cpp.i: cmake_force
@@ -185,7 +194,7 @@ CMakeFiles/Annotator.dir/Data_Structures/GraphicsItem.cpp.s: cmake_force
 
 CMakeFiles/Annotator.dir/AnnotatorApplication/AnnotatorController.cpp.o: CMakeFiles/Annotator.dir/flags.make
 CMakeFiles/Annotator.dir/AnnotatorApplication/AnnotatorController.cpp.o: ../AnnotatorApplication/AnnotatorController.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/Annotator.dir/AnnotatorApplication/AnnotatorController.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/Annotator.dir/AnnotatorApplication/AnnotatorController.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Annotator.dir/AnnotatorApplication/AnnotatorController.cpp.o -c /Users/danielpietsch/CLionProjects/Annotator/AnnotatorApplication/AnnotatorController.cpp
 
 CMakeFiles/Annotator.dir/AnnotatorApplication/AnnotatorController.cpp.i: cmake_force
@@ -198,7 +207,7 @@ CMakeFiles/Annotator.dir/AnnotatorApplication/AnnotatorController.cpp.s: cmake_f
 
 CMakeFiles/Annotator.dir/Data_Structures/Tile.cpp.o: CMakeFiles/Annotator.dir/flags.make
 CMakeFiles/Annotator.dir/Data_Structures/Tile.cpp.o: ../Data\ Structures/Tile.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/Annotator.dir/Data_Structures/Tile.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/Annotator.dir/Data_Structures/Tile.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Annotator.dir/Data_Structures/Tile.cpp.o -c "/Users/danielpietsch/CLionProjects/Annotator/Data Structures/Tile.cpp"
 
 CMakeFiles/Annotator.dir/Data_Structures/Tile.cpp.i: cmake_force
@@ -211,7 +220,7 @@ CMakeFiles/Annotator.dir/Data_Structures/Tile.cpp.s: cmake_force
 
 CMakeFiles/Annotator.dir/Data_Structures/Tiler.cpp.o: CMakeFiles/Annotator.dir/flags.make
 CMakeFiles/Annotator.dir/Data_Structures/Tiler.cpp.o: ../Data\ Structures/Tiler.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/Annotator.dir/Data_Structures/Tiler.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/Annotator.dir/Data_Structures/Tiler.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Annotator.dir/Data_Structures/Tiler.cpp.o -c "/Users/danielpietsch/CLionProjects/Annotator/Data Structures/Tiler.cpp"
 
 CMakeFiles/Annotator.dir/Data_Structures/Tiler.cpp.i: cmake_force
@@ -224,7 +233,7 @@ CMakeFiles/Annotator.dir/Data_Structures/Tiler.cpp.s: cmake_force
 
 CMakeFiles/Annotator.dir/AnnotatorUI/Toolbar.cpp.o: CMakeFiles/Annotator.dir/flags.make
 CMakeFiles/Annotator.dir/AnnotatorUI/Toolbar.cpp.o: ../AnnotatorUI/Toolbar.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/Annotator.dir/AnnotatorUI/Toolbar.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/Annotator.dir/AnnotatorUI/Toolbar.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Annotator.dir/AnnotatorUI/Toolbar.cpp.o -c /Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/Toolbar.cpp
 
 CMakeFiles/Annotator.dir/AnnotatorUI/Toolbar.cpp.i: cmake_force
@@ -234,6 +243,32 @@ CMakeFiles/Annotator.dir/AnnotatorUI/Toolbar.cpp.i: cmake_force
 CMakeFiles/Annotator.dir/AnnotatorUI/Toolbar.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Annotator.dir/AnnotatorUI/Toolbar.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/Toolbar.cpp -o CMakeFiles/Annotator.dir/AnnotatorUI/Toolbar.cpp.s
+
+CMakeFiles/Annotator.dir/AnnotatorUI/Dockwidget.cpp.o: CMakeFiles/Annotator.dir/flags.make
+CMakeFiles/Annotator.dir/AnnotatorUI/Dockwidget.cpp.o: ../AnnotatorUI/Dockwidget.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/Annotator.dir/AnnotatorUI/Dockwidget.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Annotator.dir/AnnotatorUI/Dockwidget.cpp.o -c /Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/Dockwidget.cpp
+
+CMakeFiles/Annotator.dir/AnnotatorUI/Dockwidget.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Annotator.dir/AnnotatorUI/Dockwidget.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/Dockwidget.cpp > CMakeFiles/Annotator.dir/AnnotatorUI/Dockwidget.cpp.i
+
+CMakeFiles/Annotator.dir/AnnotatorUI/Dockwidget.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Annotator.dir/AnnotatorUI/Dockwidget.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/Dockwidget.cpp -o CMakeFiles/Annotator.dir/AnnotatorUI/Dockwidget.cpp.s
+
+CMakeFiles/Annotator.dir/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.o: CMakeFiles/Annotator.dir/flags.make
+CMakeFiles/Annotator.dir/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.o: Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/Annotator.dir/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Annotator.dir/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.o -c /Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp
+
+CMakeFiles/Annotator.dir/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Annotator.dir/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp > CMakeFiles/Annotator.dir/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.i
+
+CMakeFiles/Annotator.dir/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Annotator.dir/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp -o CMakeFiles/Annotator.dir/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.s
 
 # Object files for target Annotator
 Annotator_OBJECTS = \
@@ -249,7 +284,9 @@ Annotator_OBJECTS = \
 "CMakeFiles/Annotator.dir/AnnotatorApplication/AnnotatorController.cpp.o" \
 "CMakeFiles/Annotator.dir/Data_Structures/Tile.cpp.o" \
 "CMakeFiles/Annotator.dir/Data_Structures/Tiler.cpp.o" \
-"CMakeFiles/Annotator.dir/AnnotatorUI/Toolbar.cpp.o"
+"CMakeFiles/Annotator.dir/AnnotatorUI/Toolbar.cpp.o" \
+"CMakeFiles/Annotator.dir/AnnotatorUI/Dockwidget.cpp.o" \
+"CMakeFiles/Annotator.dir/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.o"
 
 # External object files for target Annotator
 Annotator_EXTERNAL_OBJECTS =
@@ -267,13 +304,15 @@ Annotator: CMakeFiles/Annotator.dir/AnnotatorApplication/AnnotatorController.cpp
 Annotator: CMakeFiles/Annotator.dir/Data_Structures/Tile.cpp.o
 Annotator: CMakeFiles/Annotator.dir/Data_Structures/Tiler.cpp.o
 Annotator: CMakeFiles/Annotator.dir/AnnotatorUI/Toolbar.cpp.o
+Annotator: CMakeFiles/Annotator.dir/AnnotatorUI/Dockwidget.cpp.o
+Annotator: CMakeFiles/Annotator.dir/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.o
 Annotator: CMakeFiles/Annotator.dir/build.make
 Annotator: /usr/local/lib/libopenslide.dylib
 Annotator: /usr/local/lib/QtWidgets.framework/Versions/A/QtWidgets
 Annotator: /usr/local/lib/QtGui.framework/Versions/A/QtGui
 Annotator: /usr/local/lib/QtCore.framework/Versions/A/QtCore
 Annotator: CMakeFiles/Annotator.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable Annotator"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable Annotator"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Annotator.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -284,7 +323,7 @@ CMakeFiles/Annotator.dir/clean:
 	$(CMAKE_COMMAND) -P CMakeFiles/Annotator.dir/cmake_clean.cmake
 .PHONY : CMakeFiles/Annotator.dir/clean
 
-CMakeFiles/Annotator.dir/depend:
+CMakeFiles/Annotator.dir/depend: Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp
 	cd /Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/danielpietsch/CLionProjects/Annotator /Users/danielpietsch/CLionProjects/Annotator /Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug /Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug /Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles/Annotator.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Annotator.dir/depend
 

@@ -10,8 +10,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/danielpietsch/CLionProjects/Annotator/AnnotatorApplication/AnnotatorController.cpp" "/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles/Annotator.dir/AnnotatorApplication/AnnotatorController.cpp.o"
   "/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/AnnotatorMainWindow.cpp" "/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles/Annotator.dir/AnnotatorUI/AnnotatorMainWindow.cpp.o"
+  "/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/Dockwidget.cpp" "/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles/Annotator.dir/AnnotatorUI/Dockwidget.cpp.o"
   "/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/Toolbar.cpp" "/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles/Annotator.dir/AnnotatorUI/Toolbar.cpp.o"
   "/Users/danielpietsch/CLionProjects/Annotator/AnnotatorView/AnnotatorViewer.cpp" "/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles/Annotator.dir/AnnotatorView/AnnotatorViewer.cpp.o"
+  "/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp" "/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles/Annotator.dir/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.o"
   "/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/Annotator_autogen/mocs_compilation.cpp" "/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles/Annotator.dir/Annotator_autogen/mocs_compilation.cpp.o"
   "/Users/danielpietsch/CLionProjects/Annotator/Data Structures/GraphicsItem.cpp" "/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles/Annotator.dir/Data_Structures/GraphicsItem.cpp.o"
   "/Users/danielpietsch/CLionProjects/Annotator/Data Structures/Tile.cpp" "/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles/Annotator.dir/Data_Structures/Tile.cpp.o"

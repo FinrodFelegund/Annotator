@@ -44,10 +44,36 @@ void AnnotatorMainWindow::setUpGraphics()
 
     _horizontalLayout = new QHBoxLayout(_centralWidget);
     _horizontalLayout->setSpacing(6);
-    _horizontalLayout->setContentsMargins(150, 0, 150, 0);
+    //_horizontalLayout->setContentsMargins(150, 0, 150, 0);
 
     _view = std::make_shared<AnnotatorViewer>(_centralWidget);
     _horizontalLayout->addWidget(_view.get());
+
+    this->setCentralWidget(_centralWidget);
+
+    _leftDockwidget = new DockWidget(this);
+    _leftDockwidget->setAllowedAreas(Qt::LeftDockWidgetArea);
+    _leftDockwidget->setFeatures(QDockWidget::NoDockWidgetFeatures);
+    _leftDockwidget->setFixedWidth(150);
+    _leftDockwidget->setMaximumWidth(200);
+
+
+    QWidget *widget = new QWidget(this);
+    widget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    _leftLayout = new QVBoxLayout(widget);
+    _bar = new Toolbar(this);
+    _bar->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+    _bar->resize(40, this->height() / 2);
+
+
+    _leftLayout->addWidget(_bar, 0, Qt::AlignRight | Qt::AlignTop);
+
+
+
+    _leftDockwidget->setWidget(widget);
+
+
+    this->addDockWidget(Qt::LeftDockWidgetArea, _leftDockwidget);
 
 }
 
@@ -72,7 +98,7 @@ void AnnotatorMainWindow::openImage()
         return;
     } else
     {
-        this->statusBar()->showMessage("Opening: " + _currentFileName);
+        //this->statusBar()->showMessage("Opening: " + _currentFileName);
     }
 
     emit initializeImage(_currentFileName.toStdString());
@@ -88,5 +114,17 @@ std::shared_ptr<AnnotatorViewer> AnnotatorMainWindow::getView()
     }
 
     return nullptr;
+}
+
+Toolbar* AnnotatorMainWindow::getToolBar()
+{
+    return _bar;
+}
+
+void AnnotatorMainWindow::resizeEvent(QResizeEvent *event)
+{
+    QMainWindow::resizeEvent(event);
+    _bar->resize(40, this->height() / 2);
+
 }
 

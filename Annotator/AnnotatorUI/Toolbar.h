@@ -5,12 +5,16 @@
 #ifndef ANNOTATOR_TOOLBAR_H
 #define ANNOTATOR_TOOLBAR_H
 #include <QToolBar>
+#include <QToolButton>
 
 class Toolbar : public QToolBar
 {
     Q_OBJECT
 public:
-    explicit Toolbar(QObject *parent = nullptr);
+    explicit Toolbar(QWidget *parent = nullptr);
+
+private slots:
+
 private:
 
 };

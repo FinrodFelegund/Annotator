@@ -27,6 +27,7 @@ private:
     virtual void mouseMoveEvent(QMouseEvent *event);
     virtual void mousePressEvent(QMouseEvent *event);
     virtual void mouseReleaseEvent(QMouseEvent *event);
+    virtual void resizeEvent(QResizeEvent *event);
 
     std::shared_ptr<WholeSlideImageReader> _reader;
     int _currentSceneScale;
@@ -41,7 +42,7 @@ signals:
     void fieldOfViewChanged(QRect rect);
 
 public slots:
-    void loadTileInScene(unsigned int *buf, int x, int y, int width, int height, int level);
+    void loadTileInScene(unsigned char *buf, int x, int y, int width, int height, int level);
 };
 
 

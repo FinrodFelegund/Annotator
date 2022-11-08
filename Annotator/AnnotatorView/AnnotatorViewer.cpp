@@ -11,7 +11,7 @@
 
 AnnotatorViewer::AnnotatorViewer(QObject *parent)
 {
-    //_manager = std::make_shared<Manager>();
+
     setScene(new QGraphicsScene());
     setBackgroundBrush(QBrush(QColor(252, 252, 252)));
     scene()->setBackgroundBrush(QBrush(QColor(252, 252, 252)));
@@ -34,6 +34,8 @@ AnnotatorViewer::AnnotatorViewer(QObject *parent)
     verticalScrollBar()->hide();
     setEnabled(false);
 
+    setRenderHints(QPainter::Antialiasing);
+
 }
 
 AnnotatorViewer::~AnnotatorViewer() noexcept
@@ -54,8 +56,11 @@ void AnnotatorViewer::initialize(std::shared_ptr<WholeSlideImageReader> reader)
     _levelTopDimensions = _reader->getLevelDimensions(_currentLevel);
 
     setSceneRect(0, 0, _levelZeroDimensions.first, _levelZeroDimensions.second);
-    fitInView(QRectF(0, 0, _levelZeroDimensions.first, _levelZeroDimensions.second), Qt::KeepAspectRatio);
+    fitInView(QRectF(0, 0, _levelZeroDimensions.first, _levelZeroDimensions.second), Qt::KeepAspectRatioByExpanding);
 
+    //this->setRenderHints(QPainter::Antialiasing);
+    //setCacheMode(QGraphicsView::CacheBackground);
+    //setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
 }
 
 QRectF AnnotatorViewer::getSceneRect()
@@ -78,22 +83,23 @@ int AnnotatorViewer::getTileSize()
     return _tileSize;
 }
 
-void AnnotatorViewer::loadTileInScene(unsigned int *buf, int x, int y, int width, int height, int level)
+void AnnotatorViewer::loadTileInScene(unsigned char *buf, int x, int y, int width, int height, int level)
 {
 
     std::pair<int, int> currentLevel = _reader->getLevelDimensions(level);
     qreal scaleFactor = (qreal)_levelZeroDimensions.first / (qreal)currentLevel.first;
 
-    //qDebug() << "X: " << x << " Y: " << y << " Buf: " << buf << " Scalefactor: " << scaleFactor << " Width: " << width << " Height: " << height;
+    qDebug() << "Level: " << level << " X: " << x << " Y: " << y << " Buf: " << buf << " Scalefactor: " << scaleFactor << " Width: " << width << " Height: " << height;
 
-    QImage *img = nullptr;
-    QGraphicsPixmapItem *item = nullptr;
-    img = new QImage((unsigned char*)buf, width, height,  QImage::Format_ARGB32);
-    item = scene()->addPixmap(QPixmap::fromImage(*img));
-    delete img;
-    item->setScale(scaleFactor);
-    item->setPos(x, y);
+    //if(level == 2)
 
+        QImage *img = nullptr;
+        QGraphicsPixmapItem *item = nullptr;
+        img = new QImage((unsigned char*)buf, width, height,  QImage::Format_RGB888);
+        item = scene()->addPixmap(QPixmap::fromImage(*img));
+        delete img;
+        item->setScale(scaleFactor);
+        item->setPos(x, y);
 }
 
 void AnnotatorViewer::close()
@@ -159,9 +165,20 @@ void AnnotatorViewer::wheelEvent(QWheelEvent *event)
     {
         _currentLevel = projectedLevel;
         _currentSceneScale = _reader->getLevelDownSample(_currentLevel);
-        //emit fieldOfViewChanged(rect);
+        emit fieldOfViewChanged(rect);
     }
 
+}
+
+void AnnotatorViewer::resizeEvent(QResizeEvent *event)
+{
+    QRect rect = this->mapToScene(this->rect()).boundingRect().toRect();
+
+    if(rect.width() >= _levelZeroDimensions.first || rect.height() >= _levelZeroDimensions.second)
+    {
+        fitInView(0, 0, _levelZeroDimensions.first, _levelZeroDimensions.second);
+    }
+    QGraphicsView::resizeEvent(event);
 }
 
 

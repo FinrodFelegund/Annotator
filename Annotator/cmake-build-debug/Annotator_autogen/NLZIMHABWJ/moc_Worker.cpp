@@ -26,7 +26,7 @@ struct qt_meta_stringdata_Worker_t {
     char stringdata0[7];
     char stringdata1[9];
     char stringdata2[1];
-    char stringdata3[6];
+    char stringdata3[7];
     char stringdata4[7];
     char stringdata5[2];
     char stringdata6[2];
@@ -41,18 +41,18 @@ static const qt_meta_stringdata_Worker_t qt_meta_stringdata_Worker = {
         QT_MOC_LITERAL(0, 6),  // "Worker"
         QT_MOC_LITERAL(7, 8),  // "finished"
         QT_MOC_LITERAL(16, 0),  // ""
-        QT_MOC_LITERAL(17, 5),  // "uint*"
-        QT_MOC_LITERAL(23, 6),  // "buffer"
-        QT_MOC_LITERAL(30, 1),  // "x"
-        QT_MOC_LITERAL(32, 1),  // "y"
-        QT_MOC_LITERAL(34, 5),  // "width"
-        QT_MOC_LITERAL(40, 6),  // "height"
-        QT_MOC_LITERAL(47, 5)   // "level"
+        QT_MOC_LITERAL(17, 6),  // "uchar*"
+        QT_MOC_LITERAL(24, 6),  // "buffer"
+        QT_MOC_LITERAL(31, 1),  // "x"
+        QT_MOC_LITERAL(33, 1),  // "y"
+        QT_MOC_LITERAL(35, 5),  // "width"
+        QT_MOC_LITERAL(41, 6),  // "height"
+        QT_MOC_LITERAL(48, 5)   // "level"
     },
     "Worker",
     "finished",
     "",
-    "uint*",
+    "uchar*",
     "buffer",
     "x",
     "y",
@@ -90,13 +90,13 @@ void Worker::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         auto *_t = static_cast<Worker *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->finished((*reinterpret_cast< std::add_pointer_t<uint*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[6]))); break;
+        case 0: _t->finished((*reinterpret_cast< std::add_pointer_t<uchar*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[6]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (Worker::*)(unsigned int * , int , int , int , int , int );
+            using _t = void (Worker::*)(unsigned char * , int , int , int , int , int );
             if (_t _q_method = &Worker::finished; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 0;
                 return;
@@ -112,7 +112,7 @@ const QMetaObject Worker::staticMetaObject = { {
     qt_static_metacall,
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_Worker_t
-, QtPrivate::TypeAndForceComplete<Worker, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<unsigned int *, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>
+, QtPrivate::TypeAndForceComplete<Worker, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<unsigned char *, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>
 
 
 
@@ -152,7 +152,7 @@ int Worker::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void Worker::finished(unsigned int * _t1, int _t2, int _t3, int _t4, int _t5, int _t6)
+void Worker::finished(unsigned char * _t1, int _t2, int _t3, int _t4, int _t5, int _t6)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t4))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t5))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t6))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);

@@ -28,7 +28,7 @@ struct qt_meta_stringdata_AnnotatorViewer_t {
     char stringdata2[1];
     char stringdata3[5];
     char stringdata4[16];
-    char stringdata5[6];
+    char stringdata5[7];
     char stringdata6[4];
     char stringdata7[2];
     char stringdata8[2];
@@ -45,20 +45,20 @@ static const qt_meta_stringdata_AnnotatorViewer_t qt_meta_stringdata_AnnotatorVi
         QT_MOC_LITERAL(35, 0),  // ""
         QT_MOC_LITERAL(36, 4),  // "rect"
         QT_MOC_LITERAL(41, 15),  // "loadTileInScene"
-        QT_MOC_LITERAL(57, 5),  // "uint*"
-        QT_MOC_LITERAL(63, 3),  // "buf"
-        QT_MOC_LITERAL(67, 1),  // "x"
-        QT_MOC_LITERAL(69, 1),  // "y"
-        QT_MOC_LITERAL(71, 5),  // "width"
-        QT_MOC_LITERAL(77, 6),  // "height"
-        QT_MOC_LITERAL(84, 5)   // "level"
+        QT_MOC_LITERAL(57, 6),  // "uchar*"
+        QT_MOC_LITERAL(64, 3),  // "buf"
+        QT_MOC_LITERAL(68, 1),  // "x"
+        QT_MOC_LITERAL(70, 1),  // "y"
+        QT_MOC_LITERAL(72, 5),  // "width"
+        QT_MOC_LITERAL(78, 6),  // "height"
+        QT_MOC_LITERAL(85, 5)   // "level"
     },
     "AnnotatorViewer",
     "fieldOfViewChanged",
     "",
     "rect",
     "loadTileInScene",
-    "uint*",
+    "uchar*",
     "buf",
     "x",
     "y",
@@ -103,7 +103,7 @@ void AnnotatorViewer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         (void)_t;
         switch (_id) {
         case 0: _t->fieldOfViewChanged((*reinterpret_cast< std::add_pointer_t<QRect>>(_a[1]))); break;
-        case 1: _t->loadTileInScene((*reinterpret_cast< std::add_pointer_t<uint*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[6]))); break;
+        case 1: _t->loadTileInScene((*reinterpret_cast< std::add_pointer_t<uchar*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[6]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -126,7 +126,7 @@ const QMetaObject AnnotatorViewer::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_AnnotatorViewer_t
 , QtPrivate::TypeAndForceComplete<AnnotatorViewer, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QRect, std::false_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<unsigned int *, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<unsigned char *, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>
 
 
 >,
