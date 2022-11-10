@@ -4,7 +4,7 @@
 
 #include "Tile.h"
 
-Tile::Tile(int x, int y, int width, int height)
+Tile::Tile(qreal x, qreal y, int width, int height)
 {
     _xCoord = x;
     _yCoord = y;
@@ -12,12 +12,12 @@ Tile::Tile(int x, int y, int width, int height)
     _height = height;
 }
 
-int Tile::getX()
+qreal Tile::getX()
 {
     return _xCoord;
 }
 
-int Tile::getY()
+qreal Tile::getY()
 {
     return _yCoord;
 }

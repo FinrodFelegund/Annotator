@@ -225,10 +225,10 @@ unsigned char *WholeSlideImageReader::readDataFromImage(int64_t x, int64_t y, in
     if(_valid)
     {
         std::shared_lock<std::shared_mutex> l(*_mutex);
-        unsigned int *buf = new uint32_t[width * height * 3];
+        uint32_t *buf = new  uint32_t [width * height * 4];
 
         //qDebug() << "Reading image:";
-        //qDebug() << "x: " <<  x << " y: " << y << " " << width << " " << height;
+        //qDebug() << "x: " <<  x << " y: " << y << " " << width << " " << height << " Level: " << level;
 
         openslide_read_region(_obj, buf, x, y, level, width, height);
 
@@ -239,20 +239,24 @@ unsigned char *WholeSlideImageReader::readDataFromImage(int64_t x, int64_t y, in
             qDebug() << err;
         }
 
+        //OpenSlide returns buffer in form ABGR, we have to reverse it and strip the alpha channel. Source: https://openslide.org/docs/premultiplied-argb/
         unsigned char *rgb = new unsigned char[width * height * 3];
         unsigned char* bgra = (unsigned char*)buf;
         for (unsigned long long i = 0, j = 0; i < width*height*4; i+=4, j+=3) {
-            if (bgra[i + 3] == 255) {
+            if (bgra[i + 3] == 255)
+            {
                 rgb[j] = bgra[i + 2];
                 rgb[j + 1] = bgra[i + 1];
                 rgb[j + 2] = bgra[i];
             }
-            else if (bgra[i + 3] == 0) {
+            else if (bgra[i + 3] == 0)
+            {
                 rgb[j] = _bg_r;
                 rgb[j + 1] = _bg_g;
                 rgb[j + 2] = _bg_b;
             }
-            else {
+            else
+            {
                 rgb[j] = (255. * bgra[i + 2]) / bgra[i + 3];
                 rgb[j + 1] = (255. * bgra[i + 1]) / bgra[i + 3];
                 rgb[j + 2] = (255. * bgra[i]) / bgra[i + 3];

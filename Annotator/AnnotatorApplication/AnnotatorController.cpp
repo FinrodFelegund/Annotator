@@ -100,10 +100,9 @@ void AnnotatorController::initializeImage(std::string fileName)
 
 }
 
-void AnnotatorController::fieldOfViewChanged(QRect rect)
+void AnnotatorController::fieldOfViewChanged(QRectF rect)
 {
-    qDebug() << "X: " << rect.x() << " Y: " << rect.y() << " width: " << rect.width() << " height" << rect.height();
-    int viewSceneScale = _view->getCurrentSceneScale();
+    qreal viewSceneScale = _view->getCurrentSceneScale();
     int tileSize = _view->getTileSize();
     int level = _view->getCurrentLevel();
     Tiler tiler(rect, tileSize);

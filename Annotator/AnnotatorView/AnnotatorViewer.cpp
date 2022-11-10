@@ -73,7 +73,7 @@ int AnnotatorViewer::getCurrentLevel()
     return _currentLevel;
 }
 
-int AnnotatorViewer::getCurrentSceneScale()
+qreal AnnotatorViewer::getCurrentSceneScale()
 {
     return _currentSceneScale;
 }
@@ -86,20 +86,14 @@ int AnnotatorViewer::getTileSize()
 void AnnotatorViewer::loadTileInScene(unsigned char *buf, int x, int y, int width, int height, int level)
 {
 
-    std::pair<int, int> currentLevel = _reader->getLevelDimensions(level);
-    qreal scaleFactor = (qreal)_levelZeroDimensions.first / (qreal)currentLevel.first;
-
-    qDebug() << "Level: " << level << " X: " << x << " Y: " << y << " Buf: " << buf << " Scalefactor: " << scaleFactor << " Width: " << width << " Height: " << height;
-
-    //if(level == 2)
-
-        QImage *img = nullptr;
-        QGraphicsPixmapItem *item = nullptr;
-        img = new QImage((unsigned char*)buf, width, height,  QImage::Format_RGB888);
-        item = scene()->addPixmap(QPixmap::fromImage(*img));
-        delete img;
-        item->setScale(scaleFactor);
-        item->setPos(x, y);
+    QImage *img = nullptr;
+    QGraphicsPixmapItem *item = nullptr;
+    img = new QImage((unsigned char*)buf, width, height,  QImage::Format_RGB888);
+    item = scene()->addPixmap(QPixmap::fromImage(*img));
+    delete img;
+    item->setScale(_currentSceneScale);
+    qDebug() << "X Position: " << x << " Y Position: " << y << " CurrentScale: " << _currentSceneScale;
+    item->setPos(x, y);
 }
 
 void AnnotatorViewer::close()
@@ -122,10 +116,9 @@ void AnnotatorViewer::wheelEvent(QWheelEvent *event)
     setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
 
     //declarations
-    QRect rect = this->mapToScene(this->rect()).boundingRect().toRect(); //currently visible rect of scene in view
+    QRectF rect = this->mapToScene(this->rect()).boundingRect(); //currently visible rect of scene in view
     qreal currentlyScaledValue = qreal(_levelZeroDimensions.first) / qreal(rect.width());
     int levelTopDownsample = _reader->getLevelDownSample(_reader->getNumberOfLevels() - 1);
-
     auto point = event->position().toPoint();
     auto scenePos = this->mapToScene(point);
 
@@ -161,11 +154,12 @@ void AnnotatorViewer::wheelEvent(QWheelEvent *event)
 
     //find out on which level we are after scaling
     int projectedLevel = _reader->getLevelForGivenDownSample(currentlyScaledValue);
+    //qDebug() << "Current Downsample: " << currentlyScaledValue;
     if(projectedLevel != _currentLevel)
     {
         _currentLevel = projectedLevel;
-        _currentSceneScale = _reader->getLevelDownSample(_currentLevel);
-        emit fieldOfViewChanged(rect);
+        _currentSceneScale = currentlyScaledValue;
+        //emit fieldOfViewChanged(rect);
     }
 
 }

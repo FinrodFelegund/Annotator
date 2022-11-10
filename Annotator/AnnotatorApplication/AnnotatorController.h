@@ -26,7 +26,7 @@ public:
 
 public slots:
     void initializeImage(std::string fileName);
-    void fieldOfViewChanged(QRect rect);
+    void fieldOfViewChanged(QRectF rect);
     void clickTriggered(bool checked);
     void drawTriggered(bool checked);
     void exitTriggered(bool checked);

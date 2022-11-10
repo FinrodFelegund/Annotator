@@ -1165,7 +1165,32 @@ CMakeFiles/Annotator.dir/Data_Structures/GraphicsItem.cpp.o: \
  /usr/local/lib/QtWidgets.framework/Headers/qgraphicsitem.h
 CMakeFiles/Annotator.dir/Data_Structures/Tile.cpp.o: \
  ../Data\ Structures/Tile.cpp \
- ../Data\ Structures/Tile.h
+ ../Data\ Structures/Tile.h \
+ /usr/local/include/QtCore/qalgorithms.h \
+ /usr/local/include/QtCore/qatomic.h \
+ /usr/local/include/QtCore/qatomic_bootstrap.h \
+ /usr/local/include/QtCore/qatomic_cxx11.h \
+ /usr/local/include/QtCore/qbasicatomic.h \
+ /usr/local/include/QtCore/qcompare_impl.h \
+ /usr/local/include/QtCore/qcompilerdetection.h \
+ /usr/local/include/QtCore/qconfig-bootstrapped.h \
+ /usr/local/include/QtCore/qconfig.h \
+ /usr/local/include/QtCore/qcontainerfwd.h \
+ /usr/local/include/QtCore/qflags.h \
+ /usr/local/include/QtCore/qgenericatomic.h \
+ /usr/local/include/QtCore/qglobal.h \
+ /usr/local/include/QtCore/qglobalstatic.h \
+ /usr/local/include/QtCore/qlogging.h \
+ /usr/local/include/QtCore/qnumeric.h \
+ /usr/local/include/QtCore/qprocessordetection.h \
+ /usr/local/include/QtCore/qsysinfo.h \
+ /usr/local/include/QtCore/qsystemdetection.h \
+ /usr/local/include/QtCore/qtcore-config.h \
+ /usr/local/include/QtCore/qtcoreexports.h \
+ /usr/local/include/QtCore/qtypeinfo.h \
+ /usr/local/include/QtCore/qversiontagging.h \
+ /usr/local/lib/QtCore.framework/Headers/QtMath \
+ /usr/local/lib/QtCore.framework/Headers/qmath.h
 CMakeFiles/Annotator.dir/Data_Structures/TileJob.cpp.o: \
  ../Data\ Structures/TileJob.cpp \
  ../Data\ Structures/TileJob.h \

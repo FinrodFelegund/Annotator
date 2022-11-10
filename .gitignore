@@ -34,3 +34,9 @@
 # OS generated files
 .DS_Store
 .DS_Store?
+
+# build folder
+/Annotator/cmake-build-debug
+
+# stuff that I don't know
+/Annotator/.idea

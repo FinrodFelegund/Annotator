@@ -4,17 +4,18 @@
 
 #ifndef ANNOTATOR_TILE_H
 #define ANNOTATOR_TILE_H
+#include <QtMath>
 
 
 struct Tile
 {
-    int _xCoord;
-    int _yCoord;
+    qreal _xCoord;
+    qreal _yCoord;
     int _width;
     int _height;
-    Tile(int x, int y, int width, int height);
-    int getX();
-    int getY();
+    Tile(qreal x, qreal y, int width, int height);
+    qreal getX();
+    qreal getY();
     int getHeight();
     int getWidth();
 };

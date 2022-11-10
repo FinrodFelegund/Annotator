@@ -87,7 +87,7 @@ static const uint qt_meta_data_AnnotatorController[] = {
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
-    QMetaType::Void, QMetaType::QRect,    6,
+    QMetaType::Void, QMetaType::QRectF,    6,
     QMetaType::Void, QMetaType::Bool,    8,
     QMetaType::Void, QMetaType::Bool,    8,
     QMetaType::Void, QMetaType::Bool,    8,
@@ -102,7 +102,7 @@ void AnnotatorController::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
         (void)_t;
         switch (_id) {
         case 0: _t->initializeImage((*reinterpret_cast< std::add_pointer_t<std::string>>(_a[1]))); break;
-        case 1: _t->fieldOfViewChanged((*reinterpret_cast< std::add_pointer_t<QRect>>(_a[1]))); break;
+        case 1: _t->fieldOfViewChanged((*reinterpret_cast< std::add_pointer_t<QRectF>>(_a[1]))); break;
         case 2: _t->clickTriggered((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
         case 3: _t->drawTriggered((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
         case 4: _t->exitTriggered((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
@@ -119,7 +119,7 @@ const QMetaObject AnnotatorController::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_AnnotatorController_t
 , QtPrivate::TypeAndForceComplete<AnnotatorController, std::true_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<std::string, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QRect, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<std::string, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QRectF, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>
 
 
 >,

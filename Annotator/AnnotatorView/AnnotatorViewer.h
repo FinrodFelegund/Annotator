@@ -19,7 +19,7 @@ public:
     void close();
     QRectF getSceneRect();
     int getCurrentLevel();
-    int getCurrentSceneScale();
+    qreal getCurrentSceneScale();
     int getTileSize();
 
 private:
@@ -30,7 +30,7 @@ private:
     virtual void resizeEvent(QResizeEvent *event);
 
     std::shared_ptr<WholeSlideImageReader> _reader;
-    int _currentSceneScale;
+    qreal _currentSceneScale;
     int _tileSize;
     int _currentLevel;
     std::pair<int, int> _levelZeroDimensions;
@@ -39,7 +39,7 @@ private:
     QPointF _currentPos;
 
 signals:
-    void fieldOfViewChanged(QRect rect);
+    void fieldOfViewChanged(QRectF rect);
 
 public slots:
     void loadTileInScene(unsigned char *buf, int x, int y, int width, int height, int level);
