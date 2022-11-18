@@ -369,6 +369,7 @@
  mdp:/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/xlocale.h
  mdp:/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/xlocale/_time.h
  mdp:/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include/stdarg.h
+ mdp:/Users/danielpietsch/CLionProjects/Annotator/Data Structures/Tile.h
  mdp:/Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileJob.h
  mdp:/Users/danielpietsch/CLionProjects/Annotator/Reader/WholeSlideImageReader.h
  mdp:/Users/danielpietsch/CLionProjects/Annotator/Threads/Manager.h
@@ -377,6 +378,7 @@
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/QMutex
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/QObject
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/QWaitCondition
+ mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/QtMath
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/qalgorithms.h
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/qanystringview.h
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/qarraydata.h
@@ -505,6 +507,7 @@
  mdp:/usr/local/include/openslide/openslide.h
 /Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileJob.h
 /Users/danielpietsch/CLionProjects/Annotator/Threads/Manager.cpp
+/Users/danielpietsch/CLionProjects/Annotator/Threads/Worker.cpp
 /Users/danielpietsch/CLionProjects/Annotator/main.cpp
 /Users/danielpietsch/CLionProjects/Annotator/AnnotatorApplication/AnnotatorController.h
  mmc:Q_OBJECT
@@ -648,6 +651,7 @@
  mdp:/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__functional/unwrap_ref.h
  mdp:/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__functional/weak_result_type.h
  mdp:/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__functional_base
+ mdp:/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__hash_table
  mdp:/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__iterator/access.h
  mdp:/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__iterator/advance.h
  mdp:/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/__iterator/back_insert_iterator.h
@@ -784,6 +788,7 @@
  mdp:/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/tuple
  mdp:/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/type_traits
  mdp:/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/typeinfo
+ mdp:/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/unordered_map
  mdp:/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/utility
  mdp:/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/variant
  mdp:/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/c++/v1/vector
@@ -880,6 +885,8 @@
  mdp:/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/Dockwidget.h
  mdp:/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/Toolbar.h
  mdp:/Users/danielpietsch/CLionProjects/Annotator/AnnotatorView/AnnotatorViewer.h
+ mdp:/Users/danielpietsch/CLionProjects/Annotator/Data Structures/Tile.h
+ mdp:/Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileCache.h
  mdp:/Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileJob.h
  mdp:/Users/danielpietsch/CLionProjects/Annotator/Reader/WholeSlideImageReader.h
  mdp:/Users/danielpietsch/CLionProjects/Annotator/Threads/Manager.h
@@ -887,7 +894,9 @@
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/QDebug
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/QMutex
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/QObject
+ mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/QRectF
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/QWaitCondition
+ mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/QtMath
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/qalgorithms.h
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/qanystringview.h
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/qarraydata.h
@@ -1402,6 +1411,7 @@
  mdp:/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/xlocale.h
  mdp:/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/xlocale/_time.h
  mdp:/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include/stdarg.h
+ mdp:/Users/danielpietsch/CLionProjects/Annotator/Data Structures/Tile.h
  mdp:/Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileJob.h
  mdp:/Users/danielpietsch/CLionProjects/Annotator/Reader/WholeSlideImageReader.h
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/QDeadlineTimer
@@ -1409,6 +1419,7 @@
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/QMutex
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/QObject
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/QWaitCondition
+ mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/QtMath
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/qalgorithms.h
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/qanystringview.h
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/qarraydata.h
@@ -1515,16 +1526,12 @@
  mdp:/usr/local/include/openslide/openslide-features.h
  mdp:/usr/local/include/openslide/openslide.h
 /Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileJob.cpp
-/Users/danielpietsch/CLionProjects/Annotator/Threads/Worker.cpp
 /Users/danielpietsch/CLionProjects/Annotator/AnnotatorView/AnnotatorViewer.cpp
 /Users/danielpietsch/CLionProjects/Annotator/Data Structures/GraphicsItem.h
 /Users/danielpietsch/CLionProjects/Annotator/Data Structures/GraphicsItem.cpp
-/Users/danielpietsch/CLionProjects/Annotator/Reader/WholeSlideImageReader.cpp
-/Users/danielpietsch/CLionProjects/Annotator/Data Structures/Tile.cpp
-/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/Toolbar.cpp
-/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/AnnotatorMainWindow.cpp
+/Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileCache.h
 /Users/danielpietsch/CLionProjects/Annotator/Data Structures/Tile.h
-/Users/danielpietsch/CLionProjects/Annotator/Reader/WholeSlideImageReader.h
+/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/AnnotatorMainWindow.cpp
 /Users/danielpietsch/CLionProjects/Annotator/Data Structures/Tiler.h
 /Users/danielpietsch/CLionProjects/Annotator/Threads/Worker.h
  mmc:Q_OBJECT
@@ -1898,6 +1905,7 @@
  mdp:/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/xlocale.h
  mdp:/Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/xlocale/_time.h
  mdp:/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include/stdarg.h
+ mdp:/Users/danielpietsch/CLionProjects/Annotator/Data Structures/Tile.h
  mdp:/Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileJob.h
  mdp:/Users/danielpietsch/CLionProjects/Annotator/Reader/WholeSlideImageReader.h
  mdp:/Users/danielpietsch/CLionProjects/Annotator/Threads/Manager.h
@@ -1908,6 +1916,7 @@
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/QRunnable
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/QThread
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/QWaitCondition
+ mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/QtMath
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/qalgorithms.h
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/qanystringview.h
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/qarraydata.h
@@ -2809,6 +2818,7 @@
  mdp:/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/Dockwidget.h
  mdp:/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/Toolbar.h
  mdp:/Users/danielpietsch/CLionProjects/Annotator/AnnotatorView/AnnotatorViewer.h
+ mdp:/Users/danielpietsch/CLionProjects/Annotator/Data Structures/Tile.h
  mdp:/Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileJob.h
  mdp:/Users/danielpietsch/CLionProjects/Annotator/Reader/WholeSlideImageReader.h
  mdp:/Users/danielpietsch/CLionProjects/Annotator/Threads/Manager.h
@@ -2817,6 +2827,7 @@
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/QMutex
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/QObject
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/QWaitCondition
+ mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/QtMath
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/qalgorithms.h
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/qanystringview.h
  mdp:/usr/local/Cellar/qt/6.3.2/lib/QtCore.framework/Versions/A/Headers/qarraydata.h
@@ -2960,3 +2971,8 @@
  mdp:/usr/local/include/openslide/openslide-features.h
  mdp:/usr/local/include/openslide/openslide.h
 /Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/Dockwidget.cpp
+/Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileCache.cpp
+/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/Toolbar.cpp
+/Users/danielpietsch/CLionProjects/Annotator/Data Structures/Tile.cpp
+/Users/danielpietsch/CLionProjects/Annotator/Reader/WholeSlideImageReader.cpp
+/Users/danielpietsch/CLionProjects/Annotator/Reader/WholeSlideImageReader.h

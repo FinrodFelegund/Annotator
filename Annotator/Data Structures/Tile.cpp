@@ -4,20 +4,33 @@
 
 #include "Tile.h"
 
-Tile::Tile(qreal x, qreal y, int width, int height)
+Tile::Tile(int x, int y, int width, int height)
 {
     _xCoord = x;
     _yCoord = y;
     _width = width;
     _height = height;
+    _buf = nullptr;
 }
 
-qreal Tile::getX()
+Tile::Tile()
+{
+    _buf = nullptr;
+}
+
+Tile::~Tile()
+{
+
+}
+
+
+
+int Tile::getX()
 {
     return _xCoord;
 }
 
-qreal Tile::getY()
+int Tile::getY()
 {
     return _yCoord;
 }
@@ -30,4 +43,25 @@ int Tile::getWidth()
 int Tile::getHeight()
 {
     return _height;
+}
+
+void Tile::setBuf(unsigned char *buf)
+{
+    this->_buf = new unsigned char [_width * _height * 3];
+    memcpy(this->_buf, buf, _width * _height * 3);
+}
+
+unsigned  char* Tile::getBuf()
+{
+    return _buf;
+}
+
+void Tile::setLevel(int level)
+{
+    this->_level = level;
+}
+
+int Tile::getLevel()
+{
+    return this->_level;
 }

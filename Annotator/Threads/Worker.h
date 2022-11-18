@@ -14,6 +14,7 @@
 #include "../Reader/WholeSlideImageReader.h"
 
 class QPixmap;
+class Tile;
 
 class Worker : public QThread
 {
@@ -27,7 +28,7 @@ public:
 
 signals:
 
-    void finished(unsigned char* buffer, int x, int y, int width, int height, int level);
+    void finished(Tile tile);
 
 private:
 

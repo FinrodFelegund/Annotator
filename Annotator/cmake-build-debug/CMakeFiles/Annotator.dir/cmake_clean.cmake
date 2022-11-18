@@ -14,6 +14,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/Annotator.dir/Annotator_autogen/mocs_compilation.cpp.o"
   "CMakeFiles/Annotator.dir/Data_Structures/GraphicsItem.cpp.o"
   "CMakeFiles/Annotator.dir/Data_Structures/Tile.cpp.o"
+  "CMakeFiles/Annotator.dir/Data_Structures/TileCache.cpp.o"
   "CMakeFiles/Annotator.dir/Data_Structures/TileJob.cpp.o"
   "CMakeFiles/Annotator.dir/Data_Structures/Tiler.cpp.o"
   "CMakeFiles/Annotator.dir/Reader/WholeSlideImageReader.cpp.o"

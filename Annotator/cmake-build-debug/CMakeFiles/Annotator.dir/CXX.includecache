@@ -6,18 +6,52 @@
 
 #IncludeRegexTransform: 
 
-/Users/danielpietsch/CLionProjects/Annotator/AnnotatorView/AnnotatorViewer.cpp
-AnnotatorViewer.h
-/Users/danielpietsch/CLionProjects/Annotator/AnnotatorView/AnnotatorViewer.h
+/Users/danielpietsch/CLionProjects/Annotator/AnnotatorApplication/AnnotatorController.cpp
+AnnotatorController.h
+/Users/danielpietsch/CLionProjects/Annotator/AnnotatorApplication/AnnotatorController.h
+QScreen
+-
+../Data Structures/Tiler.h
+/Users/danielpietsch/CLionProjects/Annotator/Data Structures/Tiler.h
+../Data Structures/Tile.h
+/Users/danielpietsch/CLionProjects/Annotator/Data Structures/Tile.h
 ../Threads/Worker.h
 /Users/danielpietsch/CLionProjects/Annotator/Threads/Worker.h
-QGraphicsPixmapItem
+
+/Users/danielpietsch/CLionProjects/Annotator/AnnotatorApplication/AnnotatorController.h
+QObject
 -
-QLabel
+../AnnotatorUI/AnnotatorMainWindow.h
+/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/AnnotatorMainWindow.h
+../Reader/WholeSlideImageReader.h
+/Users/danielpietsch/CLionProjects/Annotator/Reader/WholeSlideImageReader.h
+../Threads/Manager.h
+/Users/danielpietsch/CLionProjects/Annotator/Threads/Manager.h
+../Data Structures/TileCache.h
+/Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileCache.h
+
+/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/AnnotatorMainWindow.h
+QMainWindow
 -
-QImage
+QHBoxLayout
 -
-QWheelEvent
+QVBoxLayout
+-
+../AnnotatorView/AnnotatorViewer.h
+/Users/danielpietsch/CLionProjects/Annotator/AnnotatorView/AnnotatorViewer.h
+Toolbar.h
+/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/Toolbar.h
+Dockwidget.h
+/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/Dockwidget.h
+
+/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/Dockwidget.h
+QDockWidget
+-
+
+/Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/Toolbar.h
+QToolBar
+-
+QToolButton
 -
 
 /Users/danielpietsch/CLionProjects/Annotator/AnnotatorView/AnnotatorViewer.h
@@ -30,11 +64,33 @@ QScrollBar
 ../Reader/WholeSlideImageReader.h
 /Users/danielpietsch/CLionProjects/Annotator/Reader/WholeSlideImageReader.h
 
+/Users/danielpietsch/CLionProjects/Annotator/Data Structures/Tile.h
+QtMath
+-
+
+/Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileCache.h
+unordered_map
+-
+QRectF
+-
+
 /Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileJob.h
 memory
 -
 ../Reader/WholeSlideImageReader.h
 /Users/danielpietsch/CLionProjects/Annotator/Reader/WholeSlideImageReader.h
+Tile.h
+/Users/danielpietsch/CLionProjects/Annotator/Data Structures/Tile.h
+
+/Users/danielpietsch/CLionProjects/Annotator/Data Structures/Tiler.h
+QRect
+-
+vector
+-
+Tile.h
+/Users/danielpietsch/CLionProjects/Annotator/Data Structures/Tile.h
+QtMath
+-
 
 /Users/danielpietsch/CLionProjects/Annotator/Reader/WholeSlideImageReader.h
 vector
@@ -1232,22 +1288,6 @@ QtGui/qfontinfo.h
 QtGui/qfontmetrics.h
 -
 
-/usr/local/include/QtGui/qpainterpath.h
-QtGui/qtguiglobal.h
--
-QtGui/qtransform.h
--
-QtCore/qglobal.h
--
-QtCore/qline.h
--
-QtCore/qlist.h
--
-QtCore/qrect.h
--
-QtCore/qshareddata.h
--
-
 /usr/local/include/QtGui/qpalette.h
 QtGui/qtguiglobal.h
 -
@@ -1264,18 +1304,6 @@ QtGui/qtguiglobal.h
 QtGui/qcolor.h
 -
 QtGui/qbrush.h
--
-
-/usr/local/include/QtGui/qpicture.h
-QtGui/qtguiglobal.h
--
-QtCore/qiodevice.h
--
-QtCore/qstringlist.h
--
-QtCore/qsharedpointer.h
--
-QtGui/qpaintdevice.h
 -
 
 /usr/local/include/QtGui/qpixelformat.h
@@ -1364,24 +1392,6 @@ QtCore/qnamespace.h
 QtCore/qnativeinterface.h
 -
 
-/usr/local/include/QtGui/qtextdocument.h
-QtGui/qtguiglobal.h
--
-QtCore/qobject.h
--
-QtCore/qsize.h
--
-QtCore/qrect.h
--
-QtCore/qvariant.h
--
-QtGui/qfont.h
--
-QtCore/qurl.h
--
-QtCore/qcontainerfwd.h
--
-
 /usr/local/include/QtGui/qtextoption.h
 QtGui/qtguiglobal.h
 -
@@ -1452,6 +1462,16 @@ QtGui/qwindowdefs_win.h
 QtGui/qtguiglobal.h
 -
 
+/usr/local/include/QtWidgets/qabstractbutton.h
+QtWidgets/qtwidgetsglobal.h
+-
+QtGui/qicon.h
+-
+QtGui/qkeysequence.h
+-
+QtWidgets/qwidget.h
+-
+
 /usr/local/include/QtWidgets/qabstractscrollarea.h
 QtWidgets/qtwidgetsglobal.h
 -
@@ -1462,6 +1482,16 @@ QtWidgets/qframe.h
 QtWidgets/qtwidgetsglobal.h
 -
 QtWidgets/qwidget.h
+-
+
+/usr/local/include/QtWidgets/qboxlayout.h
+QtWidgets/qtwidgetsglobal.h
+-
+QtWidgets/qlayout.h
+-
+QtWidgets/qwidget.h
+-
+limits.h
 -
 
 /usr/local/include/QtWidgets/qframe.h
@@ -1488,6 +1518,46 @@ QtGui/qtransform.h
 QtGui/qpen.h
 -
 
+/usr/local/include/QtWidgets/qgridlayout.h
+QtWidgets/qtwidgetsglobal.h
+-
+QtWidgets/qlayout.h
+-
+QtWidgets/qwidget.h
+-
+limits.h
+-
+
+/usr/local/include/QtWidgets/qlayout.h
+QtWidgets/qtwidgetsglobal.h
+-
+QtCore/qobject.h
+-
+QtWidgets/qlayoutitem.h
+-
+QtWidgets/qsizepolicy.h
+-
+QtCore/qrect.h
+-
+QtCore/qmargins.h
+-
+limits.h
+-
+QtWidgets/qboxlayout.h
+-
+QtWidgets/qgridlayout.h
+-
+
+/usr/local/include/QtWidgets/qlayoutitem.h
+QtWidgets/qtwidgetsglobal.h
+-
+QtWidgets/qsizepolicy.h
+-
+QtCore/qrect.h
+-
+limits.h
+-
+
 /usr/local/include/QtWidgets/qscrollarea.h
 QtWidgets/qtwidgetsglobal.h
 -
@@ -1502,6 +1572,14 @@ QtCore/qobject.h
 QtCore/qalgorithms.h
 -
 QtCore/qhashfunctions.h
+-
+
+/usr/local/include/QtWidgets/qtabwidget.h
+QtWidgets/qtwidgetsglobal.h
+-
+QtWidgets/qwidget.h
+-
+QtGui/qicon.h
 -
 
 /usr/local/include/QtWidgets/qtwidgets-config.h
@@ -1574,6 +1652,14 @@ qmutex.h
 qobject.h
 /usr/local/lib/QtCore.framework/Headers/qobject.h
 
+/usr/local/lib/QtCore.framework/Headers/QRect
+qrect.h
+/usr/local/lib/QtCore.framework/Headers/qrect.h
+
+/usr/local/lib/QtCore.framework/Headers/QRectF
+qrect.h
+/usr/local/lib/QtCore.framework/Headers/qrect.h
+
 /usr/local/lib/QtCore.framework/Headers/QRunnable
 qrunnable.h
 /usr/local/lib/QtCore.framework/Headers/qrunnable.h
@@ -1585,6 +1671,10 @@ qthread.h
 /usr/local/lib/QtCore.framework/Headers/QWaitCondition
 qwaitcondition.h
 /usr/local/lib/QtCore.framework/Headers/qwaitcondition.h
+
+/usr/local/lib/QtCore.framework/Headers/QtMath
+qmath.h
+/usr/local/lib/QtCore.framework/Headers/qmath.h
 
 /usr/local/lib/QtCore.framework/Headers/qdebug.h
 QtCore/qalgorithms.h
@@ -1614,6 +1704,16 @@ list
 map
 -
 utility
+-
+
+/usr/local/lib/QtCore.framework/Headers/qmath.h
+QtCore/qglobal.h
+-
+QtCore/qalgorithms.h
+-
+bit
+-
+cmath
 -
 
 /usr/local/lib/QtCore.framework/Headers/qmutex.h
@@ -1650,6 +1750,16 @@ QtCore/qbindingstorage.h
 chrono
 -
 
+/usr/local/lib/QtCore.framework/Headers/qrect.h
+QtCore/qhashfunctions.h
+-
+QtCore/qmargins.h
+-
+QtCore/qsize.h
+-
+QtCore/qpoint.h
+-
+
 /usr/local/lib/QtCore.framework/Headers/qrunnable.h
 QtCore/qglobal.h
 -
@@ -1672,71 +1782,33 @@ intrin.h
 QtCore/QDeadlineTimer
 -
 
-/usr/local/lib/QtGui.framework/Headers/QImage
-qimage.h
-/usr/local/lib/QtGui.framework/Headers/qimage.h
+/usr/local/lib/QtGui.framework/Headers/QScreen
+qscreen.h
+/usr/local/lib/QtGui.framework/Headers/qscreen.h
 
-/usr/local/lib/QtGui.framework/Headers/QWheelEvent
-qevent.h
-/usr/local/lib/QtGui.framework/Headers/qevent.h
-
-/usr/local/lib/QtGui.framework/Headers/qevent.h
+/usr/local/lib/QtGui.framework/Headers/qscreen.h
 QtGui/qtguiglobal.h
 -
-QtCore/qcoreevent.h
+QtCore/QList
 -
-QtCore/qiodevice.h
+QtCore/QObject
 -
-QtCore/qlist.h
+QtCore/QRect
+-
+QtCore/QSize
+-
+QtCore/QSizeF
+-
+QtGui/QTransform
 -
 QtCore/qnamespace.h
 -
-QtCore/qpointer.h
--
-QtCore/qstring.h
--
-QtCore/qurl.h
--
-QtCore/qvariant.h
--
-QtGui/qeventpoint.h
--
-QtGui/qpointingdevice.h
--
-QtGui/qregion.h
--
-QtGui/qwindowdefs.h
--
-QtGui/qkeysequence.h
+QtCore/qnativeinterface.h
 -
 
-/usr/local/lib/QtGui.framework/Headers/qimage.h
-QtGui/qtguiglobal.h
--
-QtGui/qcolor.h
--
-QtGui/qrgb.h
--
-QtGui/qpaintdevice.h
--
-QtGui/qpixelformat.h
--
-QtGui/qtransform.h
--
-QtCore/qbytearray.h
--
-QtCore/qbytearrayview.h
--
-QtCore/qrect.h
--
-QtCore/qstring.h
--
-QtCore/qcontainerfwd.h
--
-
-/usr/local/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem
-qgraphicsitem.h
-/usr/local/lib/QtWidgets.framework/Headers/qgraphicsitem.h
+/usr/local/lib/QtWidgets.framework/Headers/QDockWidget
+qdockwidget.h
+/usr/local/lib/QtWidgets.framework/Headers/qdockwidget.h
 
 /usr/local/lib/QtWidgets.framework/Headers/QGraphicsScene
 qgraphicsscene.h
@@ -1746,28 +1818,44 @@ qgraphicsscene.h
 qgraphicsview.h
 /usr/local/lib/QtWidgets.framework/Headers/qgraphicsview.h
 
-/usr/local/lib/QtWidgets.framework/Headers/QLabel
-qlabel.h
-/usr/local/lib/QtWidgets.framework/Headers/qlabel.h
+/usr/local/lib/QtWidgets.framework/Headers/QHBoxLayout
+qboxlayout.h
+/usr/local/lib/QtWidgets.framework/Headers/qboxlayout.h
+
+/usr/local/lib/QtWidgets.framework/Headers/QMainWindow
+qmainwindow.h
+/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h
 
 /usr/local/lib/QtWidgets.framework/Headers/QScrollBar
 qscrollbar.h
 /usr/local/lib/QtWidgets.framework/Headers/qscrollbar.h
 
-/usr/local/lib/QtWidgets.framework/Headers/qgraphicsitem.h
+/usr/local/lib/QtWidgets.framework/Headers/QToolBar
+qtoolbar.h
+/usr/local/lib/QtWidgets.framework/Headers/qtoolbar.h
+
+/usr/local/lib/QtWidgets.framework/Headers/QToolButton
+qtoolbutton.h
+/usr/local/lib/QtWidgets.framework/Headers/qtoolbutton.h
+
+/usr/local/lib/QtWidgets.framework/Headers/QVBoxLayout
+qboxlayout.h
+/usr/local/lib/QtWidgets.framework/Headers/qboxlayout.h
+
+/usr/local/lib/QtWidgets.framework/Headers/qboxlayout.h
 QtWidgets/qtwidgetsglobal.h
 -
-QtCore/qobject.h
+QtWidgets/qlayout.h
 -
-QtCore/qvariant.h
+QtWidgets/qwidget.h
 -
-QtCore/qrect.h
+limits.h
 -
-QtCore/qscopedpointer.h
+
+/usr/local/lib/QtWidgets.framework/Headers/qdockwidget.h
+QtWidgets/qtwidgetsglobal.h
 -
-QtGui/qpainterpath.h
--
-QtGui/qpixmap.h
+QtWidgets/qwidget.h
 -
 
 /usr/local/lib/QtWidgets.framework/Headers/qgraphicsscene.h
@@ -1800,14 +1888,12 @@ QtWidgets/qscrollarea.h
 QtWidgets/qgraphicsscene.h
 -
 
-/usr/local/lib/QtWidgets.framework/Headers/qlabel.h
+/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h
 QtWidgets/qtwidgetsglobal.h
 -
-QtWidgets/qframe.h
+QtWidgets/qwidget.h
 -
-QtGui/qpicture.h
--
-QtGui/qtextdocument.h
+QtWidgets/qtabwidget.h
 -
 
 /usr/local/lib/QtWidgets.framework/Headers/qscrollbar.h
@@ -1816,5 +1902,19 @@ QtWidgets/qtwidgetsglobal.h
 QtWidgets/qwidget.h
 -
 QtWidgets/qabstractslider.h
+-
+
+/usr/local/lib/QtWidgets.framework/Headers/qtoolbar.h
+QtWidgets/qtwidgetsglobal.h
+-
+QtGui/qaction.h
+-
+QtWidgets/qwidget.h
+-
+
+/usr/local/lib/QtWidgets.framework/Headers/qtoolbutton.h
+QtWidgets/qtwidgetsglobal.h
+-
+QtWidgets/qabstractbutton.h
 -
 

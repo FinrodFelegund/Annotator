@@ -73,3 +73,12 @@ int TileJob::getLevel()
     return level;
 }
 
+Tile TileJob::toTile()
+{
+    Tile tile(xPos, yPos, width, height);
+    tile.setBuf(buf);
+    tile.setLevel(level);
+    return tile;
+
+}
+

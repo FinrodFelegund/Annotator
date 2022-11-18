@@ -9,6 +9,7 @@
 #include "../AnnotatorUI/AnnotatorMainWindow.h"
 #include "../Reader/WholeSlideImageReader.h"
 #include "../Threads/Manager.h"
+#include "../Data Structures/TileCache.h"
 
 
 class AnnotatorController : public QObject
@@ -17,7 +18,7 @@ class AnnotatorController : public QObject
 
 public:
     AnnotatorController(QObject *parent = nullptr);
-    ~AnnotatorController();
+    ~AnnotatorController() noexcept;
     void shutDown();
     void setWindow(std::shared_ptr<AnnotatorMainWindow> window);
     std::shared_ptr<AnnotatorMainWindow> getMainWindow();
@@ -30,6 +31,7 @@ public slots:
     void clickTriggered(bool checked);
     void drawTriggered(bool checked);
     void exitTriggered(bool checked);
+    void levelChanged(QRectF rect);
 
 
 private:
@@ -37,6 +39,7 @@ private:
     std::shared_ptr<WholeSlideImageReader> _reader;
     std::shared_ptr<AnnotatorViewer> _view;
     std::shared_ptr<Manager> _manager;
+    std::shared_ptr<TileCache> _cache;
 
 };
 

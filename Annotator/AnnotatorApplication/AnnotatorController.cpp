@@ -14,6 +14,7 @@ AnnotatorController::AnnotatorController(QObject *parent) : QObject(parent)
     _window = nullptr;
     _reader = std::make_shared<WholeSlideImageReader>();
     _manager = std::make_shared<Manager>(this);
+    _cache = nullptr;
 
 }
 
@@ -73,24 +74,38 @@ void AnnotatorController::initializeImage(std::string fileName)
         return;
     }
 
+    if(!_cache)
+    {
+        _cache = std::make_shared<TileCache>(_view->getTileSize());
+    } else
+    {
+        _cache->resetCache();
+    }
+
     std::vector<Worker*> worker = _manager->getThreads();
     for(int i = 0; i < worker.size(); i++)
     {
-        connect(worker[i], &Worker::finished, _view.get(), &AnnotatorViewer::loadTileInScene);
+        connect(worker[i], &Worker::finished, _view.get(), &AnnotatorViewer::loadTileInScene, Qt::QueuedConnection);
     }
 
     connect(_view.get(), &AnnotatorViewer::fieldOfViewChanged, this, &AnnotatorController::fieldOfViewChanged);
+    connect(_view.get(), &AnnotatorViewer::levelChanged, this, &AnnotatorController::levelChanged);
     connectActions();
 
     _view->initialize(_reader);
-    int viewSceneScale = _view->getCurrentSceneScale();
+
     int level = _view->getCurrentLevel();
+    int viewSceneScale = _reader->getLevelDownSample(level);
     int tileSize = _view->getTileSize();
     QRectF sceneRect = _view->getSceneRect();
-    sceneRect.setWidth(qCeil(sceneRect.width() / viewSceneScale));
-    sceneRect.setHeight(qCeil(sceneRect.height() / viewSceneScale));
+
+
+
+    sceneRect.setWidth(((int)(sceneRect.width() / viewSceneScale)&~3) + 4);
+    sceneRect.setHeight(((int)(sceneRect.height() / viewSceneScale)&~3) + 4);
     Tiler tiler(sceneRect, tileSize);
     tiler.exec();
+    //tiler.print();
     auto tiles = tiler.getTilingResult();
     for(int i = 0; i < tiles.size(); i++)
     {
@@ -102,17 +117,36 @@ void AnnotatorController::initializeImage(std::string fileName)
 
 void AnnotatorController::fieldOfViewChanged(QRectF rect)
 {
-    qreal viewSceneScale = _view->getCurrentSceneScale();
+    //qDebug() << "X: " << rect.x() << " Y: " << rect.y() << " Width: " << rect.width() << " Height: " << rect.height();
     int tileSize = _view->getTileSize();
     int level = _view->getCurrentLevel();
+    float viewSceneScale = _reader->getLevelDownSample(level);
+    rect.setX(((int)(rect.x() / viewSceneScale)&~3) + 4);
+    rect.setY(((int)(rect.y() / viewSceneScale)&~3) + 4);
+    rect.setWidth(((int)(rect.width() / viewSceneScale)&~3) + 4);
+    rect.setHeight(((int)(rect.height() / viewSceneScale)&~3) + 4);
+
+    rect = _cache->toCacheRect(rect);
+
     Tiler tiler(rect, tileSize);
     tiler.exec();
     auto tiles = tiler.getTilingResult();
 
     for(int i = 0; i < tiles.size(); i++)
     {
-        _manager->addJob(tiles[i].getX() * viewSceneScale, tiles[i].getY() * viewSceneScale, level, tiles[i].getWidth(), tiles[i].getHeight());
+        if(!_cache->isAlreadyLoaded(tiles[i]))
+        {
+            qDebug() << "Loading new Tile";
+            _manager->addJob(tiles[i].getX() * viewSceneScale, tiles[i].getY() * viewSceneScale, level, tiles[i].getWidth(), tiles[i].getHeight());
+            _cache->setLoaded(tiles[i]);
+        }
     }
+}
+
+void AnnotatorController::levelChanged(QRectF rect)
+{
+    _cache->resetCache();
+    _cache->setLevelCache(rect);
 }
 
 std::shared_ptr<AnnotatorMainWindow> AnnotatorController::getMainWindow()

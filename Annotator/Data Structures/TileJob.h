@@ -6,6 +6,7 @@
 #define ANNOTATOR_TILEJOB_H
 #include <memory>
 #include "../Reader/WholeSlideImageReader.h"
+#include "Tile.h"
 
 class QMutex;
 
@@ -30,6 +31,7 @@ struct TileJob
     int getHeight();
     int getLevel();
     unsigned char* getBuf();
+    Tile toTile();
 };
 
 

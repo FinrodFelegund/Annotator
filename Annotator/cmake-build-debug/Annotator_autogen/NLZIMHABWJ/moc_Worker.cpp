@@ -22,17 +22,12 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Worker_t {
-    uint offsetsAndSizes[20];
+    uint offsetsAndSizes[10];
     char stringdata0[7];
     char stringdata1[9];
     char stringdata2[1];
-    char stringdata3[7];
-    char stringdata4[7];
-    char stringdata5[2];
-    char stringdata6[2];
-    char stringdata7[6];
-    char stringdata8[7];
-    char stringdata9[6];
+    char stringdata3[5];
+    char stringdata4[5];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_Worker_t::offsetsAndSizes) + ofs), len 
@@ -41,24 +36,14 @@ static const qt_meta_stringdata_Worker_t qt_meta_stringdata_Worker = {
         QT_MOC_LITERAL(0, 6),  // "Worker"
         QT_MOC_LITERAL(7, 8),  // "finished"
         QT_MOC_LITERAL(16, 0),  // ""
-        QT_MOC_LITERAL(17, 6),  // "uchar*"
-        QT_MOC_LITERAL(24, 6),  // "buffer"
-        QT_MOC_LITERAL(31, 1),  // "x"
-        QT_MOC_LITERAL(33, 1),  // "y"
-        QT_MOC_LITERAL(35, 5),  // "width"
-        QT_MOC_LITERAL(41, 6),  // "height"
-        QT_MOC_LITERAL(48, 5)   // "level"
+        QT_MOC_LITERAL(17, 4),  // "Tile"
+        QT_MOC_LITERAL(22, 4)   // "tile"
     },
     "Worker",
     "finished",
     "",
-    "uchar*",
-    "buffer",
-    "x",
-    "y",
-    "width",
-    "height",
-    "level"
+    "Tile",
+    "tile"
 };
 #undef QT_MOC_LITERAL
 
@@ -76,10 +61,10 @@ static const uint qt_meta_data_Worker[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    6,   20,    2, 0x06,    1 /* Public */,
+       1,    1,   20,    2, 0x06,    1 /* Public */,
 
  // signals: parameters
-    QMetaType::Void, 0x80000000 | 3, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int,    4,    5,    6,    7,    8,    9,
+    QMetaType::Void, 0x80000000 | 3,    4,
 
        0        // eod
 };
@@ -90,13 +75,13 @@ void Worker::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         auto *_t = static_cast<Worker *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->finished((*reinterpret_cast< std::add_pointer_t<uchar*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[6]))); break;
+        case 0: _t->finished((*reinterpret_cast< std::add_pointer_t<Tile>>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (Worker::*)(unsigned char * , int , int , int , int , int );
+            using _t = void (Worker::*)(Tile );
             if (_t _q_method = &Worker::finished; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 0;
                 return;
@@ -112,7 +97,7 @@ const QMetaObject Worker::staticMetaObject = { {
     qt_static_metacall,
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_Worker_t
-, QtPrivate::TypeAndForceComplete<Worker, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<unsigned char *, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>
+, QtPrivate::TypeAndForceComplete<Worker, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Tile, std::false_type>
 
 
 
@@ -152,9 +137,9 @@ int Worker::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void Worker::finished(unsigned char * _t1, int _t2, int _t3, int _t4, int _t5, int _t6)
+void Worker::finished(Tile _t1)
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t4))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t5))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t6))) };
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_WARNING_POP

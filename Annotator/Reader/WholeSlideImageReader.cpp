@@ -91,7 +91,7 @@ void WholeSlideImageReader::initializeImage(const std::string imagePath)
     }
 
     //printLevelDownsample();
-    //printDimensions();
+    printDimensions();
 }
 
 void WholeSlideImageReader::cleanUp()
@@ -239,7 +239,7 @@ unsigned char *WholeSlideImageReader::readDataFromImage(int64_t x, int64_t y, in
             qDebug() << err;
         }
 
-        //OpenSlide returns buffer in form ABGR, we have to reverse it and strip the alpha channel. Source: https://openslide.org/docs/premultiplied-argb/
+        //OpenSlide returns buffer in form BGRA, we have to reverse it and strip the alpha channel. Source: https://openslide.org/docs/premultiplied-argb/
         unsigned char *rgb = new unsigned char[width * height * 3];
         unsigned char* bgra = (unsigned char*)buf;
         for (unsigned long long i = 0, j = 0; i < width*height*4; i+=4, j+=3) {
@@ -275,11 +275,11 @@ void WholeSlideImageReader::printDimensions()
     {
         for(int i = 0; i < getNumberOfLevels(); i++)
         {
-            std::cout << "Level: " << i << " Width: " << _dimensions[i].first << " Height: " << _dimensions[i].second << std::endl;
+            qDebug() << "Level: " << i << " Width: " << _dimensions[i].first << " Height: " << _dimensions[i].second;
         }
     } else
     {
-        std::cout << "Invalid image" << std::endl;
+        qDebug() << "Invalid image";
     }
 }
 

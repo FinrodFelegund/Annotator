@@ -257,9 +257,22 @@ CMakeFiles/Annotator.dir/AnnotatorUI/Dockwidget.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Annotator.dir/AnnotatorUI/Dockwidget.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/danielpietsch/CLionProjects/Annotator/AnnotatorUI/Dockwidget.cpp -o CMakeFiles/Annotator.dir/AnnotatorUI/Dockwidget.cpp.s
 
+CMakeFiles/Annotator.dir/Data_Structures/TileCache.cpp.o: CMakeFiles/Annotator.dir/flags.make
+CMakeFiles/Annotator.dir/Data_Structures/TileCache.cpp.o: ../Data\ Structures/TileCache.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/Annotator.dir/Data_Structures/TileCache.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Annotator.dir/Data_Structures/TileCache.cpp.o -c "/Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileCache.cpp"
+
+CMakeFiles/Annotator.dir/Data_Structures/TileCache.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Annotator.dir/Data_Structures/TileCache.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileCache.cpp" > CMakeFiles/Annotator.dir/Data_Structures/TileCache.cpp.i
+
+CMakeFiles/Annotator.dir/Data_Structures/TileCache.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Annotator.dir/Data_Structures/TileCache.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileCache.cpp" -o CMakeFiles/Annotator.dir/Data_Structures/TileCache.cpp.s
+
 CMakeFiles/Annotator.dir/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.o: CMakeFiles/Annotator.dir/flags.make
 CMakeFiles/Annotator.dir/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.o: Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/Annotator.dir/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/Annotator.dir/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Annotator.dir/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.o -c /Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp
 
 CMakeFiles/Annotator.dir/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.i: cmake_force
@@ -286,6 +299,7 @@ Annotator_OBJECTS = \
 "CMakeFiles/Annotator.dir/Data_Structures/Tiler.cpp.o" \
 "CMakeFiles/Annotator.dir/AnnotatorUI/Toolbar.cpp.o" \
 "CMakeFiles/Annotator.dir/AnnotatorUI/Dockwidget.cpp.o" \
+"CMakeFiles/Annotator.dir/Data_Structures/TileCache.cpp.o" \
 "CMakeFiles/Annotator.dir/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.o"
 
 # External object files for target Annotator
@@ -305,6 +319,7 @@ Annotator: CMakeFiles/Annotator.dir/Data_Structures/Tile.cpp.o
 Annotator: CMakeFiles/Annotator.dir/Data_Structures/Tiler.cpp.o
 Annotator: CMakeFiles/Annotator.dir/AnnotatorUI/Toolbar.cpp.o
 Annotator: CMakeFiles/Annotator.dir/AnnotatorUI/Dockwidget.cpp.o
+Annotator: CMakeFiles/Annotator.dir/Data_Structures/TileCache.cpp.o
 Annotator: CMakeFiles/Annotator.dir/Annotator_autogen/EWIEGA46WW/qrc_Resources.cpp.o
 Annotator: CMakeFiles/Annotator.dir/build.make
 Annotator: /usr/local/lib/libopenslide.dylib
@@ -312,7 +327,7 @@ Annotator: /usr/local/lib/QtWidgets.framework/Versions/A/QtWidgets
 Annotator: /usr/local/lib/QtGui.framework/Versions/A/QtGui
 Annotator: /usr/local/lib/QtCore.framework/Versions/A/QtCore
 Annotator: CMakeFiles/Annotator.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable Annotator"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX executable Annotator"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Annotator.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

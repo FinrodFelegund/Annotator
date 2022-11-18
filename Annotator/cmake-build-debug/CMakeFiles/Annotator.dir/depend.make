@@ -9,6 +9,7 @@ CMakeFiles/Annotator.dir/AnnotatorApplication/AnnotatorController.cpp.o: \
  ../AnnotatorUI/Toolbar.h \
  ../AnnotatorView/AnnotatorViewer.h \
  ../Data\ Structures/Tile.h \
+ ../Data\ Structures/TileCache.h \
  ../Data\ Structures/TileJob.h \
  ../Data\ Structures/Tiler.h \
  ../Reader/WholeSlideImageReader.h \
@@ -168,6 +169,7 @@ CMakeFiles/Annotator.dir/AnnotatorApplication/AnnotatorController.cpp.o: \
  /usr/local/lib/QtCore.framework/Headers/QMutex \
  /usr/local/lib/QtCore.framework/Headers/QObject \
  /usr/local/lib/QtCore.framework/Headers/QRect \
+ /usr/local/lib/QtCore.framework/Headers/QRectF \
  /usr/local/lib/QtCore.framework/Headers/QRunnable \
  /usr/local/lib/QtCore.framework/Headers/QThread \
  /usr/local/lib/QtCore.framework/Headers/QWaitCondition \
@@ -205,6 +207,7 @@ CMakeFiles/Annotator.dir/AnnotatorUI/AnnotatorMainWindow.cpp.o: \
  ../AnnotatorUI/Dockwidget.h \
  ../AnnotatorUI/Toolbar.h \
  ../AnnotatorView/AnnotatorViewer.h \
+ ../Data\ Structures/Tile.h \
  ../Data\ Structures/TileJob.h \
  ../Reader/WholeSlideImageReader.h \
  ../Threads/Manager.h \
@@ -371,7 +374,9 @@ CMakeFiles/Annotator.dir/AnnotatorUI/AnnotatorMainWindow.cpp.o: \
  /usr/local/lib/QtCore.framework/Headers/QMutex \
  /usr/local/lib/QtCore.framework/Headers/QObject \
  /usr/local/lib/QtCore.framework/Headers/QWaitCondition \
+ /usr/local/lib/QtCore.framework/Headers/QtMath \
  /usr/local/lib/QtCore.framework/Headers/qdebug.h \
+ /usr/local/lib/QtCore.framework/Headers/qmath.h \
  /usr/local/lib/QtCore.framework/Headers/qmutex.h \
  /usr/local/lib/QtCore.framework/Headers/qobject.h \
  /usr/local/lib/QtCore.framework/Headers/qwaitcondition.h \
@@ -680,6 +685,7 @@ CMakeFiles/Annotator.dir/AnnotatorUI/Toolbar.cpp.o: \
 CMakeFiles/Annotator.dir/AnnotatorView/AnnotatorViewer.cpp.o: \
  ../AnnotatorView/AnnotatorViewer.cpp \
  ../AnnotatorView/AnnotatorViewer.h \
+ ../Data\ Structures/Tile.h \
  ../Data\ Structures/TileJob.h \
  ../Reader/WholeSlideImageReader.h \
  ../Threads/Manager.h \
@@ -837,7 +843,9 @@ CMakeFiles/Annotator.dir/AnnotatorView/AnnotatorViewer.cpp.o: \
  /usr/local/lib/QtCore.framework/Headers/QRunnable \
  /usr/local/lib/QtCore.framework/Headers/QThread \
  /usr/local/lib/QtCore.framework/Headers/QWaitCondition \
+ /usr/local/lib/QtCore.framework/Headers/QtMath \
  /usr/local/lib/QtCore.framework/Headers/qdebug.h \
+ /usr/local/lib/QtCore.framework/Headers/qmath.h \
  /usr/local/lib/QtCore.framework/Headers/qmutex.h \
  /usr/local/lib/QtCore.framework/Headers/qobject.h \
  /usr/local/lib/QtCore.framework/Headers/qrunnable.h \
@@ -865,6 +873,8 @@ CMakeFiles/Annotator.dir/Annotator_autogen/mocs_compilation.cpp.o: \
  ../AnnotatorUI/Dockwidget.h \
  ../AnnotatorUI/Toolbar.h \
  ../AnnotatorView/AnnotatorViewer.h \
+ ../Data\ Structures/Tile.h \
+ ../Data\ Structures/TileCache.h \
  ../Data\ Structures/TileJob.h \
  ../Reader/WholeSlideImageReader.h \
  ../Threads/Manager.h \
@@ -1029,12 +1039,16 @@ CMakeFiles/Annotator.dir/Annotator_autogen/mocs_compilation.cpp.o: \
  /usr/local/lib/QtCore.framework/Headers/QDebug \
  /usr/local/lib/QtCore.framework/Headers/QMutex \
  /usr/local/lib/QtCore.framework/Headers/QObject \
+ /usr/local/lib/QtCore.framework/Headers/QRectF \
  /usr/local/lib/QtCore.framework/Headers/QRunnable \
  /usr/local/lib/QtCore.framework/Headers/QThread \
  /usr/local/lib/QtCore.framework/Headers/QWaitCondition \
+ /usr/local/lib/QtCore.framework/Headers/QtMath \
  /usr/local/lib/QtCore.framework/Headers/qdebug.h \
+ /usr/local/lib/QtCore.framework/Headers/qmath.h \
  /usr/local/lib/QtCore.framework/Headers/qmutex.h \
  /usr/local/lib/QtCore.framework/Headers/qobject.h \
+ /usr/local/lib/QtCore.framework/Headers/qrect.h \
  /usr/local/lib/QtCore.framework/Headers/qrunnable.h \
  /usr/local/lib/QtCore.framework/Headers/qthread.h \
  /usr/local/lib/QtCore.framework/Headers/qwaitcondition.h \
@@ -1191,7 +1205,100 @@ CMakeFiles/Annotator.dir/Data_Structures/Tile.cpp.o: \
  /usr/local/include/QtCore/qversiontagging.h \
  /usr/local/lib/QtCore.framework/Headers/QtMath \
  /usr/local/lib/QtCore.framework/Headers/qmath.h
+CMakeFiles/Annotator.dir/Data_Structures/TileCache.cpp.o: \
+ ../Data\ Structures/Tile.h \
+ ../Data\ Structures/TileCache.cpp \
+ ../Data\ Structures/TileCache.h \
+ ../Data\ Structures/Tiler.h \
+ /usr/local/include/QtCore/qalgorithms.h \
+ /usr/local/include/QtCore/qanystringview.h \
+ /usr/local/include/QtCore/qarraydata.h \
+ /usr/local/include/QtCore/qarraydataops.h \
+ /usr/local/include/QtCore/qarraydatapointer.h \
+ /usr/local/include/QtCore/qatomic.h \
+ /usr/local/include/QtCore/qatomic_bootstrap.h \
+ /usr/local/include/QtCore/qatomic_cxx11.h \
+ /usr/local/include/QtCore/qbasicatomic.h \
+ /usr/local/include/QtCore/qbindingstorage.h \
+ /usr/local/include/QtCore/qbytearray.h \
+ /usr/local/include/QtCore/qbytearrayalgorithms.h \
+ /usr/local/include/QtCore/qbytearraylist.h \
+ /usr/local/include/QtCore/qbytearrayview.h \
+ /usr/local/include/QtCore/qchar.h \
+ /usr/local/include/QtCore/qcompare.h \
+ /usr/local/include/QtCore/qcompare_impl.h \
+ /usr/local/include/QtCore/qcompilerdetection.h \
+ /usr/local/include/QtCore/qconfig-bootstrapped.h \
+ /usr/local/include/QtCore/qconfig.h \
+ /usr/local/include/QtCore/qcontainerfwd.h \
+ /usr/local/include/QtCore/qcontainerinfo.h \
+ /usr/local/include/QtCore/qcontainertools_impl.h \
+ /usr/local/include/QtCore/qcontiguouscache.h \
+ /usr/local/include/QtCore/qcoreevent.h \
+ /usr/local/include/QtCore/qdatastream.h \
+ /usr/local/include/QtCore/qflags.h \
+ /usr/local/include/QtCore/qgenericatomic.h \
+ /usr/local/include/QtCore/qglobal.h \
+ /usr/local/include/QtCore/qglobalstatic.h \
+ /usr/local/include/QtCore/qhash.h \
+ /usr/local/include/QtCore/qhashfunctions.h \
+ /usr/local/include/QtCore/qiodevicebase.h \
+ /usr/local/include/QtCore/qiterable.h \
+ /usr/local/include/QtCore/qiterator.h \
+ /usr/local/include/QtCore/qlist.h \
+ /usr/local/include/QtCore/qlogging.h \
+ /usr/local/include/QtCore/qmap.h \
+ /usr/local/include/QtCore/qmargins.h \
+ /usr/local/include/QtCore/qmath.h \
+ /usr/local/include/QtCore/qmetacontainer.h \
+ /usr/local/include/QtCore/qmetatype.h \
+ /usr/local/include/QtCore/qnamespace.h \
+ /usr/local/include/QtCore/qnumeric.h \
+ /usr/local/include/QtCore/qobject.h \
+ /usr/local/include/QtCore/qobject_impl.h \
+ /usr/local/include/QtCore/qobjectdefs.h \
+ /usr/local/include/QtCore/qobjectdefs_impl.h \
+ /usr/local/include/QtCore/qpair.h \
+ /usr/local/include/QtCore/qpoint.h \
+ /usr/local/include/QtCore/qprocessordetection.h \
+ /usr/local/include/QtCore/qrefcount.h \
+ /usr/local/include/QtCore/qscopedpointer.h \
+ /usr/local/include/QtCore/qscopeguard.h \
+ /usr/local/include/QtCore/qset.h \
+ /usr/local/include/QtCore/qshareddata.h \
+ /usr/local/include/QtCore/qshareddata_impl.h \
+ /usr/local/include/QtCore/qsharedpointer.h \
+ /usr/local/include/QtCore/qsharedpointer_impl.h \
+ /usr/local/include/QtCore/qsize.h \
+ /usr/local/include/QtCore/qstring.h \
+ /usr/local/include/QtCore/qstringalgorithms.h \
+ /usr/local/include/QtCore/qstringbuilder.h \
+ /usr/local/include/QtCore/qstringconverter.h \
+ /usr/local/include/QtCore/qstringlist.h \
+ /usr/local/include/QtCore/qstringliteral.h \
+ /usr/local/include/QtCore/qstringmatcher.h \
+ /usr/local/include/QtCore/qstringtokenizer.h \
+ /usr/local/include/QtCore/qstringview.h \
+ /usr/local/include/QtCore/qsysinfo.h \
+ /usr/local/include/QtCore/qsystemdetection.h \
+ /usr/local/include/QtCore/qtaggedpointer.h \
+ /usr/local/include/QtCore/qtcore-config.h \
+ /usr/local/include/QtCore/qtcoreexports.h \
+ /usr/local/include/QtCore/qtextstream.h \
+ /usr/local/include/QtCore/qtmetamacros.h \
+ /usr/local/include/QtCore/qtypeinfo.h \
+ /usr/local/include/QtCore/qutf8stringview.h \
+ /usr/local/include/QtCore/qvarlengtharray.h \
+ /usr/local/include/QtCore/qversiontagging.h \
+ /usr/local/lib/QtCore.framework/Headers/QDebug \
+ /usr/local/lib/QtCore.framework/Headers/QRect \
+ /usr/local/lib/QtCore.framework/Headers/QRectF \
+ /usr/local/lib/QtCore.framework/Headers/QtMath \
+ /usr/local/lib/QtCore.framework/Headers/qdebug.h \
+ /usr/local/lib/QtCore.framework/Headers/qmath.h \
+ /usr/local/lib/QtCore.framework/Headers/qrect.h
 CMakeFiles/Annotator.dir/Data_Structures/TileJob.cpp.o: \
+ ../Data\ Structures/Tile.h \
  ../Data\ Structures/TileJob.cpp \
  ../Data\ Structures/TileJob.h \
  ../Reader/WholeSlideImageReader.h \
@@ -1294,6 +1401,8 @@ CMakeFiles/Annotator.dir/Data_Structures/TileJob.cpp.o: \
  /usr/local/include/openslide/openslide-features.h \
  /usr/local/include/openslide/openslide.h \
  /usr/local/lib/QtCore.framework/Headers/QMutex \
+ /usr/local/lib/QtCore.framework/Headers/QtMath \
+ /usr/local/lib/QtCore.framework/Headers/qmath.h \
  /usr/local/lib/QtCore.framework/Headers/qmutex.h \
  /usr/local/lib/QtWidgets.framework/Headers/QGraphicsScene \
  /usr/local/lib/QtWidgets.framework/Headers/qgraphicsscene.h
@@ -1534,6 +1643,7 @@ CMakeFiles/Annotator.dir/Reader/WholeSlideImageReader.cpp.o: \
  /usr/local/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
  /usr/local/lib/QtWidgets.framework/Headers/qlabel.h
 CMakeFiles/Annotator.dir/Threads/Manager.cpp.o: \
+ ../Data\ Structures/Tile.h \
  ../Data\ Structures/TileJob.h \
  ../Reader/WholeSlideImageReader.h \
  ../Threads/Manager.cpp \
@@ -1653,7 +1763,9 @@ CMakeFiles/Annotator.dir/Threads/Manager.cpp.o: \
  /usr/local/lib/QtCore.framework/Headers/QRunnable \
  /usr/local/lib/QtCore.framework/Headers/QThread \
  /usr/local/lib/QtCore.framework/Headers/QWaitCondition \
+ /usr/local/lib/QtCore.framework/Headers/QtMath \
  /usr/local/lib/QtCore.framework/Headers/qdebug.h \
+ /usr/local/lib/QtCore.framework/Headers/qmath.h \
  /usr/local/lib/QtCore.framework/Headers/qmutex.h \
  /usr/local/lib/QtCore.framework/Headers/qobject.h \
  /usr/local/lib/QtCore.framework/Headers/qrunnable.h \
@@ -1662,6 +1774,7 @@ CMakeFiles/Annotator.dir/Threads/Manager.cpp.o: \
  /usr/local/lib/QtWidgets.framework/Headers/QGraphicsScene \
  /usr/local/lib/QtWidgets.framework/Headers/qgraphicsscene.h
 CMakeFiles/Annotator.dir/Threads/Worker.cpp.o: \
+ ../Data\ Structures/Tile.h \
  ../Data\ Structures/TileJob.h \
  ../Reader/WholeSlideImageReader.h \
  ../Threads/Manager.h \
@@ -1781,7 +1894,9 @@ CMakeFiles/Annotator.dir/Threads/Worker.cpp.o: \
  /usr/local/lib/QtCore.framework/Headers/QRunnable \
  /usr/local/lib/QtCore.framework/Headers/QThread \
  /usr/local/lib/QtCore.framework/Headers/QWaitCondition \
+ /usr/local/lib/QtCore.framework/Headers/QtMath \
  /usr/local/lib/QtCore.framework/Headers/qdebug.h \
+ /usr/local/lib/QtCore.framework/Headers/qmath.h \
  /usr/local/lib/QtCore.framework/Headers/qmutex.h \
  /usr/local/lib/QtCore.framework/Headers/qobject.h \
  /usr/local/lib/QtCore.framework/Headers/qrunnable.h \
@@ -1795,6 +1910,8 @@ CMakeFiles/Annotator.dir/main.cpp.o: \
  ../AnnotatorUI/Dockwidget.h \
  ../AnnotatorUI/Toolbar.h \
  ../AnnotatorView/AnnotatorViewer.h \
+ ../Data\ Structures/Tile.h \
+ ../Data\ Structures/TileCache.h \
  ../Data\ Structures/TileJob.h \
  ../Reader/WholeSlideImageReader.h \
  ../Threads/Manager.h \
@@ -1969,10 +2086,14 @@ CMakeFiles/Annotator.dir/main.cpp.o: \
  /usr/local/lib/QtCore.framework/Headers/QDebug \
  /usr/local/lib/QtCore.framework/Headers/QMutex \
  /usr/local/lib/QtCore.framework/Headers/QObject \
+ /usr/local/lib/QtCore.framework/Headers/QRectF \
  /usr/local/lib/QtCore.framework/Headers/QWaitCondition \
+ /usr/local/lib/QtCore.framework/Headers/QtMath \
  /usr/local/lib/QtCore.framework/Headers/qdebug.h \
+ /usr/local/lib/QtCore.framework/Headers/qmath.h \
  /usr/local/lib/QtCore.framework/Headers/qmutex.h \
  /usr/local/lib/QtCore.framework/Headers/qobject.h \
+ /usr/local/lib/QtCore.framework/Headers/qrect.h \
  /usr/local/lib/QtCore.framework/Headers/qwaitcondition.h \
  /usr/local/lib/QtWidgets.framework/Headers/QApplication \
  /usr/local/lib/QtWidgets.framework/Headers/QDockWidget \

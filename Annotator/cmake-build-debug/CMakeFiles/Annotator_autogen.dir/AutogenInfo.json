@@ -313,6 +313,12 @@
 			null
 		],
 		[
+			"/Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileCache.h",
+			"MU",
+			"MMIVXED4B2/moc_TileCache.cpp",
+			null
+		],
+		[
 			"/Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileJob.h",
 			"MU",
 			"MMIVXED4B2/moc_TileJob.cpp",
@@ -433,6 +439,11 @@
 		],
 		[
 			"/Users/danielpietsch/CLionProjects/Annotator/Data Structures/Tile.cpp",
+			"MU",
+			null
+		],
+		[
+			"/Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileCache.cpp",
 			"MU",
 			null
 		],

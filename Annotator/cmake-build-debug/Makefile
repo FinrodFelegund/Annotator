@@ -358,6 +358,30 @@ Data_Structures/Tile.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Annotator.dir/build.make CMakeFiles/Annotator.dir/Data_Structures/Tile.cpp.s
 .PHONY : Data_Structures/Tile.cpp.s
 
+Data_Structures/TileCache.o: Data_Structures/TileCache.cpp.o
+.PHONY : Data_Structures/TileCache.o
+
+# target to build an object file
+Data_Structures/TileCache.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Annotator.dir/build.make CMakeFiles/Annotator.dir/Data_Structures/TileCache.cpp.o
+.PHONY : Data_Structures/TileCache.cpp.o
+
+Data_Structures/TileCache.i: Data_Structures/TileCache.cpp.i
+.PHONY : Data_Structures/TileCache.i
+
+# target to preprocess a source file
+Data_Structures/TileCache.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Annotator.dir/build.make CMakeFiles/Annotator.dir/Data_Structures/TileCache.cpp.i
+.PHONY : Data_Structures/TileCache.cpp.i
+
+Data_Structures/TileCache.s: Data_Structures/TileCache.cpp.s
+.PHONY : Data_Structures/TileCache.s
+
+# target to generate assembly for a file
+Data_Structures/TileCache.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Annotator.dir/build.make CMakeFiles/Annotator.dir/Data_Structures/TileCache.cpp.s
+.PHONY : Data_Structures/TileCache.cpp.s
+
 Data_Structures/TileJob.o: Data_Structures/TileJob.cpp.o
 .PHONY : Data_Structures/TileJob.o
 
@@ -539,6 +563,9 @@ help:
 	@echo "... Data_Structures/Tile.o"
 	@echo "... Data_Structures/Tile.i"
 	@echo "... Data_Structures/Tile.s"
+	@echo "... Data_Structures/TileCache.o"
+	@echo "... Data_Structures/TileCache.i"
+	@echo "... Data_Structures/TileCache.s"
 	@echo "... Data_Structures/TileJob.o"
 	@echo "... Data_Structures/TileJob.i"
 	@echo "... Data_Structures/TileJob.s"

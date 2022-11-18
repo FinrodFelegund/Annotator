@@ -156,6 +156,12 @@
 		<Unit filename="/Users/danielpietsch/CLionProjects/Annotator/Data Structures/Tile.h">
 			<Option target="Annotator"/>
 		</Unit>
+		<Unit filename="/Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileCache.cpp">
+			<Option target="Annotator"/>
+		</Unit>
+		<Unit filename="/Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileCache.h">
+			<Option target="Annotator"/>
+		</Unit>
 		<Unit filename="/Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileJob.cpp">
 			<Option target="Annotator"/>
 		</Unit>

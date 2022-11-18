@@ -3,6 +3,7 @@
 //
 
 #include "Worker.h"
+#include "../Data Structures/Tile.h"
 
 Worker::Worker(Manager *parent)
 {
@@ -29,7 +30,8 @@ void Worker::run()
         if(job)
         {
             job->doJob();
-            emit finished(job->getBuf(), job->getXPos(), job->getYPos(), job->getWidth(), job->getHeight(), job->getLevel());
+            Tile tile = job->toTile();
+            emit finished(tile);
             delete job;
         }
 

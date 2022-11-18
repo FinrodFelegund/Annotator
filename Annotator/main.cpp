@@ -2,8 +2,6 @@
 #include "AnnotatorApplication/AnnotatorController.h"
 #include "AnnotatorUI/AnnotatorMainWindow.h"
 
-
-
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
 

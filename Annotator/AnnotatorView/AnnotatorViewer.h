@@ -9,6 +9,8 @@
 #include "../Threads/Manager.h"
 #include "../Reader/WholeSlideImageReader.h"
 
+class Tile;
+
 class AnnotatorViewer : public QGraphicsView
 {
     Q_OBJECT
@@ -37,12 +39,14 @@ private:
     std::pair<int, int> _levelTopDimensions;
     bool _clicked;
     QPointF _currentPos;
+    QRectF _currentScene;
 
 signals:
     void fieldOfViewChanged(QRectF rect);
+    void levelChanged(QRectF rect);
 
 public slots:
-    void loadTileInScene(unsigned char *buf, int x, int y, int width, int height, int level);
+    void loadTileInScene(Tile tile);
 };
 
 

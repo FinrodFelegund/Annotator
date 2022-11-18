@@ -17,6 +17,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/Annotator_autogen/mocs_compilation.cpp" "/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles/Annotator.dir/Annotator_autogen/mocs_compilation.cpp.o"
   "/Users/danielpietsch/CLionProjects/Annotator/Data Structures/GraphicsItem.cpp" "/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles/Annotator.dir/Data_Structures/GraphicsItem.cpp.o"
   "/Users/danielpietsch/CLionProjects/Annotator/Data Structures/Tile.cpp" "/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles/Annotator.dir/Data_Structures/Tile.cpp.o"
+  "/Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileCache.cpp" "/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles/Annotator.dir/Data_Structures/TileCache.cpp.o"
   "/Users/danielpietsch/CLionProjects/Annotator/Data Structures/TileJob.cpp" "/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles/Annotator.dir/Data_Structures/TileJob.cpp.o"
   "/Users/danielpietsch/CLionProjects/Annotator/Data Structures/Tiler.cpp" "/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles/Annotator.dir/Data_Structures/Tiler.cpp.o"
   "/Users/danielpietsch/CLionProjects/Annotator/Reader/WholeSlideImageReader.cpp" "/Users/danielpietsch/CLionProjects/Annotator/cmake-build-debug/CMakeFiles/Annotator.dir/Reader/WholeSlideImageReader.cpp.o"

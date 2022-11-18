@@ -8,6 +8,7 @@
 #include <QLabel>
 #include <QImage>
 #include <QWheelEvent>
+#include "../Data Structures/Tile.h"
 
 AnnotatorViewer::AnnotatorViewer(QObject *parent)
 {
@@ -83,17 +84,17 @@ int AnnotatorViewer::getTileSize()
     return _tileSize;
 }
 
-void AnnotatorViewer::loadTileInScene(unsigned char *buf, int x, int y, int width, int height, int level)
+void AnnotatorViewer::loadTileInScene(Tile tile)
 {
 
-    QImage *img = nullptr;
     QGraphicsPixmapItem *item = nullptr;
-    img = new QImage((unsigned char*)buf, width, height,  QImage::Format_RGB888);
-    item = scene()->addPixmap(QPixmap::fromImage(*img));
-    delete img;
-    item->setScale(_currentSceneScale);
-    qDebug() << "X Position: " << x << " Y Position: " << y << " CurrentScale: " << _currentSceneScale;
-    item->setPos(x, y);
+    int bytesPerLine = 3;
+    //if(tile.getLevel() == 1)
+        //qDebug() << tile.getX() << " " << tile.getY();
+    QImage img((unsigned char*)tile.getBuf(), tile.getWidth(), tile.getHeight(), bytesPerLine* tile.getWidth(), QImage::Format_RGB888);
+    item = scene()->addPixmap(QPixmap::fromImage(img));
+    item->setScale(_reader->getLevelDownSample(tile.getLevel()));
+    item->setPos(tile.getX(), tile.getY());
 }
 
 void AnnotatorViewer::close()
@@ -154,12 +155,15 @@ void AnnotatorViewer::wheelEvent(QWheelEvent *event)
 
     //find out on which level we are after scaling
     int projectedLevel = _reader->getLevelForGivenDownSample(currentlyScaledValue);
-    //qDebug() << "Current Downsample: " << currentlyScaledValue;
+    //qDebug() << "Current Downsample: " << currentlyScaledValue << " Projected Level: " << projectedLevel;
     if(projectedLevel != _currentLevel)
     {
         _currentLevel = projectedLevel;
         _currentSceneScale = currentlyScaledValue;
-        //emit fieldOfViewChanged(rect);
+        //scene()->clear();
+        std::pair<int, int> newLevel = _reader->getLevelDimensions(_currentLevel);
+        emit levelChanged(QRectF(0, 0, newLevel.first, newLevel.second));
+        emit fieldOfViewChanged(rect);
     }
 
 }
@@ -172,7 +176,13 @@ void AnnotatorViewer::resizeEvent(QResizeEvent *event)
     {
         fitInView(0, 0, _levelZeroDimensions.first, _levelZeroDimensions.second);
     }
+    
     QGraphicsView::resizeEvent(event);
+    rect = this->mapToScene(this->rect()).boundingRect().toRect();
+    emit fieldOfViewChanged(rect);
+
+
+
 }
 
 
@@ -181,6 +191,7 @@ void AnnotatorViewer::mousePressEvent(QMouseEvent *event)
 {
     _clicked = true;
     _currentPos = event->pos();
+    _currentScene = this->mapToScene(this->rect()).boundingRect();
 }
 
 void AnnotatorViewer::mouseMoveEvent(QMouseEvent *event)
@@ -191,6 +202,11 @@ void AnnotatorViewer::mouseMoveEvent(QMouseEvent *event)
         _currentPos = event->pos();
         horizontalScrollBar()->setValue(delta.x() + horizontalScrollBar()->value());
         verticalScrollBar()->setValue(delta.y() + verticalScrollBar()->value());
+
+        QRectF rect = mapToScene(this->rect()).boundingRect();
+        emit fieldOfViewChanged(rect);
+
+
     }
 }
 

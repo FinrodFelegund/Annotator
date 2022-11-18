@@ -28,8 +28,8 @@ std::vector<Tile> Tiler::getTilingResult()
 
 void Tiler::exec()
 {
-    int tilesX = qCeil(qreal(_rectangle.width()) / qreal(_tileSize));
-    int tilesY = qCeil(qreal(_rectangle.height()) / qreal(_tileSize));
+    int tilesX = qCeil(_rectangle.width() / qreal(_tileSize));
+    int tilesY = qCeil(_rectangle.height() / qreal(_tileSize));
 
     int width, height = 0;
 
@@ -39,7 +39,7 @@ void Tiler::exec()
         {
             if(i == tilesX - 1)
             {
-                width = _rectangle.width() - i * _tileSize;
+                width = (_rectangle.width() - i * _tileSize);
             } else
             {
                 width = _tileSize;
@@ -47,7 +47,7 @@ void Tiler::exec()
 
             if(j == tilesY - 1)
             {
-                height = _rectangle.height() - j * _tileSize;
+                height = (_rectangle.height() - j * _tileSize);
             } else
             {
                 height = _tileSize;

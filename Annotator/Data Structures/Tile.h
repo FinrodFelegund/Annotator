@@ -9,15 +9,23 @@
 
 struct Tile
 {
-    qreal _xCoord;
-    qreal _yCoord;
+    int _xCoord;
+    int _yCoord;
     int _width;
     int _height;
-    Tile(qreal x, qreal y, int width, int height);
-    qreal getX();
-    qreal getY();
+    int _level;
+    unsigned char *_buf;
+    Tile(int x, int y, int width, int height);
+    Tile();
+    ~Tile();
+    int getX();
+    int getY();
     int getHeight();
     int getWidth();
+    int getLevel();
+    unsigned char* getBuf();
+    void setBuf(unsigned char *buf);
+    void setLevel(int level);
 };
 
 
