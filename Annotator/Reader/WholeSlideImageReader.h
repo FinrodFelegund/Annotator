@@ -37,7 +37,7 @@ public:
     void cleanUp();
     std::string getFileType();
     double getLevelDownSample(const int level);
-    int getLevelForGivenDownSample(const double downSample);
+    int getLevelForGivenDownSample(double downSample);
     std::pair<int, int> getLevelDimensions(const int level);
     std::pair<int, int> getLevel0Dimensions();
     int getNumberOfLevels();

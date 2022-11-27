@@ -65,15 +65,11 @@ void AnnotatorMainWindow::setUpGraphics()
     _bar->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
     _bar->resize(40, this->height() / 2);
 
-
     _leftLayout->addWidget(_bar, 0, Qt::AlignRight | Qt::AlignTop);
-
-
-
     _leftDockwidget->setWidget(widget);
 
-
     this->addDockWidget(Qt::LeftDockWidgetArea, _leftDockwidget);
+
 
 }
 
@@ -90,6 +86,8 @@ void AnnotatorMainWindow::setUpUi()
 
 void AnnotatorMainWindow::openImage()
 {
+    _currentFileName.clear();
+    qDebug() << _currentFileName;
     _currentFileName = QFileDialog::getOpenFileName(this, "Open File", "/Users/danielpietsch/Documents/Bilder/WholeSlideImages", "");
 
     if(_currentFileName.isEmpty())
@@ -98,7 +96,7 @@ void AnnotatorMainWindow::openImage()
         return;
     } else
     {
-        //this->statusBar()->showMessage("Opening: " + _currentFileName);
+        this->statusBar()->showMessage("Opening: " + _currentFileName);
     }
 
     emit initializeImage(_currentFileName.toStdString());

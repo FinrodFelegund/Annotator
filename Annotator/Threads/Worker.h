@@ -29,6 +29,7 @@ public:
 signals:
 
     void finished(Tile tile);
+    void finishedMinimapJob(Tile tile);
 
 private:
 

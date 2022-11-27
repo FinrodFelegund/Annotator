@@ -17,6 +17,7 @@ public:
     void resetCache();
     void setLevelCache(QRectF rect);
     QRectF toCacheRect(QRectF rect);
+    QRectF getCurrentSceneLevel();
     bool isAlreadyLoaded(Tile tile);
     void setLoaded(Tile tile);
 private:

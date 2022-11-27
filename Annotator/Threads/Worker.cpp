@@ -31,7 +31,14 @@ void Worker::run()
         {
             job->doJob();
             Tile tile = job->toTile();
-            emit finished(tile);
+            if(job->type == JobType::ViewJob)
+            {
+                emit finished(tile);
+            } else if(job->type == JobType::MinimapJob)
+            {
+                emit finishedMinimapJob(tile);
+            }
+
             delete job;
         }
 

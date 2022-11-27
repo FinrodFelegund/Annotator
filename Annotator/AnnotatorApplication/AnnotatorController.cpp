@@ -5,7 +5,7 @@
 #include "AnnotatorController.h"
 #include <QScreen>
 #include "../Data Structures/Tiler.h"
-#include "../Data Structures/Tile.h"
+#include "../Data Structures/TileJob.h"
 #include "../Threads/Worker.h"
 
 
@@ -15,6 +15,7 @@ AnnotatorController::AnnotatorController(QObject *parent) : QObject(parent)
     _reader = std::make_shared<WholeSlideImageReader>();
     _manager = std::make_shared<Manager>(this);
     _cache = nullptr;
+    _view = nullptr;
 
 }
 
@@ -42,6 +43,7 @@ void AnnotatorController::shutDown()
         _view = nullptr;
     }
 
+
 }
 
 void AnnotatorController::setWindow(std::shared_ptr<AnnotatorMainWindow> window)
@@ -66,7 +68,11 @@ void AnnotatorController::initializeImage(std::string fileName)
         return;
     }
     _manager->setImage(_reader);
-    _view = _window->getView();
+    if(_view == nullptr)
+    {
+        _view = _window->getView();
+    }
+
 
     if(!_view)
     {
@@ -82,6 +88,10 @@ void AnnotatorController::initializeImage(std::string fileName)
         _cache->resetCache();
     }
 
+    //setup the minimap in main thread
+    _view->initialize(_reader);
+    auto dims = _reader->getLevelDimensions(_reader->getNumberOfLevels() - 1);
+
     std::vector<Worker*> worker = _manager->getThreads();
     for(int i = 0; i < worker.size(); i++)
     {
@@ -92,24 +102,21 @@ void AnnotatorController::initializeImage(std::string fileName)
     connect(_view.get(), &AnnotatorViewer::levelChanged, this, &AnnotatorController::levelChanged);
     connectActions();
 
-    _view->initialize(_reader);
 
     int level = _view->getCurrentLevel();
     int viewSceneScale = _reader->getLevelDownSample(level);
     int tileSize = _view->getTileSize();
     QRectF sceneRect = _view->getSceneRect();
 
-
-
-    sceneRect.setWidth(((int)(sceneRect.width() / viewSceneScale)&~3) + 4);
-    sceneRect.setHeight(((int)(sceneRect.height() / viewSceneScale)&~3) + 4);
+    sceneRect.setWidth(((int)(sceneRect.width() / viewSceneScale)));
+    sceneRect.setHeight(((int)(sceneRect.height() / viewSceneScale)));
     Tiler tiler(sceneRect, tileSize);
     tiler.exec();
-    //tiler.print();
+    tiler.print();
     auto tiles = tiler.getTilingResult();
     for(int i = 0; i < tiles.size(); i++)
     {
-        _manager->addJob(tiles[i].getX() * viewSceneScale, tiles[i].getY() * viewSceneScale, level, tiles[i].getWidth(), tiles[i].getHeight());
+        _manager->addJob(tiles[i].getX() * viewSceneScale, tiles[i].getY() * viewSceneScale, level, tiles[i].getWidth(), tiles[i].getHeight(), JobType::ViewJob);
     }
 
 
@@ -117,37 +124,38 @@ void AnnotatorController::initializeImage(std::string fileName)
 
 void AnnotatorController::fieldOfViewChanged(QRectF rect)
 {
-    //qDebug() << "X: " << rect.x() << " Y: " << rect.y() << " Width: " << rect.width() << " Height: " << rect.height();
+    //qDebug() << "In Viewer Width: " << rect.width() << " Height: " << rect.height();
     int tileSize = _view->getTileSize();
     int level = _view->getCurrentLevel();
     float viewSceneScale = _reader->getLevelDownSample(level);
-    rect.setX(((int)(rect.x() / viewSceneScale)&~3) + 4);
-    rect.setY(((int)(rect.y() / viewSceneScale)&~3) + 4);
-    rect.setWidth(((int)(rect.width() / viewSceneScale)&~3) + 4);
-    rect.setHeight(((int)(rect.height() / viewSceneScale)&~3) + 4);
+    rect.setX((int)(rect.x() / viewSceneScale));
+    rect.setY((int)(rect.y() / viewSceneScale));
+    rect.setWidth((int)(rect.width() / viewSceneScale));
+    rect.setHeight((int)(rect.height() / viewSceneScale));
 
     rect = _cache->toCacheRect(rect);
 
     Tiler tiler(rect, tileSize);
     tiler.exec();
     auto tiles = tiler.getTilingResult();
-
     for(int i = 0; i < tiles.size(); i++)
     {
         if(!_cache->isAlreadyLoaded(tiles[i]))
         {
-            qDebug() << "Loading new Tile";
-            _manager->addJob(tiles[i].getX() * viewSceneScale, tiles[i].getY() * viewSceneScale, level, tiles[i].getWidth(), tiles[i].getHeight());
+            _manager->addJob(tiles[i].getX() * viewSceneScale, tiles[i].getY() * viewSceneScale, level, tiles[i].getWidth(), tiles[i].getHeight(), JobType::ViewJob);
             _cache->setLoaded(tiles[i]);
         }
     }
 }
+
+
 
 void AnnotatorController::levelChanged(QRectF rect)
 {
     _cache->resetCache();
     _cache->setLevelCache(rect);
 }
+
 
 std::shared_ptr<AnnotatorMainWindow> AnnotatorController::getMainWindow()
 {
@@ -188,17 +196,26 @@ void AnnotatorController::connectActions()
 
 void AnnotatorController::clickTriggered(bool checked)
 {
-    qDebug() << "Hello world";
+    qDebug() << "Clicking";
 }
 
 void AnnotatorController::drawTriggered(bool checked)
 {
-    qDebug() << "Hello world";
+    qDebug() << "Drawing";
 }
 
 void AnnotatorController::exitTriggered(bool checked)
 {
-    qDebug() << "Hello world";
-    _view->close();
-    _reader->cleanUp();
+    qDebug() << "Cleaning Up";
+    if(_view)
+    {
+        _view->close();
+        _view = nullptr;
+    }
+
+    if(_reader)
+    {
+        _reader->cleanUp();
+    }
+
 }

@@ -34,7 +34,7 @@ private:
     int _jobsToDo;
 
 public:
-    void addJob(int x, int y, int level, int width, int height);
+    void addJob(int x, int y, int level, int width, int height, JobType type);
     std::vector<Worker*> getThreads();
     std::list<TileJob*> getWork();
     void shutdown();

@@ -21,6 +21,7 @@ public:
     void setUpGraphics();
     std::shared_ptr<AnnotatorViewer> getView();
     Toolbar* getToolBar();
+    void setView(std::shared_ptr<AnnotatorViewer> view);
 
 public slots:
     void openImage();
@@ -40,7 +41,6 @@ private:
 
     DockWidget *_leftDockwidget;
     QVBoxLayout *_leftLayout;
-    DockWidget *_rightDockwidget;
     QAction *_openImage;
     QString _currentFileName;
 

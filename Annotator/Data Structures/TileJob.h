@@ -10,9 +10,16 @@
 
 class QMutex;
 
+enum JobType
+{
+    ViewJob,
+    MinimapJob
+
+};
+
 struct TileJob
 {
-    TileJob(int x, int y, int width, int height, int lvl, std::shared_ptr<WholeSlideImageReader> reader = nullptr, unsigned char *buf = nullptr);
+    TileJob(int x, int y, int width, int height, int lvl, std::shared_ptr<WholeSlideImageReader> reader = nullptr, unsigned char *buf = nullptr, JobType type = JobType::ViewJob);
     ~TileJob();
     int xPos;
     int yPos;
@@ -20,6 +27,8 @@ struct TileJob
     int height;
     int level;
     unsigned char *buf;
+    JobType type;
+
 
     std::shared_ptr<WholeSlideImageReader> _reader;
 

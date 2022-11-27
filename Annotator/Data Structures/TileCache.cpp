@@ -21,16 +21,13 @@ void TileCache::resetCache()
 {
     _currentSceneScale = _currentLevel = 0;
     _tiles.clear();
-    _currentSceneLevel.setX(0);
-    _currentSceneLevel.setY(0);
-    _currentSceneLevel.setWidth(0);
-    _currentSceneLevel.setHeight(0);
+    _currentSceneLevel = QRectF();
 }
 
 void TileCache::setLevelCache(QRectF rect)
 {
     _currentSceneLevel = rect;
-    Tiler tiler(rect, _tileSize);
+    Tiler tiler(_currentSceneLevel, _tileSize);
     tiler.exec();
     auto tiles = tiler.getTilingResult();
     for(int i = 0; i < tiles.size(); i++)
@@ -45,54 +42,28 @@ void TileCache::setLevelCache(QRectF rect)
 
 QRectF TileCache::toCacheRect(QRectF rect)
 {
+    //get the next smaller (x,y) floating above rect
     int x = 0, y = 0;
-    bool loadedX = false, loadedY = false;
+    x = (int)rect.x() / _tileSize;
+    y = (int)rect.y() / _tileSize;
+    x = x * _tileSize;
+    y = y * _tileSize;
 
-    //find out x, y Position of new rect
-    while(!loadedX || !loadedY)
+
+    //get the width and height offset by tilesize
+    int width = 0, height = 0;
+    width = (int)rect.bottomRight().x() / _tileSize;
+    height = (int)rect.bottomRight().y() / _tileSize;
+    width = (width * _tileSize) + _tileSize;
+    height = (height * _tileSize) + _tileSize;
+    if(width > _currentSceneLevel.width())
     {
-        if(x + _tileSize < rect.x())
-        {
-            x += _tileSize;
-        } else
-        {
-            loadedX = true;
-        }
-
-        if(y + _tileSize < rect.y())
-        {
-            y += _tileSize;
-        } else
-        {
-            loadedY = true;
-        }
-
+        width = _currentSceneLevel.width();
     }
 
-    //find out width and length of new rect
-    loadedY = loadedX = false;
-    int bottomRightX = rect.bottomRight().x();
-    //bottomRightX = bottomRightX
-    int bottomRightY = rect.bottomRight().y();
-    int width = x;
-    int height = y;
-    while(!loadedX || !loadedY)
+    if(height > _currentSceneLevel.height())
     {
-        if(width >= bottomRightX)
-        {
-            loadedX = true;
-        } else
-        {
-            width += _tileSize;
-        }
-
-        if(height >= bottomRightY)
-        {
-            loadedY = true;
-        } else
-        {
-            height += _tileSize;
-        }
+        height = _currentSceneLevel.height();
     }
 
     return QRectF(x, y, width - x, height - y);
@@ -108,6 +79,11 @@ void TileCache::setLoaded(Tile tile)
 {
     std::string st = std::to_string(tile.getX()) + " " + std::to_string(tile.getY());
     _tiles[st] = true;
+}
+
+QRectF TileCache::getCurrentSceneLevel()
+{
+    return _currentSceneLevel;
 }
 
 

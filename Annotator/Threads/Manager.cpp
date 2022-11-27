@@ -58,14 +58,14 @@ void Manager::clearJobs()
     _workList.clear();
 }
 
-void Manager::addJob(int x, int y, int level, int width, int height)
+void Manager::addJob(int x, int y, int level, int width, int height, JobType type)
 {
     QMutexLocker locker(&_mutex);
     if(!_imageToRead)
     {
         return;
     }
-    TileJob *tile = new TileJob(x, y, width, height, level);
+    TileJob *tile = new TileJob(x, y, width, height, level, nullptr, nullptr, type);
     tile->setImage(_imageToRead);
     _workList.push_front(tile);
     _condition.wakeOne();

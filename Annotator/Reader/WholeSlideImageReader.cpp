@@ -153,7 +153,7 @@ double WholeSlideImageReader::getLevelDownSample(const int level)
     return 0.;
 }
 
-int WholeSlideImageReader::getLevelForGivenDownSample(const double downSample)
+int WholeSlideImageReader::getLevelForGivenDownSample(double downSample)
 {
     if(_valid)
     {
