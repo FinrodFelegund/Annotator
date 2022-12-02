@@ -4,6 +4,7 @@
 
 #include "TileJob.h"
 #include <QMutex>
+#include <QDebug>
 
 TileJob::TileJob(int x, int y, int width, int height, int lvl, std::shared_ptr<WholeSlideImageReader> reader, unsigned char *buf, JobType type)
 {

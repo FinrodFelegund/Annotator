@@ -15,8 +15,8 @@ AnnotatorViewer::AnnotatorViewer(QObject *parent)
 {
 
     setScene(new QGraphicsScene());
-    setBackgroundBrush(QBrush(QColor(252, 252, 252)));
-    scene()->setBackgroundBrush(QBrush(QColor(252, 252, 252)));
+    setBackgroundBrush(QBrush(QColor(255, 255, 255)));
+    scene()->setBackgroundBrush(QBrush(QColor(255, 255, 255)));
     _tileSize = 1024;
     _currentLevel = 0;
     _currentSceneScale = 0;
@@ -25,6 +25,7 @@ AnnotatorViewer::AnnotatorViewer(QObject *parent)
     _currentPos.setX(0);
     _currentPos.setY(0);
     _map = nullptr;
+    _longestSide = 0;
 
     setDragMode(QGraphicsView::DragMode::NoDrag);
     setContentsMargins(0,0,0,0);
@@ -34,7 +35,7 @@ AnnotatorViewer::AnnotatorViewer(QObject *parent)
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setEnabled(false);
 
-    //setRenderHints(QPainter::Antialiasing);
+    setRenderHints(QPainter::Antialiasing);
 
     setUI();
 
@@ -54,35 +55,28 @@ void AnnotatorViewer::initialize(std::shared_ptr<WholeSlideImageReader> reader)
     _currentLevel = reader->getNumberOfLevels() - 1;
     _currentSceneScale = _reader->getLevelDownSample(_currentLevel);
     _levelZeroDimensions = _reader->getLevel0Dimensions();
+    _longestSide = _levelZeroDimensions.first > _levelZeroDimensions.second ? _levelZeroDimensions.first : _levelZeroDimensions.second;
     _levelTopDimensions = _reader->getLevelDimensions(_currentLevel);
-    if(_map)
-    {
-        _map->deleteLater();
-        _map = nullptr;
-    }
     unsigned char *buf = _reader->readDataFromImage(0, 0, _levelTopDimensions.first, _levelTopDimensions.second, _reader->getNumberOfLevels()-1);
-    QImage img(buf, _levelTopDimensions.first, _levelTopDimensions.second, 3*_levelTopDimensions.first, QImage::Format_RGB888);
-    _map = new MiniMap(QPixmap::fromImage(img), this);
+    QImage img(buf, _levelTopDimensions.first, _levelTopDimensions.second, 3 * _levelTopDimensions.first, QImage::Format_RGB888);
+    //_map = new MiniMap(QPixmap::fromImage(img), _reader->getScaleFactor(_reader->getNumberOfLevels() - 1), this);
+    _map->setPixmap(QPixmap::fromImage(img));
+    _map->setDownSample(_reader->getScaleFactor(_reader->getNumberOfLevels() - 1));
     if(this->layout())
     {
         delete this->layout();
     }
-    QHBoxLayout * Hlayout = new QHBoxLayout(this);
-    Hlayout->setContentsMargins(100, 100, 30, 30);
-    Hlayout->addStretch(4);
-    QVBoxLayout * Vlayout = new QVBoxLayout();
-    Vlayout->addStretch(4);
-    Hlayout->addLayout(Vlayout, 1);
+    QVBoxLayout * Hlayout = new QVBoxLayout(this);
+    Hlayout->setAlignment(Qt::AlignTop);
+    Hlayout->setContentsMargins(0, 15, 15, 0);
     if(_map)
     {
-        Vlayout->addWidget(_map, 1);
+        Hlayout->addWidget(_map, 4, Qt::AlignRight);
     }
 
+
     setSceneRect(0, 0, _levelZeroDimensions.first, _levelZeroDimensions.second);
-
-    int longestSide = _levelZeroDimensions.first > _levelZeroDimensions.second ? _levelZeroDimensions.first : _levelZeroDimensions.second;
-    fitInView(QRectF(0, 0, _levelZeroDimensions.first, _levelZeroDimensions.second), Qt::KeepAspectRatio);
-
+    fitInView(QRectF(0, 0, _longestSide, _longestSide), Qt::KeepAspectRatio);
 
 }
 
@@ -108,13 +102,22 @@ int AnnotatorViewer::getTileSize()
 
 void AnnotatorViewer::loadTileInScene(Tile tile)
 {
+    if(!_reader)
+    {
+        //I think if still some signals are stored in this connection, this code will be executed regardless of current state (eg _reader is not valid anymore)
+        return;
+    }
+
+    if(tile.getLevel() != _currentLevel)
+    {
+        return;
+    }
 
     QGraphicsPixmapItem *item = nullptr;
     int bytesPerLine = 3;
-    //if(tile.getLevel() == 1)
-        //qDebug() << tile.getX() << " " << tile.getY();
     QImage img((unsigned char*)tile.getBuf(), tile.getWidth(), tile.getHeight(), bytesPerLine* tile.getWidth(), QImage::Format_RGB888);
     item = scene()->addPixmap(QPixmap::fromImage(img));
+
     item->setScale(_reader->getLevelDownSample(tile.getLevel()));
     item->setPos(tile.getX(), tile.getY());
 }
@@ -125,6 +128,11 @@ void AnnotatorViewer::close()
     if(_reader)
     {
         _reader = nullptr;
+    }
+
+    if(_map)
+    {
+        _map->reset();
     }
 
 
@@ -144,17 +152,14 @@ void AnnotatorViewer::wheelEvent(QWheelEvent *event)
     setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
 
     //declarations
-    //check if width or hight is needed to calculate zoom level
-
-
-
     QRectF rect = this->mapToScene(this->rect()).boundingRect(); //currently visible rect of scene in view
     qreal currentlyScaledValue = _levelZeroDimensions.first > _levelZeroDimensions.second ? qreal(_levelZeroDimensions.first) / qreal(rect.width()) : qreal(_levelZeroDimensions.second) / qreal(rect.height());
     int levelTopDownsample = _reader->getLevelDownSample(_reader->getNumberOfLevels() - 1);
     auto point = event->position().toPoint();
     auto scenePos = this->mapToScene(point);
+    //qDebug() << "rect: " << rect.x() << " " << rect.y() << " " << rect.width() << " " << rect.height();
 
-    emit fieldOfViewForMinimapChanged(rect.toRect());
+
 
     //compute scaled angle
     float angle = event->angleDelta().y();
@@ -173,11 +178,11 @@ void AnnotatorViewer::wheelEvent(QWheelEvent *event)
         horizontalScrollBar()->setValue(move.x() + horizontalScrollBar()->value());
         verticalScrollBar()->setValue(move.y() + verticalScrollBar()->value());
 
-    } else if(angle < 1 && currentlyScaledValue <= _levelZeroDimensions.first + 1.5 *_levelZeroDimensions.first)
+    } else if(angle < 1 && currentlyScaledValue <= (2.5 * _longestSide))
     {
-        if(qreal(rect.width()) / numDegrees > (_levelZeroDimensions.first + 1.5 * _levelZeroDimensions.first))
+        if(qreal(rect.width()) / numDegrees > (2.5 * _longestSide))
         {
-            numDegrees = qreal(rect.width()) / qreal(_levelZeroDimensions.first + 1.5 * _levelZeroDimensions.first);
+            numDegrees = qreal(rect.width()) / qreal(2.5 * _longestSide);
         }
         scale(numDegrees, numDegrees);
         const QPointF p1mouse = mapFromScene(scenePos);
@@ -186,15 +191,15 @@ void AnnotatorViewer::wheelEvent(QWheelEvent *event)
         verticalScrollBar()->setValue(move.y() + verticalScrollBar()->value());
     }
 
+    rect = this->mapToScene(this->rect()).boundingRect();
+    emit fieldOfViewForMinimapChanged(rect);
 
     //find out on which level we are after scaling
     int projectedLevel = _reader->getLevelForGivenDownSample(currentlyScaledValue);
-    //qDebug() << "Projected Level: " << projectedLevel;
     if(projectedLevel != _currentLevel)
     {
         _currentLevel = projectedLevel;
         _currentSceneScale = currentlyScaledValue;
-        //scene()->clear();
         std::pair<int, int> newLevel = _reader->getLevelDimensions(_currentLevel);
         emit levelChanged(QRectF(0, 0, newLevel.first, newLevel.second));
         emit fieldOfViewChanged(rect);
@@ -204,14 +209,23 @@ void AnnotatorViewer::wheelEvent(QWheelEvent *event)
 
 void AnnotatorViewer::resizeEvent(QResizeEvent *event)
 {
+    if(!isEnabled() || !_reader)
+    {
+        return;
+    }
+
     QRect r(QPoint(0, 0), event->size());
     QRectF rect = this->mapToScene(r).boundingRect();
 
-    if(_reader)
-    {
-        emit fieldOfViewForMinimapChanged(rect);
-        emit fieldOfViewChanged(rect);
-    }
+    QGraphicsView::resizeEvent(event);
+    keepViewInCheck(rect);
+    QRectF after = this->mapToScene(this->rect()).boundingRect();
+
+
+    emit fieldOfViewForMinimapChanged(after);
+    emit fieldOfViewChanged(rect);
+
+
 }
 
 
@@ -247,12 +261,18 @@ void AnnotatorViewer::mouseReleaseEvent(QMouseEvent *event)
 
 void AnnotatorViewer::setMinimap()
 {
+    _map = new MiniMap(this);
+    connect(this, &AnnotatorViewer::fieldOfViewForMinimapChanged, _map, &MiniMap::updateFieldOfView);
+    connect(_map, &MiniMap::mapClicked, this, &AnnotatorViewer::centerOnMinimap);
 
 }
 
-void AnnotatorViewer::centerOnMinimap(QPoint point)
+void AnnotatorViewer::centerOnMinimap(QPointF point)
 {
-
+    centerOn(point);
+    QRectF rect = this->mapToScene(this->rect()).boundingRect();
+    emit fieldOfViewChanged(rect);
+    emit fieldOfViewForMinimapChanged(rect);
 }
 
 
@@ -261,4 +281,32 @@ void AnnotatorViewer::setUI()
 {
     //for now just setup Minimap and connect its signals and slots
     setMinimap();
+}
+
+void AnnotatorViewer::keepViewInCheck(QRectF rect)
+{
+    if(!_reader)
+    {
+        return;
+    }
+    //prevent the resized views' width to be wider than allowed with of 2.5 * _levelzerodims.first
+    {
+        if(rect.width() > 2.5 * _longestSide)
+        {
+            float numDegrees = rect.width() / (2.5 * _longestSide);
+            scale(numDegrees, numDegrees);
+        }
+    }
+
+
+    rect = this->mapToScene(this->rect()).boundingRect();
+    //if(_longestSide == _levelZeroDimensions.second)
+    {
+        if(rect.height() > (_longestSide * 2.5))
+        {
+            float numDegrees = rect.height() / (2.5 * _longestSide);
+            scale(numDegrees, numDegrees);
+        }
+    }
+
 }

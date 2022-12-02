@@ -7,6 +7,7 @@
 #include "../Data Structures/Tiler.h"
 #include "../Data Structures/TileJob.h"
 #include "../Threads/Worker.h"
+#include <QStatusBar>
 
 
 AnnotatorController::AnnotatorController(QObject *parent) : QObject(parent)
@@ -15,7 +16,7 @@ AnnotatorController::AnnotatorController(QObject *parent) : QObject(parent)
     _reader = std::make_shared<WholeSlideImageReader>();
     _manager = std::make_shared<Manager>(this);
     _cache = nullptr;
-    _view = nullptr;
+    _view = std::make_shared<AnnotatorViewer>();
 
 }
 
@@ -28,18 +29,18 @@ void AnnotatorController::shutDown()
 {
     if(_window)
     {
+        _window->deleteLater();
         _window = nullptr;
     }
 
     if(_reader)
     {
-        //_reader->cleanUp();
         _reader = nullptr;
     }
 
     if(_view)
     {
-        //_view->close();
+        _view->deleteLater();
         _view = nullptr;
     }
 
@@ -54,6 +55,11 @@ void AnnotatorController::setWindow(std::shared_ptr<AnnotatorMainWindow> window)
     }
 
     _window = window;
+    if(_view)
+    {
+        _window->setView(_view);
+    }
+
     connect(_window.get(), &AnnotatorMainWindow::initializeImage, this, &AnnotatorController::initializeImage);
 }
 
@@ -67,6 +73,8 @@ void AnnotatorController::initializeImage(std::string fileName)
         qDebug() << "AnnotatorController: reader is not valid";
         return;
     }
+    _manager->shutdown();
+    _manager->startWorkers();
     _manager->setImage(_reader);
     if(_view == nullptr)
     {
@@ -88,7 +96,6 @@ void AnnotatorController::initializeImage(std::string fileName)
         _cache->resetCache();
     }
 
-    //setup the minimap in main thread
     _view->initialize(_reader);
     auto dims = _reader->getLevelDimensions(_reader->getNumberOfLevels() - 1);
 
@@ -112,13 +119,12 @@ void AnnotatorController::initializeImage(std::string fileName)
     sceneRect.setHeight(((int)(sceneRect.height() / viewSceneScale)));
     Tiler tiler(sceneRect, tileSize);
     tiler.exec();
-    tiler.print();
     auto tiles = tiler.getTilingResult();
+    _manager->setCurrentLevel(level);
     for(int i = 0; i < tiles.size(); i++)
     {
         _manager->addJob(tiles[i].getX() * viewSceneScale, tiles[i].getY() * viewSceneScale, level, tiles[i].getWidth(), tiles[i].getHeight(), JobType::ViewJob);
     }
-
 
 }
 
@@ -127,6 +133,7 @@ void AnnotatorController::fieldOfViewChanged(QRectF rect)
     //qDebug() << "In Viewer Width: " << rect.width() << " Height: " << rect.height();
     int tileSize = _view->getTileSize();
     int level = _view->getCurrentLevel();
+    _manager->setCurrentLevel(level);
     float viewSceneScale = _reader->getLevelDownSample(level);
     rect.setX((int)(rect.x() / viewSceneScale));
     rect.setY((int)(rect.y() / viewSceneScale));
@@ -196,17 +203,21 @@ void AnnotatorController::connectActions()
 
 void AnnotatorController::clickTriggered(bool checked)
 {
-    qDebug() << "Clicking";
+
 }
 
 void AnnotatorController::drawTriggered(bool checked)
 {
-    qDebug() << "Drawing";
+
 }
 
 void AnnotatorController::exitTriggered(bool checked)
 {
-    qDebug() << "Cleaning Up";
+
+    if(_manager)
+    {
+        _manager->shutdown();
+    }
     if(_view)
     {
         _view->close();
@@ -215,6 +226,7 @@ void AnnotatorController::exitTriggered(bool checked)
 
     if(_reader)
     {
+        _window->statusBar()->showMessage("Closing");
         _reader->cleanUp();
     }
 

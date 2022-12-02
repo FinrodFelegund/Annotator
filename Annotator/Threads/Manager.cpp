@@ -11,9 +11,16 @@ Manager::Manager(QObject *parent) : QObject(parent)
     _waitingThreads = 0;
     _imageToRead = nullptr;
     _tileSize = 0;
+    _currentLevel = 0;
 
     _numberOfThreads = std::thread::hardware_concurrency();
 
+
+}
+
+void Manager::startWorkers()
+{
+    _stop = false;
     for(int i = 0; i < _numberOfThreads; i++)
     {
         Worker *worker = new Worker(this);
@@ -43,7 +50,7 @@ void Manager::shutdown()
         delete (*it);
 
     }
-
+    clearJobs();
     _threadList.clear();
 
 }
@@ -69,6 +76,11 @@ void Manager::addJob(int x, int y, int level, int width, int height, JobType typ
     tile->setImage(_imageToRead);
     _workList.push_front(tile);
     _condition.wakeOne();
+}
+
+int Manager::getNumberOfJobs()
+{
+    return _workList.size();
 }
 
 void Manager::setImage(std::shared_ptr<WholeSlideImageReader> img)
@@ -114,16 +126,47 @@ int Manager::getWaitingThreads()
     return _waitingThreads;
 }
 
-
-
-
-
-
-//old
-void Manager::print()
+void Manager::removeJob(QRectF rect, int level)
 {
+    if(!_imageToRead)
+    {
+        return;
+    }
+
+    _mutex.lock();
+    int downSample = _imageToRead->getScaleFactor(level);
+    rect = QRectF(rect.x() * downSample, rect.y() * downSample, rect.width() * downSample, rect.height() * downSample);
+    std::list<TileJob*>::iterator it;
+    for(it = _workList.begin(); it != _workList.end(); it++)
+    {
+        int sample = _imageToRead->getScaleFactor((*it)->getLevel());
+        QRectF del((*it)->getXPos() * sample, (*it)->getYPos() * sample, (*it)->getWidth(), (*it)->getHeight());
+        qDebug() << del;
+        if(del.intersects(rect) && level != (*it)->getLevel())
+        {
+            _workList.erase(it);
+        }
+    }
+
+
+    _mutex.unlock();
+}
+
+void Manager::setCurrentLevel(int level)
+{
+    QMutexLocker locker(&_mutex);
+    _currentLevel = level;
 
 }
+
+int Manager::getCurrentLevel()
+{
+    QMutexLocker locker(&_mutex);
+    qDebug() << "residing here";
+    return _currentLevel;
+}
+
+
 
 
 

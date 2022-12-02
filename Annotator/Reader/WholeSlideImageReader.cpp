@@ -26,6 +26,11 @@ WholeSlideImageReader::~WholeSlideImageReader()
     cleanUp();
 }
 
+int WholeSlideImageReader::getScaleFactor(int level)
+{
+    return _scaleFactors[level];
+}
+
 void WholeSlideImageReader::initializeImage(const std::string imagePath)
 {
     std::unique_lock<std::shared_mutex> lock(*_mutex);
@@ -43,20 +48,36 @@ void WholeSlideImageReader::initializeImage(const std::string imagePath)
     if(const char *error = openslide_get_error(_obj))
     {
         _errorState = error;
+        _valid = false;
         std::cout << _errorState << std::endl;
+        return;
     }
 
     if(_errorState.empty()) {
-        _numberOfLevels = openslide_get_level_count(_obj);
-        for (int i = 0; i < _numberOfLevels; i++) {
+        int discardedLevels = 0;
+        for (int i = 0; i < openslide_get_level_count(_obj); i++)
+        {
             int64_t x, y = 0;
             openslide_get_level_dimensions(_obj, i, &x, &y);
-            std::pair<int, int> dims = std::make_pair(x, y);
-            _dimensions.push_back(dims);
-            _scaleFactors.push_back(openslide_get_level_downsample(_obj, i));
+            if(x >= 1000 || y >= 1000)
+            {
+                std::pair<int, int> dims = std::make_pair(x, y);
+                _dimensions.push_back(dims);
+                _scaleFactors.push_back(openslide_get_level_downsample(_obj, i));
+            } else
+            {
+                discardedLevels++;
+            }
         }
 
+        _numberOfLevels = openslide_get_level_count(_obj) - discardedLevels;
 
+        if(_numberOfLevels == 0)
+        {
+            //if first levels are all very small, the view will be very pixeled, so just discard those levels and only load those, which have a proper size
+            _valid = false;
+            return;
+        }
 
         if(const char *const *value = openslide_get_property_names(_obj))
         {
@@ -73,7 +94,14 @@ void WholeSlideImageReader::initializeImage(const std::string imagePath)
             _propertiesMap.insert(std::make_pair("MPP_Y", std::string(value)));
         }
 
+        if(const char *value = openslide_get_property_value(_obj, OPENSLIDE_PROPERTY_NAME_BACKGROUND_COLOR))
+        {
+            _propertiesMap.insert(std::make_pair("BackgroundColor", std::string(value)));
+        }
+
         _filetype = openslide_get_property_value(_obj, OPENSLIDE_PROPERTY_NAME_VENDOR);
+
+
 
         const char *value = openslide_get_property_value(_obj, OPENSLIDE_PROPERTY_NAME_BACKGROUND_COLOR);
         if(value)
@@ -91,11 +119,14 @@ void WholeSlideImageReader::initializeImage(const std::string imagePath)
     }
 
     //printLevelDownsample();
-    printDimensions();
+    //printDimensions();
+    //printProperties();
+
 }
 
 void WholeSlideImageReader::cleanUp()
 {
+
     if(_obj)
     {
         openslide_close(_obj);
@@ -170,10 +201,10 @@ int WholeSlideImageReader::getLevelForGivenDownSample(double downSample)
             return 0;
         }
 
-        for(int i  = _dimensions.size() - 1; i > 0; i--)
+        for(int i  = _dimensions.size() - 2; i > 0; i--)
         {
-            double currentDownSample = (double)_dimensions[0].first / (double)_dimensions[i].first;
-            double nextDownSample = (double)_dimensions[0].first / (double)_dimensions[i - 1].first;
+            double nextDownSample = (double)_dimensions[0].first / (double)_dimensions[i].first;
+            double currentDownSample = (double)_dimensions[0].first / (double)_dimensions[i + 1].first;
 
             if(DownSample <= currentDownSample && DownSample > nextDownSample)
             {
@@ -181,7 +212,7 @@ int WholeSlideImageReader::getLevelForGivenDownSample(double downSample)
             }
 
         }
-        return getNumberOfLevels() - 1;
+        return 0;
     } else
     {
         return -1;
@@ -293,5 +324,13 @@ void WholeSlideImageReader::printLevelDownsample()
             qDebug() << "Downsample: " << _scaleFactors[i];
             qDebug();
         }
+    }
+}
+
+void WholeSlideImageReader::printProperties()
+{
+    for(std::map<std::string, std::string>::iterator it = _propertiesMap.begin(); it != _propertiesMap.end(); it++)
+    {
+        qDebug() << QString::fromStdString(it->first) << ": " << QString::fromStdString(it->second);
     }
 }

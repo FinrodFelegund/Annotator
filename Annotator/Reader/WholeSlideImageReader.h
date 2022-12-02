@@ -44,10 +44,11 @@ public:
     std::string getProperty(const std::string property);
     bool isValid();
     std::string getErrorState();
-
+    int getScaleFactor(int level);
     unsigned char *readDataFromImage(int64_t x, int64_t y, int64_t width, int64_t height, int32_t level);
     void printDimensions();
     void printLevelDownsample();
+    void printProperties();
 
 };
 

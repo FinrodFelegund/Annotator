@@ -25,6 +25,7 @@ public:
     int getCurrentLevel();
     qreal getCurrentSceneScale();
     int getTileSize();
+    void keepViewInCheck(QRectF rect);
 
 
 
@@ -38,6 +39,7 @@ private:
     void setUI();
 
     std::shared_ptr<WholeSlideImageReader> _reader;
+    int _longestSide;
     qreal _currentSceneScale;
     int _tileSize;
     int _currentLevel;
@@ -57,7 +59,7 @@ signals:
 
 public slots:
     void loadTileInScene(Tile tile);
-    void centerOnMinimap(QPoint point);
+    void centerOnMinimap(QPointF point);
 
 };
 

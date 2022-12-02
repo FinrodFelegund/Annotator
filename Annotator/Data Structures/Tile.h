@@ -5,6 +5,7 @@
 #ifndef ANNOTATOR_TILE_H
 #define ANNOTATOR_TILE_H
 #include <QtMath>
+#include <QRectF>
 
 
 struct Tile
@@ -26,6 +27,7 @@ struct Tile
     unsigned char* getBuf();
     void setBuf(unsigned char *buf);
     void setLevel(int level);
+    QRectF toRect();
 };
 
 

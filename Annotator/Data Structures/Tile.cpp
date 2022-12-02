@@ -65,3 +65,8 @@ int Tile::getLevel()
 {
     return this->_level;
 }
+
+QRectF Tile::toRect()
+{
+    return QRectF(getX(), getY(), getWidth(), getHeight());
+}

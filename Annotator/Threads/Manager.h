@@ -32,6 +32,7 @@ private:
     int _tileSize;
     int _numberOfThreads;
     int _jobsToDo;
+    int _currentLevel;
 
 public:
     void addJob(int x, int y, int level, int width, int height, JobType type);
@@ -44,6 +45,10 @@ public:
     void print();
     void setImage(std::shared_ptr<WholeSlideImageReader> img);
     int getNumberOfJobs();
+    void startWorkers();
+    void removeJob(QRectF rect, int level);
+    int getCurrentLevel();
+    void setCurrentLevel(int level);
 
 };
 

@@ -38,7 +38,6 @@ void Worker::run()
             {
                 emit finishedMinimapJob(tile);
             }
-
             delete job;
         }
 

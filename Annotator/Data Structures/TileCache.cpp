@@ -36,7 +36,7 @@ void TileCache::setLevelCache(QRectF rect)
         _tiles[st] = false;
     }
 
-    qDebug() << "New level cache x: " << _currentSceneLevel.x() << " y: " << _currentSceneLevel.y() << " width: " << _currentSceneLevel.width() << " height: " << _currentSceneLevel.height();
+    //qDebug() << "New level cache x: " << _currentSceneLevel.x() << " y: " << _currentSceneLevel.y() << " width: " << _currentSceneLevel.width() << " height: " << _currentSceneLevel.height();
 
 }
 

@@ -42,13 +42,6 @@ void AnnotatorMainWindow::setUpGraphics()
     policy.setHeightForWidth(_centralWidget->sizePolicy().hasHeightForWidth());
     _centralWidget->setSizePolicy(policy);
 
-    _horizontalLayout = new QHBoxLayout(_centralWidget);
-    _horizontalLayout->setSpacing(6);
-    //_horizontalLayout->setContentsMargins(150, 0, 150, 0);
-
-    _view = std::make_shared<AnnotatorViewer>(_centralWidget);
-    _horizontalLayout->addWidget(_view.get());
-
     this->setCentralWidget(_centralWidget);
 
     _leftDockwidget = new DockWidget(this);
@@ -87,7 +80,6 @@ void AnnotatorMainWindow::setUpUi()
 void AnnotatorMainWindow::openImage()
 {
     _currentFileName.clear();
-    qDebug() << _currentFileName;
     _currentFileName = QFileDialog::getOpenFileName(this, "Open File", "/Users/danielpietsch/Documents/Bilder/WholeSlideImages", "");
 
     if(_currentFileName.isEmpty())
@@ -124,5 +116,15 @@ void AnnotatorMainWindow::resizeEvent(QResizeEvent *event)
     QMainWindow::resizeEvent(event);
     _bar->resize(40, this->height() / 2);
 
+}
+
+void AnnotatorMainWindow::setView(std::shared_ptr<AnnotatorViewer> view)
+{
+    this->_view = view;
+    _horizontalLayout = new QHBoxLayout(_centralWidget);
+    _horizontalLayout->setSpacing(6);
+    //_horizontalLayout->setContentsMargins(150, 0, 150, 0);
+
+    _horizontalLayout->addWidget(_view.get());
 }
 
