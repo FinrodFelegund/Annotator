@@ -10,6 +10,7 @@
 #include "../Reader/WholeSlideImageReader.h"
 #include <QFormLayout>
 #include "MiniMap.h"
+#include "../Data Structures/GraphicsItem.h"
 
 class Tile;
 
@@ -26,7 +27,6 @@ public:
     qreal getCurrentSceneScale();
     int getTileSize();
     void keepViewInCheck(QRectF rect);
-
 
 
 private:
@@ -56,6 +56,7 @@ signals:
     void fieldOfViewChanged(QRectF rect);
     void fieldOfViewForMinimapChanged(QRectF rect);
     void levelChanged(QRectF rect);
+    void itemLoaded(GraphicsItem *item);
 
 public slots:
     void loadTileInScene(Tile tile);

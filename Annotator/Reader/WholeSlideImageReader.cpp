@@ -119,7 +119,7 @@ void WholeSlideImageReader::initializeImage(const std::string imagePath)
     }
 
     //printLevelDownsample();
-    //printDimensions();
+    printDimensions();
     //printProperties();
 
 }

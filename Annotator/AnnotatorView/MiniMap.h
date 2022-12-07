@@ -18,6 +18,7 @@ public:
     void setPixmap(QPixmap map);
     void setDownSample(int downSample);
     void reset();
+    void initalize();
 
 public slots:
     void updateFieldOfView(QRectF rect);

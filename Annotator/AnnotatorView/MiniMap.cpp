@@ -7,6 +7,7 @@
 
 MiniMap::MiniMap(QWidget *parent) : QWidget(parent)
 {
+    setEnabled(false);
     _map = QPixmap();
     _ratio = 0;
     _downSample = 0;
@@ -34,7 +35,18 @@ void MiniMap::reset()
     _map = QPixmap();
     _ratio = 0;
     _downSample = 0;
-    _fieldOfView = QRectF();
+    _fieldOfView = QRect(0, 0, 0, 0);
+    setEnabled(false);
+}
+
+void MiniMap::initalize()
+{
+    setEnabled(true);
+    if(!_map.isNull())
+    {
+        _fieldOfView = QRectF(1, 1, width() - 2, height() - 2);
+        update();
+    }
 }
 
 void MiniMap::paintEvent(QPaintEvent *event)
@@ -58,24 +70,15 @@ void MiniMap::updateFieldOfView(QRectF rect)
 {
 
 
-    if(rect.isValid() && !rect.isNull())
+    if(!rect.isNull())
     {
         //bring the fieldofView in Minimap coordinates by scaling it down
         _fieldOfView = QRectF(rect.x() / _downSample, rect.y() / _downSample, rect.width() / _downSample, rect.height() / _downSample);
         _fieldOfView = QRectF(_fieldOfView.x() / _map.width() * width(), _fieldOfView.y() / _map.height() * height(), _fieldOfView.width() / _map.width() * width(), _fieldOfView.height() / _map.height() * height());
 
-        //make a check if width() and height() actually return what we expect
-        QSize size = sizeHint();
-        if(width() != size.width() || height() != size.height())
-        {
-            //For some weird reason, when loading up the image and this function is called for the first time, width() and height() are not returning the correct size
-            //_fieldOfView = QRectF(0, 0, size.width(), size.height());
-
-        }
 
         if(_fieldOfView.x() < 0 && _fieldOfView.y() < 0 && _fieldOfView.width() > width() && _fieldOfView.height() > height())
         {
-            //determine which parts are currently visible (eg is the rect also showing parts of scene, which are not part of image
             _fieldOfView = QRectF(1, 1, width() - 2, height() - 2);
         } else if(_fieldOfView.height() > height())
         {

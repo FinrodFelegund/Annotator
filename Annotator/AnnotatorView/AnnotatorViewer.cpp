@@ -4,7 +4,6 @@
 
 #include "AnnotatorViewer.h"
 #include "../Threads/Worker.h"
-#include <QGraphicsPixmapItem>
 #include <QLabel>
 #include <QImage>
 #include <QWheelEvent>
@@ -74,6 +73,8 @@ void AnnotatorViewer::initialize(std::shared_ptr<WholeSlideImageReader> reader)
         Hlayout->addWidget(_map, 4, Qt::AlignRight);
     }
 
+    _map->setHidden(false);
+    _map->initalize();
 
     setSceneRect(0, 0, _levelZeroDimensions.first, _levelZeroDimensions.second);
     fitInView(QRectF(0, 0, _longestSide, _longestSide), Qt::KeepAspectRatio);
@@ -108,18 +109,24 @@ void AnnotatorViewer::loadTileInScene(Tile tile)
         return;
     }
 
-    if(tile.getLevel() != _currentLevel)
-    {
-        return;
-    }
-
-    QGraphicsPixmapItem *item = nullptr;
     int bytesPerLine = 3;
     QImage img((unsigned char*)tile.getBuf(), tile.getWidth(), tile.getHeight(), bytesPerLine* tile.getWidth(), QImage::Format_RGB888);
-    item = scene()->addPixmap(QPixmap::fromImage(img));
+    GraphicsItem *newItem = new GraphicsItem(QPixmap(QPixmap::fromImage(img)), _reader->getScaleFactor(tile.getLevel()), tile.getLevel(), tile.getX(), tile.getY());
+    if(tile.getLevel() != _currentLevel)
+    {
+        newItem->setOpacity(0);
+    } else
+    {
+        newItem->setOpacity(1.);
+    }
 
-    item->setScale(_reader->getLevelDownSample(tile.getLevel()));
-    item->setPos(tile.getX(), tile.getY());
+    scene()->addItem(newItem);
+
+    newItem->setPos(tile.getX(), tile.getY());
+    newItem->setScale(_reader->getLevelDownSample(tile.getLevel()));
+
+
+    emit itemLoaded(newItem);
 }
 
 void AnnotatorViewer::close()
@@ -132,6 +139,7 @@ void AnnotatorViewer::close()
 
     if(_map)
     {
+        _map->setHidden(true);
         _map->reset();
     }
 
@@ -150,7 +158,6 @@ void AnnotatorViewer::close()
 void AnnotatorViewer::wheelEvent(QWheelEvent *event)
 {
     setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-
     //declarations
     QRectF rect = this->mapToScene(this->rect()).boundingRect(); //currently visible rect of scene in view
     qreal currentlyScaledValue = _levelZeroDimensions.first > _levelZeroDimensions.second ? qreal(_levelZeroDimensions.first) / qreal(rect.width()) : qreal(_levelZeroDimensions.second) / qreal(rect.height());
@@ -247,6 +254,8 @@ void AnnotatorViewer::mouseMoveEvent(QMouseEvent *event)
         verticalScrollBar()->setValue(delta.y() + verticalScrollBar()->value());
 
         QRectF rect = mapToScene(this->rect()).boundingRect();
+
+        //find out if the tiles we pan to are covering or if we have to reload the fieldofview
         emit fieldOfViewChanged(rect);
         emit fieldOfViewForMinimapChanged(rect);
 
@@ -310,3 +319,5 @@ void AnnotatorViewer::keepViewInCheck(QRectF rect)
     }
 
 }
+
+
