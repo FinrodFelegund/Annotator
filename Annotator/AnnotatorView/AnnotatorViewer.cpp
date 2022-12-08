@@ -273,6 +273,7 @@ void AnnotatorViewer::setMinimap()
     _map = new MiniMap(this);
     connect(this, &AnnotatorViewer::fieldOfViewForMinimapChanged, _map, &MiniMap::updateFieldOfView);
     connect(_map, &MiniMap::mapClicked, this, &AnnotatorViewer::centerOnMinimap);
+    connect(_map, &MiniMap::mapDragged, this, &AnnotatorViewer::dragInMiniMap);
 
 }
 
@@ -318,6 +319,14 @@ void AnnotatorViewer::keepViewInCheck(QRectF rect)
         }
     }
 
+}
+
+void AnnotatorViewer::dragInMiniMap(QPointF point)
+{
+    centerOn(point);
+    QRectF rect = this->mapToScene(this->rect()).boundingRect();
+    emit fieldOfViewForMinimapChanged(rect);
+    emit fieldOfViewChanged(rect);
 }
 
 

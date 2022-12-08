@@ -61,6 +61,7 @@ signals:
 public slots:
     void loadTileInScene(Tile tile);
     void centerOnMinimap(QPointF point);
+    void dragInMiniMap(QPointF point);
 
 };
 

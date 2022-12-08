@@ -318,6 +318,4 @@ void AnnotatorController::exitTriggered(bool checked)
 void AnnotatorController::itemLoaded(GraphicsItem *item)
 {
     _cache->insertNewElement(item);
-    qDebug() << _view->scene()->items().size();
-
 }

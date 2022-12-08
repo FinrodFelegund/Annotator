@@ -25,17 +25,23 @@ public slots:
 
 signals:
     void mapClicked(QPointF pos);
+    void mapDragged(QPointF pos);
 
 
 protected:
     void paintEvent(QPaintEvent *event);
     virtual void mousePressEvent(QMouseEvent *event);
+    virtual void mouseMoveEvent(QMouseEvent *event);
+    virtual void mouseReleaseEvent(QMouseEvent *event);
+
 private:
     QRectF _fieldOfView;
     QPixmap _map;
+    QPointF _currentPos;
     float _ratio;
     int _downSample;
     int _baseSize;
+    bool _clicked;
 };
 
 
