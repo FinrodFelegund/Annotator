@@ -227,15 +227,7 @@ void AnnotatorController::fieldOfViewChanged(QRectF rect)
     auto tiles = tiler.getTilingResult();
     for(int i = 0; i < tiles.size(); i++)
     {
-        std::string key = std::to_string(tiles[i].getLevel()) + " " + std::to_string(tiles[i].getX()) + " " + std::to_string(tiles[i].getX());
-        if(!_cache->contains(key))
-        {
-            _manager->addJob(tiles[i].getX() * viewSceneScale, tiles[i].getY() * viewSceneScale, level, tiles[i].getWidth(), tiles[i].getHeight(), JobType::ViewJob);
-        } else
-        {
-            _cache->updateTile(key);
-        }
-
+        _manager->addJob(tiles[i].getX() * viewSceneScale, tiles[i].getY() * viewSceneScale, level, tiles[i].getWidth(), tiles[i].getHeight(), JobType::ViewJob);
     }
 }
 

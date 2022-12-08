@@ -130,7 +130,6 @@ void MiniMap::mousePressEvent(QMouseEvent *event)
     emit mapClicked(point);
 
     _clicked = true;
-    _currentPos = event->pos();
 
 }
 
@@ -138,20 +137,11 @@ void MiniMap::mouseMoveEvent(QMouseEvent *event)
 {
     if(_clicked)
     {
-
-        QPointF tmp = QPointF((double)_currentPos.x() / width(), (double)_currentPos.y() / height());
-        tmp = QPointF(tmp.x() * _map.width(), tmp.y() * _map.height());
-        tmp = QPointF(tmp.x() * _downSample, tmp.y() * _downSample);
-
-
-        /*//scale both points up
-        QPointF delta = event->pos();
-        delta = QPointF(delta.x() / width(), delta.y() / height());
-        delta = QPointF(delta.x() * _map.width(), delta.y() / _map.height());
-        delta = QPointF(delta.x() * _downSample, delta.y() / _downSample);*/
-
-        emit mapDragged(tmp);
         _currentPos = event->pos();
+        _currentPos = QPointF((double)_currentPos.x() / width(), (double)_currentPos.y() / height());
+        _currentPos = QPointF(_currentPos.x() * _map.width(), _currentPos.y() * _map.height());
+        _currentPos = QPointF(_currentPos.x() * _downSample, _currentPos.y() * _downSample);
+        emit mapDragged(_currentPos);
     }
 }
 
