@@ -14,6 +14,7 @@
 
 struct LevelManager
 {
+
     LevelManager();
     ~LevelManager();
     void setCurrentLevel(QRectF levelRect);

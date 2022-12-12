@@ -12,7 +12,7 @@ class GraphicsItem : public QGraphicsItem
 {
 public:
     GraphicsItem(QPixmap map, int scaleFactor, int level, int cx, int cy);
-    ~GraphicsItem() noexcept;
+    ~GraphicsItem();
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     void opacityChanged();

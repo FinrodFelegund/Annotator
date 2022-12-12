@@ -83,6 +83,11 @@ AnnotatorController::AnnotatorController(QObject *parent) : QObject(parent)
     _view = std::make_shared<AnnotatorViewer>();
     _levelManager = std::make_shared<LevelManager>();
     _cache = std::make_shared<ItemCache>();
+    _cache->setScene(_view->scene());
+    connect(_view.get(), &AnnotatorViewer::itemLoaded, this, &AnnotatorController::itemLoaded);
+    connect(_view.get(), &AnnotatorViewer::fieldOfViewChanged, this, &AnnotatorController::fieldOfViewChanged);
+    connect(_view.get(), &AnnotatorViewer::levelChanged, this, &AnnotatorController::levelChanged);
+
 
 }
 
@@ -93,6 +98,7 @@ AnnotatorController::~AnnotatorController() noexcept
 
 void AnnotatorController::shutDown()
 {
+
     if(_window)
     {
         _window->deleteLater();
@@ -138,6 +144,7 @@ void AnnotatorController::setWindow(std::shared_ptr<AnnotatorMainWindow> window)
     }
 
     connect(_window.get(), &AnnotatorMainWindow::initializeImage, this, &AnnotatorController::initializeImage);
+    connectActions();
 }
 
 void AnnotatorController::initializeImage(std::string fileName)
@@ -153,10 +160,6 @@ void AnnotatorController::initializeImage(std::string fileName)
     _manager->shutdown();
     _manager->startWorkers();
     _manager->setImage(_reader);
-    if(_view == nullptr)
-    {
-        _view = _window->getView();
-    }
 
 
     if(!_view)
@@ -166,10 +169,12 @@ void AnnotatorController::initializeImage(std::string fileName)
     }
 
 
-    _cache->setScene(_view->scene());
+    _cache->clear();
+    //_cache->setScene(_view->scene());
     _cache->setTopLevel(_reader->getNumberOfLevels() - 1);
     _view->initialize(_reader);
     auto dims = _reader->getLevelDimensions(_reader->getNumberOfLevels() - 1);
+    _levelManager->setCurrentLevel(QRectF(0, 0, dims.first, dims.second));
 
     std::vector<Worker*> worker = _manager->getThreads();
     for(int i = 0; i < worker.size(); i++)
@@ -177,10 +182,8 @@ void AnnotatorController::initializeImage(std::string fileName)
         connect(worker[i], &Worker::finished, _view.get(), &AnnotatorViewer::loadTileInScene, Qt::QueuedConnection);
     }
 
-    connect(_view.get(), &AnnotatorViewer::itemLoaded, this, &AnnotatorController::itemLoaded);
-    connect(_view.get(), &AnnotatorViewer::fieldOfViewChanged, this, &AnnotatorController::fieldOfViewChanged);
-    connect(_view.get(), &AnnotatorViewer::levelChanged, this, &AnnotatorController::levelChanged);
-    connectActions();
+
+
 
 
     int level = _view->getCurrentLevel();
@@ -217,7 +220,6 @@ void AnnotatorController::fieldOfViewChanged(QRectF rect)
     rect = _levelManager->toLevelRect(rect);
     if(_levelManager->isCurrentFieldOfView(rect))
     {
-        //qDebug() << "I dont have to be reloaded";
         return;
     }
 
@@ -296,7 +298,12 @@ void AnnotatorController::exitTriggered(bool checked)
     if(_view)
     {
         _view->close();
-        _view = nullptr;
+        //_view = nullptr;
+    }
+
+    if(_cache)
+    {
+        _cache->clear();
     }
 
     if(_reader)

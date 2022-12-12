@@ -43,6 +43,7 @@ AnnotatorViewer::AnnotatorViewer(QObject *parent)
 AnnotatorViewer::~AnnotatorViewer() noexcept
 {
     close();
+    delete scene();
 }
 
 void AnnotatorViewer::initialize(std::shared_ptr<WholeSlideImageReader> reader)

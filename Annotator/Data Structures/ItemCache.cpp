@@ -20,10 +20,6 @@ ItemCache::~ItemCache()
 
 void ItemCache::clear()
 {
-    if(_scene)
-    {
-        _scene = nullptr;
-    }
 
     _excludedLevel = 0;
     _map.clear();
@@ -63,7 +59,6 @@ void ItemCache::insertNewElement(GraphicsItem *item)
                 std::unordered_map<std::string, std::pair<GraphicsItem*, std::list<std::string>::iterator>>::iterator it = _map.find(_list.back());
                 auto item = it->second.first;
                 deleteFromScene(item);
-                delete it->second.first;
                 it->second.first = nullptr;
                 _list.pop_back();
                 _map.erase(it);
@@ -111,13 +106,15 @@ void ItemCache::deleteFromScene(GraphicsItem *item)
         if(_scene)
         {
             _scene->removeItem(item);
+            delete item;
+            item = nullptr;
         }
     }
 }
 
 void ItemCache::printSizes()
 {
-    qDebug() << "Mapsize: " << _map.size() << " Listsize: " << _list.size();
+    qDebug() << "Mapsize: " << _map.size() << " Listsize: " << _list.size() << " Scene size: " << _scene->items().size();
 }
 
 void ItemCache::setTopLevel(int level)

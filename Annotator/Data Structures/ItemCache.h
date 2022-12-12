@@ -33,7 +33,7 @@ private:
     std::list<std::string> _list;
     int _currentSize;
     QGraphicsScene *_scene;
-    const int _maxSize = 200;
+    const int _maxSize = 400;
     int _excludedLevel;
 };
 

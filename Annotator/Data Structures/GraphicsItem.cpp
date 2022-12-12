@@ -24,9 +24,9 @@ GraphicsItem::GraphicsItem(QPixmap map, int scaleFactor, int level, int cx, int 
     _cy = cy;
 }
 
-GraphicsItem::~GraphicsItem() noexcept
+GraphicsItem::~GraphicsItem()
 {
-
+    _cx = _cy = _level = _scaleFactor = 0;
 }
 
 QRectF GraphicsItem::boundingRect() const
