@@ -42,6 +42,9 @@ QRectF LevelManager::toLevelRect(QRectF fieldOfView)
     x = x * _tileSize;
     y = y * _tileSize;
 
+    if(x < 0) x = 0;
+    if(y < 0) y = 0;
+
 
     //get the width and height offset by tilesize
     int width = 0, height = 0;
@@ -78,7 +81,7 @@ bool LevelManager::isCurrentFieldOfView(QRectF rect)
 AnnotatorController::AnnotatorController(QObject *parent) : QObject(parent)
 {
     _window = nullptr;
-    _reader = std::make_shared<WholeSlideImageReader>();
+    _factory = std::make_shared<ImageFactory>();
     _manager = std::make_shared<Manager>(this);
     _view = std::make_shared<AnnotatorViewer>();
     _levelManager = std::make_shared<LevelManager>();
@@ -149,7 +152,7 @@ void AnnotatorController::setWindow(std::shared_ptr<AnnotatorMainWindow> window)
 
 void AnnotatorController::initializeImage(std::string fileName)
 {
-
+    _reader = _factory->getImageTyp(fileName);
     _reader->initializeImage(fileName);
 
     if(!_reader->isValid())
@@ -160,8 +163,7 @@ void AnnotatorController::initializeImage(std::string fileName)
     _manager->shutdown();
     _manager->startWorkers();
     _manager->setImage(_reader);
-
-
+    
     if(!_view)
     {
         qDebug() << "AnnotatorController: view is not valid";
@@ -182,10 +184,6 @@ void AnnotatorController::initializeImage(std::string fileName)
         connect(worker[i], &Worker::finished, _view.get(), &AnnotatorViewer::loadTileInScene, Qt::QueuedConnection);
     }
 
-
-
-
-
     int level = _view->getCurrentLevel();
     int viewSceneScale = _reader->getLevelDownSample(level);
     int tileSize = _view->getTileSize();
@@ -203,11 +201,12 @@ void AnnotatorController::initializeImage(std::string fileName)
 
     }
 
+
 }
 
 void AnnotatorController::fieldOfViewChanged(QRectF rect)
 {
-    //qDebug() << "In Viewer Width: " << rect.width() << " Height: " << rect.height();
+
     int tileSize = _view->getTileSize();
     int level = _view->getCurrentLevel();
     _manager->setCurrentLevel(level);
@@ -218,6 +217,7 @@ void AnnotatorController::fieldOfViewChanged(QRectF rect)
     rect.setHeight((int)(rect.height() / viewSceneScale));
 
     rect = _levelManager->toLevelRect(rect);
+
     if(_levelManager->isCurrentFieldOfView(rect))
     {
         return;
@@ -316,5 +316,6 @@ void AnnotatorController::exitTriggered(bool checked)
 
 void AnnotatorController::itemLoaded(GraphicsItem *item)
 {
+    //qDebug() << "In view: " << _view->scene()->items().size();
     _cache->insertNewElement(item);
 }

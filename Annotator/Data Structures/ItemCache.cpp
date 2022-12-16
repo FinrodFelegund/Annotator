@@ -36,9 +36,7 @@ void ItemCache::setScene(QGraphicsScene *scene)
 
 void ItemCache::insertNewElement(GraphicsItem *item)
 {
-    if(item->getLevel() != _excludedLevel)
-    {
-
+        //printSizes();
         std::string key = std::to_string(item->getLevel()) + " " + std::to_string(item->getX()) + " " + std::to_string(item->getY());
         if(_map.find(key) != _map.end())
         {
@@ -51,29 +49,30 @@ void ItemCache::insertNewElement(GraphicsItem *item)
 
         } else
         {
-            //insert the new item
-            int size = _list.size();
-            if(_currentSize >= _maxSize)
-            {
-                //if maxsize is reached, purge the last record
-                std::unordered_map<std::string, std::pair<GraphicsItem*, std::list<std::string>::iterator>>::iterator it = _map.find(_list.back());
-                auto item = it->second.first;
-                deleteFromScene(item);
-                it->second.first = nullptr;
-                _list.pop_back();
-                _map.erase(it);
-                _currentSize--;
+            //insert the new item, if it is not toplevel
+            if(item->getLevel() != _excludedLevel) {
+                if (_currentSize >= _maxSize) {
+                    //if maxsize is reached, purge the last record
+                    std::unordered_map<std::string, std::pair<GraphicsItem *, std::list<std::string>::iterator>>::iterator it = _map.find(
+                            _list.back());
+                    auto item = it->second.first;
+                    deleteFromScene(item);
+                    it->second.first = nullptr;
+                    _list.pop_back();
+                    _map.erase(it);
+                    _currentSize--;
 
 
+                }
+                auto it = _list.insert(_list.begin(), key);
             }
-            auto it = _list.insert(_list.begin(), key);
-            _map.insert(std::make_pair(key, std::make_pair(item, it)));
+
+
+            _map.insert(std::make_pair(key, std::make_pair(item, _list.begin())));
             _currentSize++;
-
-
         }
 
-    }
+
 }
 
 void ItemCache::updateTile(std::string key)

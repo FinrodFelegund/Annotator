@@ -20,8 +20,6 @@ AnnotatorMainWindow::AnnotatorMainWindow(QObject *parent)
 
     setUpUi();
     setUpGraphics();
-
-
 }
 
 AnnotatorMainWindow::~AnnotatorMainWindow() noexcept

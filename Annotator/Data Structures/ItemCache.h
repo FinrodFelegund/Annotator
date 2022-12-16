@@ -10,6 +10,7 @@
 #include "GraphicsItem.h"
 #include "../Reader/WholeSlideImageReader.h"
 #include "Tiler.h"
+#include <QGraphicsScene>
 
 
 class ItemCache {

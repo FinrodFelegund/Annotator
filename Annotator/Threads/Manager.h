@@ -8,7 +8,7 @@
 #include <QObject>
 #include <QDebug>
 #include <QWaitCondition>
-#include "../Reader/WholeSlideImageReader.h"
+#include "../Reader/ImageReader.h"
 #include "../Data Structures/TileJob.h"
 #include <QMutex>
 
@@ -28,7 +28,7 @@ private:
     int _waitingThreads;
     QMutex _mutex;
     QWaitCondition _condition;
-    std::shared_ptr<WholeSlideImageReader> _imageToRead;
+    std::shared_ptr<ImageReader> _imageToRead;
     int _tileSize;
     int _numberOfThreads;
     int _jobsToDo;
@@ -43,7 +43,7 @@ public:
     TileJob *getJob();
     int getWaitingThreads();
     void print();
-    void setImage(std::shared_ptr<WholeSlideImageReader> img);
+    void setImage(std::shared_ptr<ImageReader> img);
     int getNumberOfJobs();
     void startWorkers();
     void removeJob(QRectF rect, int level);

@@ -83,7 +83,7 @@ int Manager::getNumberOfJobs()
     return _workList.size();
 }
 
-void Manager::setImage(std::shared_ptr<WholeSlideImageReader> img)
+void Manager::setImage(std::shared_ptr<ImageReader> img)
 {
     _imageToRead = img;
 }

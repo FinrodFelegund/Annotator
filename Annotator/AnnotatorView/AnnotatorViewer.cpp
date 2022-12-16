@@ -46,7 +46,7 @@ AnnotatorViewer::~AnnotatorViewer() noexcept
     delete scene();
 }
 
-void AnnotatorViewer::initialize(std::shared_ptr<WholeSlideImageReader> reader)
+void AnnotatorViewer::initialize(std::shared_ptr<ImageReader> reader)
 {
 
     close();
@@ -125,6 +125,7 @@ void AnnotatorViewer::loadTileInScene(Tile tile)
 
     newItem->setPos(tile.getX(), tile.getY());
     newItem->setScale(_reader->getLevelDownSample(tile.getLevel()));
+    //newItem->setZValue(tile.getLevel());
 
 
     emit itemLoaded(newItem);
@@ -174,11 +175,11 @@ void AnnotatorViewer::wheelEvent(QWheelEvent *event)
     qreal numDegrees = std::pow(1.2, angle / 240.);
 
     //scale
-    if(angle > 1 && levelTopDownsample >= currentlyScaledValue) //angle > 1 means scaling down; lTD >= cSV means scaling down till view is as wide as top Level width
+    if(angle > 1 && levelTopDownsample * 2.5 >= currentlyScaledValue) //angle > 1 means scaling down; lTD >= cSV means scaling down till view is as wide as top Level width
     {
-        if(qreal(rect.width()) / numDegrees < _levelTopDimensions.first)
+        if(qreal(rect.width()) * 2.5 / numDegrees < _levelTopDimensions.first)
         {
-            numDegrees = qreal(rect.width()) / qreal(_levelTopDimensions.first); //scale only till width of top level is reached
+            numDegrees = qreal(rect.width()) * 2.5 / qreal(_levelTopDimensions.first); //scale only till width of top level is reached
         }
         scale(numDegrees, numDegrees);
         const QPointF p1mouse = mapFromScene(scenePos);
@@ -232,7 +233,6 @@ void AnnotatorViewer::resizeEvent(QResizeEvent *event)
 
     emit fieldOfViewForMinimapChanged(after);
     emit fieldOfViewChanged(rect);
-
 
 }
 
@@ -328,6 +328,11 @@ void AnnotatorViewer::dragInMiniMap(QPointF point)
     QRectF rect = this->mapToScene(this->rect()).boundingRect();
     emit fieldOfViewForMinimapChanged(rect);
     emit fieldOfViewChanged(rect);
+}
+
+void AnnotatorViewer::enable(bool val)
+{
+    this->setEnabled(val);
 }
 
 

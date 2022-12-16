@@ -6,7 +6,7 @@
 #include <QMutex>
 #include <QDebug>
 
-TileJob::TileJob(int x, int y, int width, int height, int lvl, std::shared_ptr<WholeSlideImageReader> reader, unsigned char *buf, JobType type)
+TileJob::TileJob(int x, int y, int width, int height, int lvl, std::shared_ptr<ImageReader> reader, unsigned char *buf, JobType type)
 {
     xPos = x;
     yPos = y;
@@ -23,14 +23,14 @@ TileJob::~TileJob()
 {
     if(buf)
     {
-        delete buf;
+        delete [] buf;
         buf = nullptr;
     }
 
     _reader = nullptr;
 }
 
-void TileJob::setImage(std::shared_ptr<WholeSlideImageReader> reader)
+void TileJob::setImage(std::shared_ptr<ImageReader> reader)
 {
     _reader = reader;
 }

@@ -47,7 +47,7 @@ void GraphicsItem::opacityChanged()
 
 void GraphicsItem::print()
 {
-    qDebug() << _boundingRect;
+    qDebug() << "X: " << _cx << " Y: " << _cy << " Level: " << _level;
 }
 
 int GraphicsItem::getX()

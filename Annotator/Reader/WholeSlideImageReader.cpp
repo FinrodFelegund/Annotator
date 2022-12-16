@@ -3,21 +3,15 @@
 //
 
 #include "WholeSlideImageReader.h"
-#include <QImage>
-#include <QLabel>
+#include <QDebug>
 
-WholeSlideImageReader::WholeSlideImageReader() {
+WholeSlideImageReader::WholeSlideImageReader(std::string extension) : ImageReader(extension) {
 
     _obj = nullptr;
-    _numberOfLevels = 0;
-    _errorState = "";
-    _filetype = "";
-    _valid = false;
     _bg_r = 255;
     _bg_g = 255;
     _bg_b = 255;
 
-    _mutex.reset(new std::shared_mutex());
 }
 
 WholeSlideImageReader::~WholeSlideImageReader()
@@ -26,10 +20,7 @@ WholeSlideImageReader::~WholeSlideImageReader()
     cleanUp();
 }
 
-int WholeSlideImageReader::getScaleFactor(int level)
-{
-    return _scaleFactors[level];
-}
+
 
 void WholeSlideImageReader::initializeImage(const std::string imagePath)
 {
@@ -119,7 +110,7 @@ void WholeSlideImageReader::initializeImage(const std::string imagePath)
     }
 
     //printLevelDownsample();
-    printDimensions();
+    //printDimensions();
     //printProperties();
 
 }
@@ -142,114 +133,6 @@ void WholeSlideImageReader::cleanUp()
     _valid = false;
 }
 
-bool WholeSlideImageReader::isValid()
-{
-    return _valid;
-}
-
-std::string WholeSlideImageReader::getProperty(const std::string property)
-{
-    if(_valid)
-    {
-        std::map<std::string, std::string>::iterator it = _propertiesMap.begin();
-        while(it != _propertiesMap.end())
-        {
-            if(property == it->first)
-            {
-                return it->second;
-            }
-        }
-    }
-    return "";
-}
-
-std::string WholeSlideImageReader::getFileType()
-{
-    if(_valid)
-    {
-        return _filetype;
-    }
-    return "";
-}
-
-double WholeSlideImageReader::getLevelDownSample(const int level)
-{
-    if(_valid && level < getNumberOfLevels())
-    {
-        double downSampleOnLevel0 = _dimensions[0].first;
-        double downSampleOnLevel = _dimensions[level].first;
-
-        return downSampleOnLevel0 / downSampleOnLevel;
-    }
-    return 0.;
-}
-
-int WholeSlideImageReader::getLevelForGivenDownSample(double downSample)
-{
-    if(_valid)
-    {
-        if(downSample <= 1.)
-        {
-            return getNumberOfLevels() - 1;
-        }
-
-        int sample = getLevelDownSample(getNumberOfLevels() - 1);
-        double DownSample = sample / downSample;
-
-        if(DownSample <= 1.)
-        {
-            return 0;
-        }
-
-        for(int i  = _dimensions.size() - 2; i > 0; i--)
-        {
-            double nextDownSample = (double)_dimensions[0].first / (double)_dimensions[i].first;
-            double currentDownSample = (double)_dimensions[0].first / (double)_dimensions[i + 1].first;
-
-            if(DownSample <= currentDownSample && DownSample > nextDownSample)
-            {
-                return i;
-            }
-
-        }
-        return 0;
-    } else
-    {
-        return -1;
-    }
-}
-
-int WholeSlideImageReader::getNumberOfLevels()
-{
-    if(_valid)
-    {
-        return _numberOfLevels;
-    }
-    return -1;
-}
-
-std::string WholeSlideImageReader::getErrorState()
-{
-    return _errorState;
-}
-
-std::pair<int, int> WholeSlideImageReader::getLevel0Dimensions()
-{
-    if(_valid)
-    {
-        return _dimensions[0];
-    }
-    return std::make_pair(-1, -1);
-}
-
-std::pair<int, int> WholeSlideImageReader::getLevelDimensions(const int level)
-{
-    if(_valid && level < getNumberOfLevels())
-    {
-        return _dimensions[level];
-    }
-    return std::make_pair(-1, -1);
-}
 
 unsigned char *WholeSlideImageReader::readDataFromImage(int64_t x, int64_t y, int64_t width, int64_t height, int32_t level)
 {
@@ -298,39 +181,4 @@ unsigned char *WholeSlideImageReader::readDataFromImage(int64_t x, int64_t y, in
     }
 
     return nullptr;
-}
-
-void WholeSlideImageReader::printDimensions()
-{
-    if(_valid)
-    {
-        for(int i = 0; i < getNumberOfLevels(); i++)
-        {
-            qDebug() << "Level: " << i << " Width: " << _dimensions[i].first << " Height: " << _dimensions[i].second;
-        }
-    } else
-    {
-        qDebug() << "Invalid image";
-    }
-}
-
-void WholeSlideImageReader::printLevelDownsample()
-{
-    if(!_scaleFactors.empty())
-    {
-        for(int i = 0; i < _scaleFactors.size(); i++)
-        {
-            qDebug() << "Level: " << i;
-            qDebug() << "Downsample: " << _scaleFactors[i];
-            qDebug();
-        }
-    }
-}
-
-void WholeSlideImageReader::printProperties()
-{
-    for(std::map<std::string, std::string>::iterator it = _propertiesMap.begin(); it != _propertiesMap.end(); it++)
-    {
-        qDebug() << QString::fromStdString(it->first) << ": " << QString::fromStdString(it->second);
-    }
 }

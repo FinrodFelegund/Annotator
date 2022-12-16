@@ -6,28 +6,19 @@
 #define ANNOTATOR_WHOLESLIDEIMAGEREADER_H
 #include <vector>
 #include "openslide.h"
+#include "ImageReader.h"
 #include <string>
 #include <iostream>
-#include <shared_mutex>
 #include <cmath>
-#include <QGraphicsScene>
 
-class WholeSlideImageReader {
+
+class WholeSlideImageReader : public ImageReader {
 public:
-    WholeSlideImageReader();
+    WholeSlideImageReader(std::string extension);
     ~WholeSlideImageReader();
 
 private:
     openslide_t *_obj;
-    std::vector<std::pair<int, int>> _dimensions;
-    std::vector<int> _scaleFactors;
-    int _numberOfLevels;
-    const int _tileSize = 1024;
-    std::shared_ptr<std::shared_mutex> _mutex;
-    std::string _filetype;
-    std::map<std::string, std::string> _propertiesMap;
-    std::string _errorState;
-    bool _valid;
     int _bg_r;
     int _bg_g;
     int _bg_b;
@@ -35,20 +26,8 @@ private:
 public:
     void initializeImage(const std::string imagePath);
     void cleanUp();
-    std::string getFileType();
-    double getLevelDownSample(const int level);
-    int getLevelForGivenDownSample(double downSample);
-    std::pair<int, int> getLevelDimensions(const int level);
-    std::pair<int, int> getLevel0Dimensions();
-    int getNumberOfLevels();
-    std::string getProperty(const std::string property);
-    bool isValid();
-    std::string getErrorState();
-    int getScaleFactor(int level);
     unsigned char *readDataFromImage(int64_t x, int64_t y, int64_t width, int64_t height, int32_t level);
-    void printDimensions();
-    void printLevelDownsample();
-    void printProperties();
+
 
 };
 

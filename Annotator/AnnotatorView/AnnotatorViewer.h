@@ -7,7 +7,7 @@
 #include <QGraphicsView>
 #include <QScrollBar>
 #include "../Threads/Manager.h"
-#include "../Reader/WholeSlideImageReader.h"
+#include "../Reader/ImageReader.h"
 #include <QFormLayout>
 #include "MiniMap.h"
 #include "../Data Structures/GraphicsItem.h"
@@ -20,13 +20,14 @@ class AnnotatorViewer : public QGraphicsView
 public:
     AnnotatorViewer(QObject *parent = nullptr);
     ~AnnotatorViewer() noexcept;
-    void initialize(std::shared_ptr<WholeSlideImageReader> reader);
+    void initialize(std::shared_ptr<ImageReader> reader);
     void close();
     QRectF getSceneRect();
     int getCurrentLevel();
     qreal getCurrentSceneScale();
     int getTileSize();
     void keepViewInCheck(QRectF rect);
+    void enable(bool val);
 
 
 private:
@@ -38,7 +39,7 @@ private:
     void setMinimap();
     void setUI();
 
-    std::shared_ptr<WholeSlideImageReader> _reader;
+    std::shared_ptr<ImageReader> _reader;
     int _longestSide;
     qreal _currentSceneScale;
     int _tileSize;

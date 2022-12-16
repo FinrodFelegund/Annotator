@@ -7,10 +7,11 @@
 
 #include <QObject>
 #include "../AnnotatorUI/AnnotatorMainWindow.h"
-#include "../Reader/WholeSlideImageReader.h"
+#include "../Reader/ImageReader.h"
 #include "../Threads/Manager.h"
 #include "../Data Structures/GraphicsItem.h"
 #include "../Data Structures/ItemCache.h"
+#include "../Reader/ImageFactory.h"
 
 struct LevelManager
 {
@@ -53,12 +54,13 @@ public slots:
 
 
 private:
-    std::shared_ptr<AnnotatorMainWindow> _window;
-    std::shared_ptr<WholeSlideImageReader> _reader;
-    std::shared_ptr<AnnotatorViewer> _view;
-    std::shared_ptr<Manager> _manager;
-    std::shared_ptr<LevelManager> _levelManager;
-    std::shared_ptr<ItemCache> _cache;
+    std::shared_ptr<AnnotatorMainWindow> _window = nullptr;
+    std::shared_ptr<ImageReader> _reader = nullptr;
+    std::shared_ptr<AnnotatorViewer> _view = nullptr;
+    std::shared_ptr<Manager> _manager = nullptr;
+    std::shared_ptr<LevelManager> _levelManager = nullptr;
+    std::shared_ptr<ItemCache> _cache = nullptr;
+    std::shared_ptr<ImageFactory> _factory = nullptr;
 
 
 };
