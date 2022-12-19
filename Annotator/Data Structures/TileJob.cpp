@@ -23,7 +23,7 @@ TileJob::~TileJob()
 {
     if(buf)
     {
-        delete [] buf;
+        //delete [] buf;
         buf = nullptr;
     }
 

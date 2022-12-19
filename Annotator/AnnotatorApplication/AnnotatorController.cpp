@@ -195,6 +195,7 @@ void AnnotatorController::initializeImage(std::string fileName)
     tiler.exec();
     auto tiles = tiler.getTilingResult();
     _manager->setCurrentLevel(level);
+    qDebug() << "Initial amount of tiles: " << tiles.size();
     for(int i = 0; i < tiles.size(); i++)
     {
         _manager->addJob(tiles[i].getX() * viewSceneScale, tiles[i].getY() * viewSceneScale, level, tiles[i].getWidth(), tiles[i].getHeight(), JobType::ViewJob);

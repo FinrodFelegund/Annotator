@@ -10,10 +10,13 @@ set( CMAKE_BUILD_TYPE Debug)
 INCLUDE(FindPackageHandleStandardArgs)
 
 
-FIND_PACKAGE(OpenCV REQUIRED)
-INCLUDE_DIRECTORIES(${OpenCV_INCLUDE_DIRS})
-LINK_DIRECTORIES(${OpenCV_LIBRARY_DIRS})
-ADD_DEFINITIONS(${OpenCV_DEFINITIONS})
+find_package(OpenCV REQUIRED)
+if(OpenCV_FOUND)
+    message("found OpenCV")
+    include_directories(${OpenCV_INCLUDE_DIRS})
+    link_directories(${OpenCV_LIBRARY_DIRS})
+    add_definitions(${OpenCV_DEFINITIONS})
+endif()
 
 
 find_package_handle_standard_args(openslide DEFAULT_MSG openslide_LIBRARY openslide_INCLUDE_DIR)
@@ -25,7 +28,7 @@ if(openslide_FOUND)
     set(OPENSLIDE_LIBRARIES    ${openslide_LIBRARY})
     set(OPENSLIDE_INCLUDE_DIRS ${openslide_INCLUDE_DIR})
     include_directories( ${OPENSLIDE_INCLUDE_DIRS} )
-    message("Openslide found")
+    message("found Openslide")
 else()
     message("Openslide not found")
 endif()
@@ -51,8 +54,4 @@ target_link_libraries(Annotator
         ${OPENSLIDE_LIBRARIES}
         ${OpenCV_LIBRARIES})
 
-get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
-foreach(dir ${dirs})
-    message(STATUS "dir='${dir}'")
-endforeach()
 

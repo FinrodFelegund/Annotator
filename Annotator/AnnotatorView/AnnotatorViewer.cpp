@@ -59,7 +59,6 @@ void AnnotatorViewer::initialize(std::shared_ptr<ImageReader> reader)
     _levelTopDimensions = _reader->getLevelDimensions(_currentLevel);
     unsigned char *buf = _reader->readDataFromImage(0, 0, _levelTopDimensions.first, _levelTopDimensions.second, _reader->getNumberOfLevels()-1);
     QImage img(buf, _levelTopDimensions.first, _levelTopDimensions.second, 3 * _levelTopDimensions.first, QImage::Format_RGB888);
-    //_map = new MiniMap(QPixmap::fromImage(img), _reader->getScaleFactor(_reader->getNumberOfLevels() - 1), this);
     _map->setPixmap(QPixmap::fromImage(img));
     _map->setDownSample(_reader->getScaleFactor(_reader->getNumberOfLevels() - 1));
     if(this->layout())
@@ -111,7 +110,7 @@ void AnnotatorViewer::loadTileInScene(Tile tile)
     }
 
     int bytesPerLine = 3;
-    QImage img((unsigned char*)tile.getBuf(), tile.getWidth(), tile.getHeight(), bytesPerLine* tile.getWidth(), QImage::Format_RGB888);
+    QImage img((uchar*)tile.getBuf(), tile.getWidth(), tile.getHeight(),3 * tile.getWidth(), QImage::Format_RGB888);
     GraphicsItem *newItem = new GraphicsItem(QPixmap(QPixmap::fromImage(img)), _reader->getScaleFactor(tile.getLevel()), tile.getLevel(), tile.getX(), tile.getY());
     if(tile.getLevel() != _currentLevel)
     {
@@ -126,7 +125,6 @@ void AnnotatorViewer::loadTileInScene(Tile tile)
     newItem->setPos(tile.getX(), tile.getY());
     newItem->setScale(_reader->getLevelDownSample(tile.getLevel()));
     //newItem->setZValue(tile.getLevel());
-
 
     emit itemLoaded(newItem);
 }
@@ -231,8 +229,8 @@ void AnnotatorViewer::resizeEvent(QResizeEvent *event)
     QRectF after = this->mapToScene(this->rect()).boundingRect();
 
 
-    emit fieldOfViewForMinimapChanged(after);
-    emit fieldOfViewChanged(rect);
+    //emit fieldOfViewForMinimapChanged(after);
+    //emit fieldOfViewChanged(rect);
 
 }
 

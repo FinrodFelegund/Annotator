@@ -19,9 +19,12 @@ public:
     void cleanUp();
     void initializeImage(const std::string imagePath);
     unsigned char *readDataFromImage(int64_t x, int64_t y, int64_t width, int64_t height, int32_t level);
+    bool saveToDiskCV(std::string name, cv::Mat mat);
+    bool saveToDiskQt(std::string name, cv::Mat mat);
 
 private:
-
+    cv::Mat _mat;
+    int counter = 0;
 
 };
 

@@ -4,6 +4,10 @@
 
 #include "OpenCVImageReader.h"
 #include <QDebug>
+#include <opencv4/opencv2/highgui.hpp>
+#include <opencv4/opencv2/imgproc.hpp>
+#include <opencv4/opencv2/opencv.hpp>
+#include <QImage>
 
 
 OpenCVImageReader::OpenCVImageReader(std::string extension) : ImageReader(extension)
@@ -29,19 +33,22 @@ void OpenCVImageReader::initializeImage(const std::string imagePath)
     std::unique_lock<std::shared_mutex> lock(*_mutex);
     cleanUp();
 
-    cv::Mat mat = cv::imread(imagePath, cv::IMREAD_COLOR);
+    _mat = cv::imread(imagePath, cv::IMREAD_COLOR);
 
-    if(mat.size().width == 0 || mat.size().height == 0)
+
+    if(_mat.size().width == 0 || _mat.size().height == 0)
     {
         _valid = false;
         qDebug() << "Unable to open image";
         _errorState = "Image not valid";
         return;
     }
+
+    cv::cvtColor(_mat, _mat, cv::COLOR_BGR2RGB);
     _filetype = imagePath;
     _valid = true;
 
-    std::pair<int, int> dims = std::make_pair(mat.size().width, mat.size().height);
+    std::pair<int, int> dims = std::make_pair(_mat.size().width, _mat.size().height);
     _dimensions.push_back(dims);
     _scaleFactors.push_back(1);
     _numberOfLevels = 1;
@@ -52,14 +59,28 @@ void OpenCVImageReader::initializeImage(const std::string imagePath)
 }
 
 unsigned char* OpenCVImageReader::readDataFromImage(int64_t x, int64_t y, int64_t width, int64_t height, int32_t level)
-{   qDebug() << "X: " << x << " Y: " << y << " Width: " << width << " Height: " << height;
+{
     if(_valid)
     {
-        cv::Mat mat = cv::imread(_filetype, cv::IMREAD_COLOR);
         std::shared_lock<std::shared_mutex> l(*_mutex);
-        cv::Mat croppedImage = mat(cv::Range(y, height), cv::Range(x, width));
-        return (unsigned char*)croppedImage.data;
+        cv::Rect tile(x, y, width, height);
+        unsigned char *buf = new unsigned char[width * height * 3];
+        memcpy(buf, cv::Mat(_mat, tile).clone().data, width * height * 3);
+        return buf;
     }
 
     return nullptr;
+}
+
+bool OpenCVImageReader::saveToDiskCV(std::string name, cv::Mat mat)
+{
+    return cv::imwrite(name, mat);
+}
+
+bool OpenCVImageReader::saveToDiskQt(std::string name, cv::Mat mat)
+{
+    cv::Size size = mat.size();
+    QImage img((unsigned  char*)mat.data, size.width, size.height, mat.step1(), QImage::Format_RGB888);
+    QString namer = QString::number(counter++) + "Test" + QString::number(size.width) + QString::number(size.height) + ".jpeg";
+    return img.save(namer);
 }
